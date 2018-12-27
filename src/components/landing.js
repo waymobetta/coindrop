@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'reactstrap';
-import { Container, Row, Col } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Button } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import Header from './header'
 import './layout.css'
 
-const Layout = ({ children }) => (
+const Landing = ({ children }) => (
 	<StaticQuery
 		query={graphql`
-			query SiteTitleQuery {
+			query SiteTitleQueryLanding {
 				site {
 					siteMetadata {
 						title
@@ -20,18 +20,19 @@ const Layout = ({ children }) => (
 		`}
 		render={data => (
 			<>
-				<Header siteTitle={data.site.siteMetadata.title} showLogo={false} hasShadow={false} />
+				<Header siteTitle={data.site.siteMetadata.title} />
 				<Container>
+					<div className="root--bg1"></div>
+					<div className="root--bg2"></div>
 					{children}
-					<div className="root--bg1 halfOpacity"></div>
 				</Container>
 			</>
 		)}
 	/>
 )
 
-Layout.propTypes = {
+Landing.propTypes = {
 	children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export default Landing

@@ -1,0 +1,111 @@
+.main__row--features {
+	padding-top: 30px;
+	height: 100vh;
+}
+
+.featureDiamond {
+	display: flex;
+	flex-direction: column;
+	height: 400px;
+	align-items: center;
+}
+
+.featureDiamond .featureDiamond__box {
+	align-items: center;
+	height: 400px;
+	padding: 30px;
+	width: 300px;
+	box-shadow: 0px 1px 30px 1px rgba(0, 0, 0, 0);
+	border-radius: 5px;
+	transition: all 0.3s cubic-bezier(0, 0, 1, 1);
+}
+
+.featureDiamond .featureDiamond__box:hover {
+	background-color: white;
+	box-shadow: 0px 1px 30px 1px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s cubic-bezier(0, 0, 1, 1);
+}
+
+.featureDiamond h4 {
+	text-transform: uppercase;
+}
+
+.featureDiamond__inner {
+	width: 250px;
+	height: 250px;
+	display: block;
+	position: relative;
+}
+
+.diamond__icon {
+	display: block;
+	height: 250px;
+	width: 250px;
+}
+
+.featureDiamond__icon {
+	position: absolute;
+}
+
+.featureDiamond__icon.icon__ethereum {
+	left: 30px;
+	top: 50px;
+	width: 55px;
+	height: 90px;
+}
+
+.featureDiamond__icon.icon__socialMedia {
+	right: 40px;
+	top: 52px;
+	width: 60px;
+	height: 65px;
+}
+
+.featureDiamond__icon.icon__hashLove {
+	right: 40px;
+	bottom: 40px;
+	width: 94px;
+	height: 43px;
+}
+
+.featureDiamond__icon.icon__personTalking {
+	left: 30px;
+	top: 30px;
+	width: 72px;
+	height: 74px;
+}
+
+.featureDiamond__icon.icon__commentBubbles {
+	right: 30px;
+	top: 70px;
+	width: 65px;
+	height: 65px;
+}
+
+.featureDiamond__icon.icon__commentBubble {
+	left: 60px;
+	bottom: 40px;
+	width: 65px;
+	height: 65px;
+}
+
+.featureDiamond__icon.icon__dollar {
+	right: 81px;
+	top: 5px;
+	width: 39px;
+	height: 68px;
+}
+
+.featureDiamond__icon.icon__coins {
+	right: 30px;
+	top: 111px;
+	width: 83px;
+	height: 64px;
+}
+
+.featureDiamond__icon.icon__walletCoins {
+	left: 47px;
+	bottom: 40px;
+	width: 58px;
+	height: 110px;
+}
