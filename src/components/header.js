@@ -26,7 +26,7 @@ export default class Header extends React.Component {
 		})
 	}
 	render() {
-		const { showLogo, siteTitle, hasShadow } = this.props
+		const { showLogo, hasShadow } = this.props
 		return (
 			<Navbar
 				color="faded"
