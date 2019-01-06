@@ -1,4 +1,3 @@
-import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 import classNames from 'classnames'
@@ -15,7 +14,7 @@ import { ReactComponent as PersonTalking } from '../../components/assets/person_
 import { ReactComponent as SocialMedia } from '../../components/assets/social_media.svg'
 import { ReactComponent as WalletCoins } from '../../components/assets/wallet_coins.svg'
 
-const FeatureDiamond = (props) => {
+const FeatureDiamond = props => {
 	const components = {
 		coins: Coins,
 		commentBubble: CommentBubble,
@@ -66,9 +65,19 @@ export default FeatureDiamond
 FeatureDiamond.propTypes = {
 	siteTitle: PropTypes.string,
 	showLogo: PropTypes.bool,
+	title: PropTypes.string,
+	desc: PropTypes.string,
+	icon1: PropTypes.string,
+	icon2: PropTypes.string,
+	icon3: PropTypes.string,
 }
 
 FeatureDiamond.defaultProps = {
 	siteTitle: '',
 	showLogo: true,
+	title: '',
+	desc: '',
+	icon1: 'ethereum',
+	icon2: 'ethereum',
+	icon3: 'ethereum',
 }

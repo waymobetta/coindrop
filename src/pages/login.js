@@ -1,27 +1,16 @@
 import React from 'react'
 import { Link } from 'gatsby'
-
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-
 import { ReactComponent as LogoFull } from '../components/assets/coindrop_logo_full.svg'
-import {
-	Button,
-	Form,
-	FormGroup,
-	Label,
-	Input,
-	FormText,
-	Row,
-	Col,
-} from 'reactstrap'
+import { Button, FormGroup, Input, Row, Col } from 'reactstrap'
 
 const Login = () => (
 	<Layout>
 		<SEO title="Login" />
 		<Row>
 			<Col md={6} lg={6} sm={8} className="pb-4">
-				<Link to="/" >
+				<Link to="/">
 					<LogoFull className="logo--signup" />
 				</Link>
 				<h2>Where Your Contribution Matters</h2>
@@ -52,21 +41,21 @@ const Login = () => (
 						autoComplete="off"
 						className="form-control--underlined"
 					/>
-						<small
-							className="form-text text-muted text-right help-text"
-						>
-							<a href="#">
-								Forgot Password?
-							</a>
-						</small>
+					<small className="form-text text-muted text-right help-text">
+						<a href="#">Forgot Password?</a>
+					</small>
 				</FormGroup>
-				<Button outline color="primary" className="button--cd btn-block">
-						Login
-					</Button>
-					<p>
-						No Account?
-						<Link to="/signup"> Create Account</Link>
-					</p>
+				<Button
+					outline
+					color="primary"
+					className="button--cd btn-block"
+				>
+					Login
+				</Button>
+				<p>
+					No Account?
+					<Link to="/signup"> Create Account</Link>
+				</p>
 			</Col>
 		</Row>
 	</Layout>

@@ -1,11 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Button } from 'reactstrap'
-import { Container, Row, Col } from 'reactstrap'
+import { Container } from 'reactstrap'
 import Header from './header'
-import './layout.css'
 
 const Landing = ({ children }) => (
 	<StaticQuery
