@@ -39,7 +39,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Titillium Web:200,300,400,600,700']
+          families: ['Open Sans:300,400,600']
         }
       }
     }

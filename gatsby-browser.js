@@ -3,5 +3,4 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
-import 'bootstrap/dist/css/bootstrap.min.css'
-import "./src/components/layout.css"
+import './src/components/layout.css'

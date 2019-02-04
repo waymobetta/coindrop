@@ -1,23 +1,11 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import { ReactComponent as LogoFull } from '../components/assets/coindrop_logo_full.svg'
-import {
-	Button,
-	Form,
-	FormGroup,
-	Label,
-	Input,
-	Row,
-	Col,
-	UncontrolledTooltip,
-} from 'reactstrap'
 
 const SignUp = () => (
 	<Layout>
 		<SEO title="SignUp" />
-		<Form>
+		{/* <Form>
 			<Row>
 				<Col md={6} className="pb-4">
 					<Link to="/">
@@ -139,7 +127,7 @@ const SignUp = () => (
 					</p>
 				</Col>
 			</Row>
-		</Form>
+		</Form> */}
 	</Layout>
 )
 

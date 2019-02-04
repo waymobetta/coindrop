@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import classNames from 'classnames'
-import { Col } from 'reactstrap'
 import './featureDiamond.css'
 import { ReactComponent as Diamond } from '../../components/assets/diamond.svg'
 import { ReactComponent as Coins } from '../../components/assets/coins.svg'
@@ -30,33 +29,31 @@ const FeatureDiamond = props => {
 	const Icon2 = components[props.icon2]
 	const Icon3 = components[props.icon3]
 	return (
-		<Col md="4" className="featureDiamond">
-			<div className="featureDiamond__box d-flex justify-content-between flex-column">
-				<div className="featureDiamond__inner">
-					<Icon1
-						className={classNames(
-							'featureDiamond__icon',
-							`icon__${props.icon1}`
-						)}
-					/>
-					<Icon2
-						className={classNames(
-							'featureDiamond__icon',
-							`icon__${props.icon2}`
-						)}
-					/>
-					<Icon3
-						className={classNames(
-							'featureDiamond__icon',
-							`icon__${props.icon3}`
-						)}
-					/>
-					<Diamond className="diamond__icon" />
-				</div>
-				<h4>{props.title}</h4>
-				<p>{props.desc}</p>
+		<div className="featureDiamond__box d-flex justify-content-between flex-column">
+			<div className="featureDiamond__inner">
+				<Icon1
+					className={classNames(
+						'featureDiamond__icon',
+						`icon__${props.icon1}`
+					)}
+				/>
+				<Icon2
+					className={classNames(
+						'featureDiamond__icon',
+						`icon__${props.icon2}`
+					)}
+				/>
+				<Icon3
+					className={classNames(
+						'featureDiamond__icon',
+						`icon__${props.icon3}`
+					)}
+				/>
+				<Diamond className="diamond__icon" />
 			</div>
-		</Col>
+			<h4>{props.title}</h4>
+			<p>{props.desc}</p>
+		</div>
 	)
 }
 
