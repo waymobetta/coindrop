@@ -17,6 +17,7 @@ import StepTwo from '../components/steps/StepTwo'
 import StepThree from '../components/steps/StepThree'
 import StepFour from '../components/steps/StepFour'
 import StepFinal from '../components/steps/StepFinal'
+import StepIcon from '@material-ui/core/StepIcon'
 
 const styles = theme => ({
 	root: {
@@ -24,6 +25,8 @@ const styles = theme => ({
 		margin: 'auto',
 		height: '100%',
 		background: 'linear-gradient(#572fff 0%, #bf41ff 100%)',
+		borderBottomRightRadius: 250,
+		borderBottomLeftRadius: 250,
 	},
 	paper: {
 		textAlign: 'center',
@@ -33,6 +36,11 @@ const styles = theme => ({
 		height: 400,
 		maxWidth: 540,
 		margin: 'auto',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		position: 'relative',
 	},
 	grow: {
 		flexGrow: 1,
@@ -44,6 +52,28 @@ const styles = theme => ({
 	subGrid: {
 		height: 300,
 		marginTop: 200,
+	},
+	stepLabel: {
+		padding: 0,
+		height: 10,
+		width: 10,
+	},
+	stepper: {
+		width: 144,
+		margin: '0px auto',
+	},
+	stepIcon: {
+		fill: '#ccc',
+		width: 16,
+		height: 16,
+	},
+	stepIconActive: {
+		fill: '#D74EFF',
+		width: 16,
+		height: 16,
+	},
+	stepIconText: {
+		display: 'none',
 	},
 })
 
@@ -58,8 +88,8 @@ class Connect extends React.Component {
 			activeStep: 0,
 			skipped: new Set(),
 			selectedPlatform: '',
-			verified: false,
-			canClaimEther: false,
+			verified: true,
+			canClaimEther: true,
 		}
 	}
 	isStepOptional = step => step === 0
@@ -93,7 +123,7 @@ class Connect extends React.Component {
 	getStepTitle = step => {
 		switch (step) {
 			case 0:
-				return 'Connect Accounts'
+				return ''
 			case 1:
 				return 'Connect Accounts'
 			case 2:
@@ -101,7 +131,7 @@ class Connect extends React.Component {
 			case 3:
 				return 'Almost Done'
 			default:
-				return 'Unknown step'
+				return ''
 		}
 	}
 
@@ -195,7 +225,6 @@ class Connect extends React.Component {
 					<Grid
 						container
 						spacing={0}
-						className={classes.root}
 						justify="center"
 						alignContent="space-around"
 						alignItems="center"
@@ -207,22 +236,28 @@ class Connect extends React.Component {
 							md={6}
 							className={classes.subGrid}
 						>
-							<Paper className={classes.paper} elevation={10}>
-								<div>
-									<Typography variant="h5" gutterBottom>
-										{this.getStepTitle(activeStep)}
-									</Typography>
-									{activeStep === steps.length ? (
-										<div>
-											{verified ? (
-												<StepFinal
-													verified
-													canClaimEther={
-														canClaimEther
-													}
-												/>
-											) : (
-												<div>
+							<Typography
+								variant="h6"
+								gutterBottom
+								align="center"
+							>
+								{this.getStepTitle(activeStep)}
+							</Typography>
+
+							<React.Fragment>
+								{activeStep === steps.length ? (
+									<React.Fragment>
+										{verified ? (
+											<StepFinal
+												verified
+												canClaimEther={canClaimEther}
+											/>
+										) : (
+											<Paper
+												className={classes.paper}
+												elevation={10}
+											>
+												<React.Fragment>
 													<p>Sorry!!!</p>
 													<p>
 														It seems that there was
@@ -238,13 +273,24 @@ class Connect extends React.Component {
 													>
 														Try Again
 													</Button>
-												</div>
-											)}
-										</div>
-									) : (
-										<div>
+												</React.Fragment>
+											</Paper>
+										)}
+									</React.Fragment>
+								) : (
+									<Paper
+										className={classes.paper}
+										elevation={10}
+									>
+										<React.Fragment>
 											{this.getStepContent(activeStep)}
-											<Stepper activeStep={activeStep}>
+											<Stepper
+												activeStep={activeStep}
+												connector=""
+												classes={{
+													root: classes.stepper,
+												}}
+											>
 												{steps.map((label, index) => {
 													const props = {}
 													const labelProps = {}
@@ -260,15 +306,32 @@ class Connect extends React.Component {
 															key={label}
 															{...props}
 														>
-															<StepLabel StepIconComponent="" />
+															<StepLabel
+																classes={{
+																	root:
+																		classes.stepLabel,
+																}}
+																StepIconProps={{
+																	classes: {
+																		root:
+																			classes.stepIcon,
+																		active:
+																			classes.stepIconActive,
+																		text:
+																			classes.stepIconText,
+																		completed:
+																			classes.stepIconActive,
+																	},
+																}}
+															/>
 														</Step>
 													)
 												})}
 											</Stepper>
-										</div>
-									)}
-								</div>
-							</Paper>
+										</React.Fragment>
+									</Paper>
+								)}
+							</React.Fragment>
 						</Grid>
 					</Grid>
 				</div>

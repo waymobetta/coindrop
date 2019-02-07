@@ -17,14 +17,28 @@ const styles = theme => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 		flexGrow: 1,
 		display: 'flex',
 		alignItems: 'center',
 		backgroundColor: 'white',
+		borderRadius: 26,
+		marginBottom: 45,
 	},
 	headerSearchForm: {
-		flexGrow: 2,
+		flexGrow: 1,
+	},
+	bigAvatar: {
+		margin: '0px 0px 0px 20px',
+	},
+	notificationIcon: {
+		color: '#ccc',
+		marginRight: 10,
+	},
+	email: {
+		color: '#A9A9A9',
+		fontSize: 16,
+		fontWeight: 500,
 	},
 })
 
@@ -44,8 +58,12 @@ class DashHeader extends Component {
 							}
 						/>
 					</FormControl>
-					<NotificationsNone />
-					<Typography variant="h5" component="h3">
+					<NotificationsNone className={classes.notificationIcon} />
+					<Typography
+						variant="h5"
+						component="h3"
+						className={classes.email}
+					>
 						hunter@email.com
 					</Typography>
 					<Avatar

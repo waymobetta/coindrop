@@ -4,17 +4,17 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
 	root: {
-		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
-		backgroundColor: '#572FFF',
+		backgroundColor: '#FFF',
 		borderRadius: theme.borderRadius,
-		color: 'white',
-		padding: '16px 36px',
+		color: '#D74EFF',
+		padding: '14px 36px',
 		textTransform: 'capitalize',
-		maxWidth: 180,
+		border: '2px solid #E390FF',
+		maxWidth: 200,
 	},
 })
 
-function ButtonDark(props) {
+function ButtonOutlineLight(props) {
 	return (
 		<Button
 			classes={{
@@ -27,4 +27,4 @@ function ButtonDark(props) {
 	)
 }
 
-export default withStyles(styles)(ButtonDark)
+export default withStyles(styles)(ButtonOutlineLight)

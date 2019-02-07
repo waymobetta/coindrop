@@ -11,10 +11,11 @@ import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import Avatar from '@material-ui/core/Avatar'
 import ButtonLight from '../components/ButtonLight'
 import classNames from 'classnames'
-import { ReactComponent as CommentBubles } from '../components/assets/comment_bubbles.svg'
+import { ReactComponent as IconRecognition } from '../components/assets/IconRecognition.svg'
+import { ReactComponent as UnlockIcon } from '../components/assets/UnlockIcon.svg'
+import { ReactComponent as TasksIcon } from '../components/assets/TasksIcon.svg'
 
 const styles = theme => ({
 	root: {
@@ -33,9 +34,6 @@ const styles = theme => ({
 	},
 	hero1: {
 		minHeight: 660,
-	},
-	subTitle1: {
-		marginBottom: 40,
 	},
 	hero2: {
 		minHeight: 400,
@@ -74,6 +72,7 @@ const styles = theme => ({
 		overflow: 'hidden',
 		position: 'relative',
 		marginTop: -100,
+		padding: 30,
 	},
 	hero3Cut: {
 		backgroundColor: '#47317A',
@@ -99,6 +98,40 @@ const styles = theme => ({
 	},
 	collectBonus: {
 		zIndex: 9,
+	},
+	iconRecognition: {
+		width: 60,
+		height: 60,
+		color: '#CA34FF',
+	},
+	iconTasks: {
+		width: 60,
+		height: 60,
+		color: '#CA34FF',
+	},
+	iconUnlock: {
+		width: 60,
+		height: 60,
+		color: '#CA34FF',
+	},
+	reputationBox: {
+		borderRadius: 34,
+		padding: 20,
+		textAlign: 'right',
+		boxShadow:
+			'0 12px 22px 0 rgba(99,108,123,0.1), 0 -12px 22px 0 rgba(99,108,123,0.05)',
+	},
+	h3: {
+		color: '#FFF',
+		width: '85%',
+	},
+	subtitle1: {
+		color: '#FFF',
+		fontSize: 22,
+		marginTop: 30,
+	},
+	reputationSubTitle: {
+		marginBottom: 40,
 	},
 })
 
@@ -138,7 +171,7 @@ class Index extends React.Component {
 							<Typography
 								variant="subtitle1"
 								gutterBottom
-								className={classes.subTitle1}
+								className={classes.reputationSubTitle}
 							>
 								Free your reputation on Reddit and Stack
 								Overflow by connecting it to your Ethereum
@@ -159,43 +192,34 @@ class Index extends React.Component {
 						alignItems="center"
 					>
 						<Grid item xs={12} sm={6}>
-							<Paper elevation={1} color="default">
+							<Paper
+								elevation={1}
+								color="default"
+								className={classes.reputationBox}
+							>
 								<List className={classes.root}>
 									<ListItem>
-										<Avatar
-											classes={{
-												root:
-													classes.listIconTransparent,
-											}}
-										>
-											<CommentBubles />
-										</Avatar>
+										<IconRecognition
+											className={classes.iconRecognition}
+										/>
 										<ListItemText primary="Gain recognition and tokens by micro-consulting for projects at your leisure." />
 									</ListItem>
 									<ListItem>
-										<Avatar
-											classes={{
-												root:
-													classes.listIconTransparent,
-											}}
-										>
-											<CommentBubles />
-										</Avatar>
+										<TasksIcon
+											className={classes.iconTasks}
+										/>
 										<ListItemText primary="Unlock badges for individual achievements." />
 									</ListItem>
 									<ListItem>
-										<Avatar
-											classes={{
-												root:
-													classes.listIconTransparent,
-											}}
-										>
-											<CommentBubles />
-										</Avatar>
+										<UnlockIcon
+											className={classes.iconUnlock}
+										/>
 										<ListItemText primary="Complete tasks and surveys to receive crypto micropayments." />
 									</ListItem>
 								</List>
-								<Button size="medium">Get Started</Button>
+								<Button size="medium" color="secondary">
+									Get Started
+								</Button>
 							</Paper>
 						</Grid>
 						<Grid item xs={12} sm={6}>
@@ -224,10 +248,14 @@ class Index extends React.Component {
 						alignItems="center"
 					>
 						<Grid item xs={12} sm={6}>
-							<Typography component="h3" variant="h3">
+							<Typography variant="h3" className={classes.h3}>
 								Sign up and receive a $5 Ether bonus
 							</Typography>
-							<Typography variant="subtitle1" gutterBottom>
+							<Typography
+								variant="subtitle1"
+								gutterBottom
+								className={classes.subtitle1}
+							>
 								This is a limited time offer!
 							</Typography>
 						</Grid>

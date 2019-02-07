@@ -6,13 +6,13 @@ import red from '@material-ui/core/colors/red'
 const rawTheme = createMuiTheme({
 	palette: {
 		primary: {
-			ligth: '#69696a',
+			ligth: '#FFF',
 			main: '#28282a',
 			dark: '#1e1e1f',
 		},
 		secondary: {
 			light: '#fff5f8',
-			main: '#ff3366',
+			main: '#E864FF',
 			dark: '#e62958',
 		},
 		warning: {
@@ -31,6 +31,12 @@ const rawTheme = createMuiTheme({
 	},
 	borderRadius: 34,
 	maxWidth: '1100px',
+	modalBorderRadius: 56,
+	boxTitle: {
+		fontSize: 16,
+		color: '#92979D',
+		paddingBottom: 5,
+	},
 	typography: {
 		fontFamily: "'Work Sans', sans-serif",
 		fontSize: 14,
@@ -77,7 +83,7 @@ const theme = {
 		h2: {
 			...rawTheme.typography.h2,
 			...fontHeader,
-			fontSize: 48,
+			fontSize: 45,
 		},
 		h3: {
 			...rawTheme.typography.h3,

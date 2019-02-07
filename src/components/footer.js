@@ -12,10 +12,13 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import { ReactComponent as CommentBubles } from '../components/assets/comment_bubbles.svg'
 import theme from './theme'
+import SocialIcons from './socialIcons'
 const styles = {
 	footer: {
 		backgroundColor: '#272B2F',
-		height: 200,
+		height: 220,
+		padding: '0px 15px',
+		margin: 0,
 	},
 	grow: {
 		flexGrow: 1,
@@ -23,12 +26,29 @@ const styles = {
 	row: {
 		flexGrow: 1,
 		maxWidth: 1100,
-		margin: 'auto',
-		padding: 10,
+		margin: 0,
+		padding: 0,
 		color: '#fff',
 	},
 	footerHeader: {
 		color: 'white',
+		margin: 'auto 0px',
+		[theme.breakpoints.down('sm')]: {
+			textAlign: 'center',
+			marginTop: '30px',
+			marginBottom: 10,
+			width: '100%',
+		},
+		[theme.breakpoints.up('md')]: {
+			textAlign: 'left',
+		},
+	},
+	footerLink: {
+		color: '#A5A5A5',
+	},
+	footerLinks: {
+		textAlign: 'center',
+		margin: 'auto',
 	},
 }
 
@@ -80,6 +100,7 @@ class Footer extends React.Component {
 					xs={12}
 					className={classes.row}
 					wrap="wrap-reverse"
+					justify="space-between"
 				>
 					<Grid
 						item
@@ -87,81 +108,60 @@ class Footer extends React.Component {
 						sm={6}
 						container
 						direction="row"
-						justify="space-around"
+						justify="space-between"
 					>
-						<Grid item xs={12} sm={6}>
-							<Typography
-								inline
-								component="h6"
-								variant="h6"
-								gutterBottom
-								className={classes.footerHeader}
-							>
-								Coindrop 2019
-							</Typography>
-						</Grid>
-						<Grid item xs={12} sm={6}>
+						<Typography
+							component="h6"
+							variant="h6"
+							gutterBottom
+							className={classes.footerHeader}
+						>
+							Coindrop 2019
+						</Typography>
+
+						<div
+							item
+							xs={12}
+							sm={6}
+							className={classes.footerLinks}
+						>
 							<Button
 								size="small"
 								variant="text"
-								className={classes.margin}
+								className={classes.footerLink}
 							>
 								About Us
 							</Button>
 							<Button
 								size="small"
 								variant="text"
-								className={classes.margin}
+								className={classes.footerLink}
 							>
 								Terms and policy
 							</Button>
-						</Grid>
+						</div>
 					</Grid>
 					<Grid
 						item
 						container
 						xs={12}
-						sm={6}
+						sm={4}
 						direction="row"
 						justify="space-around"
 					>
-						<Grid item xs={12} sm={6}>
-							<Typography
-								component="h6"
-								variant="h6"
-								gutterBottom
-								className={classes.footerHeader}
-							>
-								Join us!
-							</Typography>
-						</Grid>
-
-						<Grid
-							item
-							container
-							justify="center"
-							alignItems="center"
-							xs={6}
+						<Typography
+							component="h6"
+							variant="h6"
+							gutterBottom
+							className={classes.footerHeader}
 						>
-							<IconButton
-								className={classes.button}
-								aria-label="Delete"
-							>
-								<CommentBubles />
-							</IconButton>
-							<IconButton
-								className={classes.button}
-								aria-label="Delete"
-							>
-								<CommentBubles />
-							</IconButton>
-							<IconButton
-								className={classes.button}
-								aria-label="Delete"
-							>
-								<CommentBubles />
-							</IconButton>
-						</Grid>
+							Join us!
+						</Typography>
+
+						<SocialIcons
+							className={classes.socialIconsHome}
+							xs={7}
+						/>
 					</Grid>
 				</Grid>
 			</Grid>

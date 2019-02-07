@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
+import AccountButton from '../AccountButton'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
@@ -25,32 +25,32 @@ class StepTwo extends React.Component {
 	}
 
 	render() {
-		const { classes } = this.props
+		//const { classes } = this.props
 		return (
-			<div className={classes.root}>
+			<React.Fragment>
 				<Typography variant="h3" gutterBottom>
-					Choose one to star
+					Choose one to start
 				</Typography>
 				<Typography variant="subtitle1" gutterBottom>
 					You can connect more accounts later
 				</Typography>
-				<Button
+				<AccountButton
 					variant="outlined"
 					size="large"
 					color="primary"
 					onClick={this.onSelectOption.bind(this, 'reddit')}
 				>
 					Reddit
-				</Button>
-				<Button
+				</AccountButton>
+				<AccountButton
 					variant="outlined"
 					size="large"
 					color="primary"
 					onClick={this.onSelectOption.bind(this, 'stackoverflow')}
 				>
 					StackOverflow
-				</Button>
-			</div>
+				</AccountButton>
+			</React.Fragment>
 		)
 	}
 }

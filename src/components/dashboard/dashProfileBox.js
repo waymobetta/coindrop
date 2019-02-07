@@ -9,19 +9,20 @@ import { withStyles } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
 import EditIcon from '@material-ui/icons/Edit'
 import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Hidden from '@material-ui/core/Hidden'
+import ButtonDark from '../ButtonDark'
+import classNames from 'classnames'
 
 const styles = theme => ({
 	bigAvatar: {
 		margin: 10,
-		width: 60,
-		height: 60,
+		width: 100,
+		height: 100,
 	},
 	fab: {
 		margin: theme.spacing.unit,
@@ -31,6 +32,29 @@ const styles = theme => ({
 	},
 	profileBoxPaper: {
 		position: 'relative',
+		padding: '20px 20px',
+		borderRadius: 30,
+		display: 'flex',
+		justifyContent: 'space-between',
+		flexDirection: 'column',
+		[theme.breakpoints.up('md')]: {
+			alignItems: 'flex-start',
+		},
+		[theme.breakpoints.down('sm')]: {
+			alignItems: 'center',
+		},
+	},
+	boxTitle: {
+		...theme.boxTitle,
+	},
+	profileList: {
+		padding: 0,
+	},
+	form: {
+		margin: '10px 30px',
+	},
+	centerAvatar: {
+		justifyContent: 'center',
 	},
 })
 
@@ -54,7 +78,7 @@ class DashProfileBox extends Component {
 		const { editProfile } = this.state
 		return (
 			<Grid item xs={12} sm={6}>
-				<Typography variant="h5" component="h3">
+				<Typography className={classes.boxTitle} component="subtitle1">
 					Profile
 				</Typography>
 				<Paper className={classes.profileBoxPaper}>
@@ -68,17 +92,34 @@ class DashProfileBox extends Component {
 						<p>hunter27@gmail.com</p>
 					</Hidden>
 					<Hidden smDown>
-						<List className={classes.root}>
-							<ListItem>
+						<List className={classes.profileList}>
+							<ListItem
+								className={classNames(
+									editProfile ? classes.centerAvatar : ''
+								)}
+							>
 								<Avatar
 									alt="Remy Sharp"
 									src={profilePicture}
 									className={classes.bigAvatar}
 								/>
-								<ListItemText
-									primary="Photos"
-									secondary="Jan 9, 2014"
-								/>
+								{!editProfile ? (
+									<ListItemText
+										primary="Hunter"
+										secondary="hunter27@gmail.com"
+										primaryTypographyProps={{
+											variant: 'h6',
+										}}
+										secondaryTypographyProps={{
+											variant: 'subtitle1',
+										}}
+									/>
+								) : (
+									<React.Fragment>
+										<EditIcon />
+										<EditIcon />
+									</React.Fragment>
+								)}
 							</ListItem>
 						</List>
 					</Hidden>
@@ -102,65 +143,79 @@ class DashProfileBox extends Component {
 						</>
 					) : (
 						<>
-							<form className={classes.form}>
-								<FormControl margin="normal" required fullWidth>
-									<InputLabel htmlFor="email">
-										Name
-									</InputLabel>
-									<Input
-										id="name"
-										name="name"
-										autoComplete="name"
-										autoFocus
-									/>
-								</FormControl>
-								<FormControl margin="normal" required fullWidth>
-									<InputLabel htmlFor="email">
-										Email
-									</InputLabel>
-									<Input
-										id="email"
-										name="email"
-										autoComplete="email"
-										autoFocus
-									/>
-								</FormControl>
-								<FormControl margin="normal" required fullWidth>
-									<InputLabel htmlFor="password">
-										Password
-									</InputLabel>
-									<Input
-										name="password"
-										type="password"
-										id="password"
-									/>
-								</FormControl>
-								<FormControl margin="normal" required fullWidth>
-									<InputLabel htmlFor="repeatPassword">
-										Repeat Password
-									</InputLabel>
-									<Input
-										name="repeatPassword"
-										type="repeatPassword"
-										id="repeatPassword"
-									/>
-								</FormControl>
-							</form>
-							<Button
-								size="large"
-								color="primary"
-								onClick={this.handleSaveProfile}
+							<Grid
+								container
+								alignContent="space-between"
+								justify="space-between"
+								direction="column"
+								alignItems="center"
+								spacing={0}
 							>
-								Change Password
-							</Button>
-							<Button
-								variant="outlined"
-								size="large"
-								color="primary"
-								onClick={this.handleSaveProfile}
-							>
-								Save
-							</Button>
+								<form className={classes.form}>
+									<FormControl
+										margin="normal"
+										required
+										fullWidth
+									>
+										<Input
+											placeholder="Email Address"
+											id="email"
+											name="email"
+											autoFocus
+											classes={{
+												underline: classes.cssUnderline,
+											}}
+										/>
+									</FormControl>
+									<FormControl
+										margin="normal"
+										required
+										fullWidth
+									>
+										<Input
+											name="password"
+											type="password"
+											id="password"
+											placeholder="Password"
+											classes={{
+												underline: classes.cssUnderline,
+											}}
+										/>
+									</FormControl>
+									<FormControl
+										margin="normal"
+										required
+										fullWidth
+										error
+									>
+										<Input
+											placeholder="Repeat Password"
+											name="repeatPassword"
+											type="repeatPassword"
+											id="repeatPassword"
+											classes={{
+												underline: classes.cssUnderline,
+											}}
+										/>
+									</FormControl>
+								</form>
+								<Button
+									size="small"
+									color="primary"
+									variant="text"
+									align="right"
+									onClick={this.handleSaveProfile}
+								>
+									Change Password
+								</Button>
+								<ButtonDark
+									type="submit"
+									fullWidth
+									onClick={this.handleSaveProfile}
+								>
+									Save
+								</ButtonDark>
+							</Grid>
 						</>
 					)}
 				</Paper>

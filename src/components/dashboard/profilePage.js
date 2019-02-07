@@ -8,7 +8,6 @@ import DashContributions from './dashContributions'
 import DashProfileBox from './dashProfileBox'
 import DashBadges from './dashBadges'
 import DashBalances from './dashBalances'
-import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Hidden from '@material-ui/core/Hidden'
@@ -21,6 +20,17 @@ const styles = theme => ({
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3,
 		backgroundColor: '#FAFAFA',
+	},
+	mobileTabsRoot: {
+		backgroundColor: 'transparent',
+	},
+	mobileTabsLabel: {
+		color: '#E66DFE',
+		fontSize: 14,
+		textTransform: 'Capitalize',
+	},
+	indicator: {
+		backgroundColor: '#E66DFE',
 	},
 })
 
@@ -45,7 +55,7 @@ class ProfilePage extends React.Component {
 						justify="flex-start"
 					>
 						<DashProfileBox />
-						<DashBadges />
+						<DashBalances />
 					</Grid>
 					<Grid
 						container
@@ -53,23 +63,35 @@ class ProfilePage extends React.Component {
 						className={classes.root}
 						justify="flex-start"
 					>
-						<DashBalances />
+						<DashBadges />
 						<DashContributions />
 					</Grid>
 				</Hidden>
 				<Hidden smUp>
 					<DashProfileBox />
-					<AppBar position="static">
-						<Tabs
-							centered
-							value={value}
-							onChange={this.handleChange}
-						>
-							<Tab label="Balances" />
-							<Tab label="Contributions" />
-							<Tab label="Badges" />
-						</Tabs>
-					</AppBar>
+
+					<Tabs
+						centered
+						value={value}
+						onChange={this.handleChange}
+						classes={{
+							root: classes.mobileTabsRoot,
+							indicator: classes.indicator,
+						}}
+					>
+						<Tab
+							label="Balances"
+							classes={{ root: classes.mobileTabsLabel }}
+						/>
+						<Tab
+							label="Contributions"
+							classes={{ root: classes.mobileTabsLabel }}
+						/>
+						<Tab
+							label="Badges"
+							classes={{ root: classes.mobileTabsLabel }}
+						/>
+					</Tabs>
 					{value === 0 && <DashBalances />}
 					{value === 1 && <DashContributions />}
 					{value === 2 && <DashBadges />}

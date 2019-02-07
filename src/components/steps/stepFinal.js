@@ -6,14 +6,26 @@ import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
+import OopsImage from '../assets/oops.png'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
-	paper2: {
+	paper: {
 		textAlign: 'center',
-		color: theme.palette.text.secondary,
+		color: '#fff',
+		backgroundColor: 'transparent',
 		padding: '20px',
 		borderRadius: '67px',
 		height: 400,
+		maxWidth: 540,
+		margin: 'auto',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		position: 'relative',
+		border: '2px solid #fff',
 	},
 })
 
@@ -46,41 +58,48 @@ class StepFinal extends React.Component {
 		const { show } = this.state
 		return show ? (
 			<div className={classes.root}>
-				{canClaimEther && verified ? (
-					<div>
-						<p>Now claim your $5 in Ether </p>
-						<p>Enter your Ethereum address</p>
-						<form className={classes.form}>
-							<FormControl margin="normal" required fullWidth>
-								<InputLabel htmlFor="redditUserName">
-									Wallet Address
-								</InputLabel>
-								<Input
-									id="redditUserName"
-									name="redditUserName"
-									autoFocus
-								/>
-							</FormControl>
-						</form>
-						<Button
-							variant="outlined"
-							size="large"
-							color="primary"
-							onClick={this.onClick}
-						>
-							Get Paid
-						</Button>
-						<p>You don´t have one? Create Wallet</p>
-					</div>
-				) : (
-					<div>
-						<p>
-							To qualify for this offer you must have at least 100
-							Reddit Karma and/or 100 Stack Overflow reputation.
-						</p>
-						<p>Come back to claim once you have reached 100!</p>
-					</div>
-				)}
+				<Typography variant="h6" gutterBottom align="center">
+					Congrats!
+				</Typography>
+				<Paper className={classes.paper} elevation={0}>
+					{canClaimEther && verified ? (
+						<div>
+							<p>Now claim your $5 in Ether </p>
+							<p>Enter your Ethereum address</p>
+							<form className={classes.form}>
+								<FormControl margin="normal" required fullWidth>
+									<InputLabel htmlFor="redditUserName">
+										Wallet Address
+									</InputLabel>
+									<Input
+										id="redditUserName"
+										name="redditUserName"
+										autoFocus
+									/>
+								</FormControl>
+							</form>
+							<Button
+								variant="outlined"
+								size="large"
+								color="primary"
+								onClick={this.onClick}
+							>
+								Get Paid
+							</Button>
+							<p>You don´t have one? Create Wallet</p>
+						</div>
+					) : (
+						<div>
+							<img src={OopsImage} />
+							<p>
+								To qualify for this offer you must have at least
+								100 Reddit Karma and/or 100 Stack Overflow
+								reputation.
+							</p>
+							<p>Come back to claim once you have reached 100!</p>
+						</div>
+					)}
+				</Paper>
 			</div>
 		) : (
 			<div>Verified!!!</div>

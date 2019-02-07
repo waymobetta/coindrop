@@ -3,14 +3,15 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
 import Divider from '@material-ui/core/Divider'
-import { ReactComponent as LogoFull } from '../../components/assets/coindrop_logo_full.svg'
-import InboxIcon from '@material-ui/icons/Inbox'
+import { ReactComponent as LogoFull } from '../../components/assets/coindrop_logo_dark_white.svg'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
+import { ReactComponent as CommentBubles } from '../assets/comment_bubbles.svg'
+
+import Badge from '@material-ui/core/Badge'
+import SocialIcons from '../socialIcons'
 
 const styles = theme => ({
 	paper2: {
@@ -34,11 +35,6 @@ const styles = theme => ({
 		fill: '#fff',
 		display: 'block',
 	},
-	list: {
-		width: 200,
-		display: 'block',
-		marginTop: 100,
-	},
 	drawerWrapper: {
 		display: 'flex',
 		justifyContent: 'space-between',
@@ -50,11 +46,76 @@ const styles = theme => ({
 			alignItems: 'flex-start',
 		},
 	},
-	socialIcons: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		width: 160,
-		margin: 15,
+	adminDrawerMenu: {
+		backgroundColor: '#171A1D',
+		width: 310,
+		borderTopLeftRadius: theme.modalBorderRadius,
+	},
+	list: {
+		marginTop: '20px',
+		paddingLeft: '0',
+		paddingTop: '0',
+		paddingBottom: '0',
+		marginBottom: '0',
+		listStyle: 'none',
+		position: 'unset',
+		marginRight: 20,
+	},
+	item: {
+		paddingTop: 5,
+		paddingBottom: 5,
+	},
+	itemLink: {
+		width: 'auto',
+		transition: 'all 300ms linear',
+		margin: '10px 15px 0',
+		position: 'relative',
+		display: 'block',
+		padding: '0px',
+		backgroundColor: 'transparent',
+		color: '#9E9E9E',
+		borderRadius: 30,
+		textDecoration: 'none',
+		'&:hover,&:focus,&:visited,&': {
+			color: '#9E9E9E',
+		},
+		'&.active': {
+			color: '#FFFFFF',
+			backgroundColor: 'rgba(255, 255, 255, 0.1)',
+		},
+		fontSize: 16,
+		fontWeight: 600,
+	},
+	itemIcon: {
+		width: '24px',
+		height: '30px',
+		fontSize: '24px',
+		lineHeight: '30px',
+		float: 'left',
+		marginRight: '15px',
+		textAlign: 'center',
+		verticalAlign: 'middle',
+		color: 'rgba(255, 255, 255, 0.8)',
+		fill: '#fff',
+	},
+	itemText: {
+		margin: '0',
+		lineHeight: '30px',
+		fontSize: '14px',
+		color: 'inherit',
+	},
+	badge: {
+		top: '50%',
+		right: -3,
+		// The border color match the background color.
+		border: `2px solid ${
+			theme.palette.type === 'light'
+				? theme.palette.grey[200]
+				: theme.palette.grey[900]
+		}`,
+	},
+	logout: {
+		marginRight: 40,
 	},
 })
 
@@ -72,6 +133,7 @@ class DashDrawer extends React.Component {
 			<div className={classes.drawerWrapper}>
 				<LogoFull className={classes.drawerLogo} />
 				<Divider />
+
 				<List className={classes.list}>
 					{[
 						{ name: 'Profile', url: '/dashboard/dashboard' },
@@ -80,81 +142,58 @@ class DashDrawer extends React.Component {
 						{ name: 'Accounts', url: '/dashboard/accounts' },
 						{ name: 'Policy', url: '/dashboard/policy' },
 					].map((page, index) => (
-						<ListItem
-							button
+						<Link
+							className={classes.itemLink}
+							activeClassName="active"
 							key={index}
-							classes={{
-								button: classes.leftListButton,
-							}}
+							to={page.url}
 						>
-							<ListItemIcon>
-								<InboxIcon />
-							</ListItemIcon>
-							<Link
-								to={page.url}
-								activeClassName="active"
-								className="nav-link"
+							<ListItem
+								key={index}
+								classes={{ root: classes.item }}
 							>
+								<ListItemIcon
+									className={{ root: classes.itemIcon }}
+								>
+									<CommentBubles color="white" />
+								</ListItemIcon>
+
 								<ListItemText
 									primary={page.name}
 									classes={{
-										primary: classes.leftListButtonText,
+										primary: classes.itemText,
 									}}
 								/>
-							</Link>
-						</ListItem>
+								{page.name === 'Tasks' && (
+									<Badge
+										badgeContent={2}
+										color="primary"
+										classes={{ badge: classes.badge }}
+									/>
+								)}
+							</ListItem>
+						</Link>
 					))}
 				</List>
 				<Divider />
-				<div className={classes.socialIcons}>
-					<Fab
-						size="small"
-						color="secondary"
-						aria-label="Add"
-						className={classes.margin}
-					>
-						<AddIcon />
-					</Fab>
-					<Fab
-						size="small"
-						color="secondary"
-						aria-label="Add"
-						className={classes.margin}
-					>
-						<AddIcon />
-					</Fab>
-					<Fab
-						size="small"
-						color="secondary"
-						aria-label="Add"
-						className={classes.margin}
-					>
-						<AddIcon />
-					</Fab>
-				</div>
-				<List className={classes.list}>
-					<ListItem
-						button
-						classes={{
-							button: classes.leftListButton,
-						}}
-					>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Link
-							to="/"
-							activeClassName="active"
-							className="nav-link"
-						>
+				<SocialIcons />
+				<List className={classes.logout}>
+					<Link className={classes.itemLink} activeClassName="active">
+						<ListItem classes={{ root: classes.item }}>
+							<ListItemIcon
+								className={{ root: classes.itemIcon }}
+							>
+								<CommentBubles color="white" />
+							</ListItemIcon>
+
 							<ListItemText
 								primary="Logout"
 								classes={{
-									primary: classes.leftListButtonText,
+									primary: classes.itemText,
 								}}
 							/>
-						</Link>
-					</ListItem>
+						</ListItem>
+					</Link>
 				</List>
 			</div>
 		)

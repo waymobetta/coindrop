@@ -6,6 +6,11 @@ import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
+import { ReactComponent as Reddit } from '../assets/reddit.svg'
+import { ReactComponent as StackOverflow } from '../assets/stackOverflow.svg'
+import Fab from '@material-ui/core/Fab'
+import ArrowForward from '@material-ui/icons/ArrowForward'
+import ArrowBack from '@material-ui/icons/ArrowBack'
 
 const styles = theme => ({
 	paper2: {
@@ -14,6 +19,32 @@ const styles = theme => ({
 		padding: '20px',
 		borderRadius: '67px',
 		height: 400,
+	},
+	reddit: {
+		width: 36,
+		height: 36,
+	},
+	stackOverflow: {
+		width: 36,
+		height: 36,
+	},
+	fabNext: {
+		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
+		backgroundColor: '#572FFF',
+		right: -50,
+		top: 210,
+		position: 'absolute',
+	},
+	form: {
+		position: 'relative',
+		width: 320,
+	},
+	fabBackTopLeft: {
+		top: -20,
+		left: -20,
+		position: 'absolute',
+		background: 'transparent',
+		boxShadow: 'none',
 	},
 })
 
@@ -54,75 +85,88 @@ class StepThree extends React.Component {
 		const { classes } = this.props
 		const { stackHelp } = this.state
 		return (
-			<div className={classes.root}>
+			<React.Fragment>
 				{this.props.selectedPlatform === 'reddit' ? (
-					<form className={classes.form}>
-						<FormControl margin="normal" required fullWidth>
-							<InputLabel htmlFor="redditUserName">
-								Reddit Username
-							</InputLabel>
-							<Input
-								id="redditUserName"
-								name="redditUserName"
-								autoFocus
-							/>
-						</FormControl>
-						<Button
-							variant="outlined"
-							size="large"
+					<React.Fragment>
+						<form className={classes.form}>
+							<Reddit className={classes.reddit} />
+							<FormControl margin="normal" required fullWidth>
+								<InputLabel htmlFor="redditUserName">
+									Reddit Username
+								</InputLabel>
+								<Input
+									id="redditUserName"
+									name="redditUserName"
+									autoFocus
+								/>
+							</FormControl>
+						</form>
+						<Fab
 							color="primary"
+							aria-label="Add"
+							className={classes.fabNext}
 							onClick={this.onClick}
 						>
-							Next
-						</Button>
-					</form>
+							<ArrowForward />
+						</Fab>
+					</React.Fragment>
 				) : (
-					<div>
+					<React.Fragment>
 						{!stackHelp ? (
-							<form className={classes.form}>
-								<FormControl margin="normal" required fullWidth>
-									<InputLabel htmlFor="email">
-										Stack Overflow UserID
-									</InputLabel>
-									<Input
-										id="stackOverflowId"
-										name="stackOverflowId"
-										autoFocus
+							<React.Fragment>
+								<form className={classes.form}>
+									<StackOverflow
+										className={classes.stackOverflow}
 									/>
-								</FormControl>
-								<Button
-									variant="outlined"
-									size="large"
+									<FormControl
+										margin="normal"
+										required
+										fullWidth
+									>
+										<p>Stack Overflow UserID</p>
+
+										<Input
+											id="stackOverflowId"
+											name="stackOverflowId"
+											autoFocus
+											placeholder="User: 109873627"
+										/>
+									</FormControl>
+
+									<Button
+										variant="text"
+										size="small"
+										color="primary"
+										onClick={this.showStackHelp}
+									>
+										Where is my ID
+									</Button>
+								</form>
+								<Fab
 									color="primary"
+									aria-label="Add"
+									className={classes.fabNext}
 									onClick={this.onClick}
 								>
-									Next
-								</Button>
-								<Button
-									variant="outlined"
-									size="large"
-									color="primary"
-									onClick={this.showStackHelp}
-								>
-									Where is my ID
-								</Button>
-							</form>
+									<ArrowForward />
+								</Fab>
+							</React.Fragment>
 						) : (
-							<form className={classes.form}>
-								Help finding stackOverflowId?
-								<Button
-									variant="outlined"
-									size="large"
+							<React.Fragment>
+								<p>Help finding stackOverflowId?</p>
+								<Fab
 									color="primary"
+									aria-label="Add"
+									className={classes.fabBackTopLeft}
 									onClick={this.hideStackHelp}
 								>
-									Back
-								</Button>
-							</form>
+									<ArrowBack />
+								</Fab>
+							</React.Fragment>
 						)}
-					</div>
+					</React.Fragment>
 				)}
-			</div>
+			</React.Fragment>
 		)
 	}
 }

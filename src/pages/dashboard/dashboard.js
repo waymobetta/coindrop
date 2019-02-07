@@ -16,6 +16,11 @@ const styles = theme => ({
 		padding: theme.spacing.unit * 3,
 		backgroundColor: '#FAFAFA',
 	},
+	boxTitle: {
+		fontSize: 16,
+		color: '#92979D',
+		paddingBottom: 5,
+	},
 })
 
 class Dashboard extends React.Component {

@@ -5,7 +5,7 @@ const styles = theme => ({
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
 		outline: 'none',
-		borderRadius: 56,
+		borderRadius: theme.modalBorderRadius,
 	},
 	main: {
 		width: 'auto',
@@ -17,16 +17,17 @@ const styles = theme => ({
 			width: 400,
 			marginLeft: 'auto',
 			marginRight: 'auto',
+			minHeight: 490,
 		},
 	},
 	paper: {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+		justifyContent: 'space-evenly',
 		backgroundColor: 'transparent',
 
-		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit *
-			3}px ${theme.spacing.unit * 3}px`,
+		padding: '30px 48px',
 	},
 	form: {
 		width: '100%', // Fix IE 11 issue.
@@ -52,6 +53,10 @@ const styles = theme => ({
 		top: -20,
 		right: -20,
 		position: 'absolute',
+	},
+	signupTOSLink: {
+		display: 'flex',
+		justify: 'flex-start',
 	},
 })
 

@@ -4,43 +4,40 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import { ReactComponent as CommentBubles } from './assets/comment_bubbles.svg'
 import Hidden from '@material-ui/core/Hidden'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import purple from '@material-ui/core/colors/purple'
-
-const theme = createMuiTheme({
-	overrides: {
-		// Name of the component ⚛️ / style sheet
-		MuiButton: {
-			// Name of the rule
-			text: {
-				// Some CSS
-				background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-				borderRadius: 3,
-				border: 0,
-				color: 'white',
-				height: 48,
-				padding: '0 30px',
-				boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-			},
-		},
-	},
-	palette: {
-		primary: { main: purple[500] }, // Purple and green play nicely together.
-		secondary: { main: '#444444' }, // This is just green.A700 as hex.
-	},
-	typography: { useNextVariants: true },
-})
+import ButtonLight from '../components/ButtonLight'
+import ButtonOutlineDark from '../components/ButtonOutlineDark'
+import SocialIcons from './socialIcons'
+import Grid from '@material-ui/core/Grid'
+import theme from './theme'
 
 const styles = {
 	list: {
-		width: 250,
+		padding: 30,
 	},
 	fullList: {
 		width: 'auto',
 	},
-	customPaper: {
-		backgroundColor: '#fff',
+	homeDrawerMenu: {
+		backgroundColor: '#171A1D',
+		width: 310,
+		borderTopLeftRadius: theme.modalBorderRadius,
+	},
+	toggleButton: {
+		position: 'absolute',
+		top: 10,
+		right: 10,
+		fill: '#fff',
+	},
+	socialIconsHome: {
+		marginTop: 200,
+		width: 210,
+	},
+	buttons: {
+		marginTop: 30,
+		height: 130,
 	},
 }
 
@@ -60,53 +57,79 @@ class HomeMenu extends React.Component {
 		})
 	}
 
-	handleOpenSignUp() {
-		this.props.onSignUpOpen()
+	handleOpenSignUp(type) {
+		this.props.onSignUpOpen(type)
 	}
 
 	render() {
 		const { classes } = this.props
 		const sideList = (
 			<div className={classes.list}>
-				<Button onClick={this.toggleDrawer('right', true)}>
-					Close
-				</Button>
+				<IconButton
+					className={classes.toggleButton}
+					aria-label="Delete"
+					onClick={this.toggleDrawer('right', true)}
+				>
+					<CommentBubles />
+				</IconButton>
 
-				<Button onClick={this.handleOpenSignUp}>Sign Up</Button>
+				<Grid
+					item
+					container
+					justify="space-between"
+					direction="column"
+					alignItems="center"
+					xs={12}
+					className={classes.buttons}
+				>
+					<ButtonLight
+						size="large"
+						onClick={() => this.handleOpenSignUp('signUp', this)}
+						className={classes.drawerButton}
+					>
+						Sign Up
+					</ButtonLight>
+					<ButtonOutlineDark
+						size="large"
+						onClick={() => this.handleOpenSignUp('signIn', this)}
+					>
+						Sign In
+					</ButtonOutlineDark>
+				</Grid>
+
+				<SocialIcons className={classes.socialIconsHome} />
 			</div>
 		)
-
 		return (
 			<>
 				<Hidden smUp>
-					<Button
+					<IconButton
+						className={classes.toggleButton}
+						aria-label="Delete"
 						onClick={this.toggleDrawer('right', true)}
-						color="secondary"
 					>
-						Open Right
-					</Button>
+						<CommentBubles />
+					</IconButton>
 
-					<MuiThemeProvider theme={theme}>
-						<SwipeableDrawer
-							anchor="right"
-							PaperProps={{ rounded: 'false' }}
-							classes={{
-								paper: classes.customPaper,
-							}}
-							open={this.state.right}
-							onClose={this.toggleDrawer('right', false)}
-							onOpen={this.toggleDrawer('right', true)}
+					<SwipeableDrawer
+						anchor="right"
+						PaperProps={{ rounded: 'false' }}
+						classes={{
+							paper: classes.homeDrawerMenu,
+						}}
+						open={this.state.right}
+						onClose={this.toggleDrawer('right', false)}
+						onOpen={this.toggleDrawer('right', true)}
+					>
+						<div
+							tabIndex={0}
+							role="button"
+							onClick={this.toggleDrawer('right', false)}
+							onKeyDown={this.toggleDrawer('right', false)}
 						>
-							<div
-								tabIndex={0}
-								role="button"
-								onClick={this.toggleDrawer('right', false)}
-								onKeyDown={this.toggleDrawer('right', false)}
-							>
-								{sideList}
-							</div>
-						</SwipeableDrawer>
-					</MuiThemeProvider>
+							{sideList}
+						</div>
+					</SwipeableDrawer>
 				</Hidden>
 			</>
 		)

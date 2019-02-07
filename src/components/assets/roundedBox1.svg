@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="159.457" height="125.445">
+  <defs>
+    <linearGradient id="a" x1=".049" x2=".925" y1=".065" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stopColor="#e390ff"/>
+      <stop offset="1" stopColor="#b53fff"/>
+    </linearGradient>
+    <clipPath id="b">
+      <rect width="159.457" height="125.445" fill="url(#a)" rx="34"/>
+    </clipPath>
+    <linearGradient id="c" x1=".5" x2=".528" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stopColor="#e390ff" stopOpacity=".431"/>
+      <stop offset="1" stopColor="#b53fff" stopOpacity=".431"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <rect width="159.457" height="125.445" fill="url(#a)" rx="34"/>
+    <g clipPath="url(#b)">
+      <rect width="203.25" height="125.445" fill="url(#c)" rx="50" transform="rotate(-138 115.47 96.169)"/>
+    </g>
+  </g>
+</svg>

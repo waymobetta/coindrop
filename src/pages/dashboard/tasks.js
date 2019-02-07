@@ -5,15 +5,18 @@ import SEO from '../../components/seo'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 
 const styles = theme => ({
-	root: {
-		display: 'flex',
-	},
-	content: {
+	tasksBoxPaper: {
+		position: 'relative',
+		height: 180,
+		borderRadius: 33,
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3,
-		backgroundColor: '#FAFAFA',
+		marginTop: 30,
 	},
 })
 
@@ -22,13 +25,23 @@ class Tasks extends React.Component {
 		super(props)
 	}
 	render() {
+		const { classes } = this.props
 		return (
 			<Layout>
 				<SEO
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
 				/>
-				Tasks
+				<Grid item xs={12} sm={10}>
+					<Paper className={classes.tasksBoxPaper}>
+						<Typography variant="h5" component="h3">
+							Welcome to Coindrop!
+						</Typography>
+						<Typography ariant="subtitle2" gutterBottom>
+							You don´t have any tasks yet.
+						</Typography>
+					</Paper>
+				</Grid>
 			</Layout>
 		)
 	}

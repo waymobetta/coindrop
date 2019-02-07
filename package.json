@@ -25,6 +25,7 @@
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
     "react-scroll": "^1.7.10",
+    "react-scrollspy-nav": "^1.2.1",
     "vanilla-tilt": "^1.5.0"
   },
   "keywords": [

@@ -10,7 +10,8 @@ import DashHeader from './dashboard/dashHeader'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import Hidden from '@material-ui/core/Hidden'
-const drawerWidth = 355
+import theme from './theme'
+import { MuiThemeProvider } from '@material-ui/core/styles'
 
 const styles = theme => ({
 	root: {
@@ -19,7 +20,7 @@ const styles = theme => ({
 	drawer: {
 		[theme.breakpoints.up('md')]: {
 			flexShrink: 0,
-			width: drawerWidth,
+			width: 355,
 		},
 		[theme.breakpoints.down('sm')]: {
 			width: 0,
@@ -30,7 +31,7 @@ const styles = theme => ({
 		color: '#fff',
 		[theme.breakpoints.up('md')]: {
 			flexShrink: 0,
-			width: drawerWidth,
+			width: 355,
 		},
 		[theme.breakpoints.down('sm')]: {
 			flexShrink: 0,
@@ -93,37 +94,39 @@ class Layout extends React.Component {
 		const { classes, width, children } = this.props
 		const matches = width == 'xs' || width == 'sm'
 		return (
-			<div className={classes.root}>
-				<CssBaseline />
-				<nav className={classes.drawer}>
-					<Drawer
-						classes={{
-							paper: classes.drawerPaper,
-						}}
-						onClose={this.handleDrawerToggle}
-						open={matches ? this.state.mobileOpen : true}
-						variant={matches ? 'temporary' : 'permanent'}
-						anchor={matches ? 'right' : 'left'}
-					>
-						<DashDrawer />
-					</Drawer>
-				</nav>
-				<main className={classes.content}>
-					<Hidden mdUp>
-						<Fab
-							size="small"
-							color="secondary"
-							aria-label="Add"
-							className={classes.mobileMenuButton}
-							onClick={this.handleDrawerToggle}
+			<MuiThemeProvider theme={theme}>
+				<div className={classes.root}>
+					<CssBaseline />
+					<nav className={classes.drawer}>
+						<Drawer
+							classes={{
+								paper: classes.drawerPaper,
+							}}
+							onClose={this.handleDrawerToggle}
+							open={matches ? this.state.mobileOpen : true}
+							variant={matches ? 'temporary' : 'permanent'}
+							anchor={matches ? 'right' : 'left'}
 						>
-							<AddIcon />
-						</Fab>
-					</Hidden>
-					<DashHeader />
-					{children}
-				</main>
-			</div>
+							<DashDrawer />
+						</Drawer>
+					</nav>
+					<main className={classes.content}>
+						<Hidden mdUp>
+							<Fab
+								size="small"
+								color="secondary"
+								aria-label="Add"
+								className={classes.mobileMenuButton}
+								onClick={this.handleDrawerToggle}
+							>
+								<AddIcon />
+							</Fab>
+						</Hidden>
+						<DashHeader />
+						{children}
+					</main>
+				</div>
+			</MuiThemeProvider>
 		)
 	}
 }

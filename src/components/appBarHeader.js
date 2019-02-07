@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import HomeMenu from './homeMenu'
 import SignUp from './SignUp'
+import ButtonHeader from './ButtonHeader'
 import { ReactComponent as LogoFull } from '../components/assets/coindrop_logo_full.svg'
 const styles = {
 	root: {
@@ -33,6 +34,7 @@ class AppBarHeader extends React.Component {
 		this.state = {
 			open: false,
 			signUpOpen: false,
+			signUpMode: true,
 		}
 		this.handleOpen = this.handleOpen.bind(this)
 		this.handleClose = this.handleClose.bind(this)
@@ -48,12 +50,20 @@ class AppBarHeader extends React.Component {
 		this.setState({ open: false })
 	}
 
-	handleSignUpOpen = () => {
-		this.setState({ signUpOpen: true })
+	handleSignUpOpen = type => {
+		if (type === 'signUp') {
+			this.setState({ signUpOpen: true, signUpMode: true })
+		} else {
+			this.setState({ signUpOpen: true, signUpMode: false })
+		}
 	}
 
 	handleSignUpClose = () => {
 		this.setState({ signUpOpen: false })
+	}
+
+	switchToSignIn = () => {
+		this.setState({ signUpMode: false })
 	}
 
 	render() {
@@ -91,16 +101,26 @@ class AppBarHeader extends React.Component {
 									</Button>
 								</Grid>
 								<Grid item>
-									<Button
-										component={Link}
-										to="/login/"
-										activeClassName="active"
+									<ButtonHeader
+										onClick={() =>
+											this.handleSignUpOpen(
+												'signIn',
+												this
+											)
+										}
 									>
 										Login
-									</Button>
-									<Button onClick={this.handleSignUpOpen}>
+									</ButtonHeader>
+									<ButtonHeader
+										onClick={() =>
+											this.handleSignUpOpen(
+												'signUp',
+												this
+											)
+										}
+									>
 										Sign Up
-									</Button>
+									</ButtonHeader>
 								</Grid>
 							</Hidden>
 
@@ -111,6 +131,8 @@ class AppBarHeader extends React.Component {
 				<SignUp
 					open={this.state.signUpOpen}
 					onClose={this.handleSignUpClose}
+					signUpMode={this.state.signUpMode}
+					switchToSignIn={this.switchToSignIn}
 				/>
 			</div>
 		)

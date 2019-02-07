@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import ButtonOutlineLight from '../ButtonOutlineLight'
 
 const styles = theme => ({
 	paper2: {
@@ -25,9 +25,8 @@ class StepOne extends React.Component {
 	}
 
 	render() {
-		const { classes } = this.props
 		return (
-			<div className={classes.root}>
+			<React.Fragment>
 				<Typography variant="h3" gutterBottom>
 					Welcome to Coindrop!
 				</Typography>
@@ -35,15 +34,10 @@ class StepOne extends React.Component {
 					Connect your accounts to Coindrop and receive your first
 					Ether payment
 				</Typography>
-				<Button
-					variant="outlined"
-					size="large"
-					color="primary"
-					onClick={this.onClick}
-				>
+				<ButtonOutlineLight size="large" onClick={this.onClick}>
 					Get Paid
-				</Button>
-			</div>
+				</ButtonOutlineLight>
+			</React.Fragment>
 		)
 	}
 }

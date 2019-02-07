@@ -39,7 +39,11 @@ class SignUp extends React.Component {
 					onClose={this.props.onClose}
 				>
 					<div style={getModalStyle()} className={classes.modalPaper}>
-						<SignUpForm closeSignUp={this.closeButton} />
+						<SignUpForm
+							closeSignUp={this.closeButton}
+							signUpMode={this.props.signUpMode}
+							switchToSignIn={this.props.switchToSignIn}
+						/>
 						<IconButton
 							className={classes.modalCloseButton}
 							aria-label="Delete"
@@ -59,6 +63,8 @@ SignUp.propTypes = {
 	open: PropTypes.bool,
 	onClose: PropTypes.func,
 	handleSignUpClose: PropTypes.func,
+	signUpMode: PropTypes.bool,
+	switchToSignIn: PropTypes.func,
 }
 
 export default withStyles(styles)(SignUp)

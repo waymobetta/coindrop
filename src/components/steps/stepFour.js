@@ -7,6 +7,10 @@ import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Chip from '@material-ui/core/Chip'
+import ButtonOutlineLight from '../ButtonOutlineLight'
+import Fab from '@material-ui/core/Fab'
+import ArrowForward from '@material-ui/icons/ArrowForward'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
 	paper2: {
@@ -15,6 +19,20 @@ const styles = theme => ({
 		padding: '20px',
 		borderRadius: '67px',
 		height: 400,
+	},
+	code: {
+		padding: 25,
+		borderRadius: 30,
+	},
+	fabCopy: {
+		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
+		backgroundColor: '#572FFF',
+		right: -50,
+		top: 210,
+		position: 'absolute',
+	},
+	root: {
+		position: 'relative',
 	},
 })
 
@@ -35,49 +53,56 @@ class StepFour extends React.Component {
 		const { classes, canClaimEther, selectedPlatform } = this.props
 		console.log(canClaimEther)
 		return (
-			<div className={classes.root}>
+			<React.Fragment>
 				{selectedPlatform === 'reddit' ? (
-					<div>
+					<React.Fragment>
+						<Typography variant="h5" gutterBottom>
+							Verification Code
+						</Typography>
 						<Chip
 							variant="outlined"
 							label="AJY765439096GGDC876997"
+							className={classes.code}
 						/>
 						<p>
 							Copy the code and paste it in our subreddit using
 							this link.
 						</p>
+						<br />
 						<p>Already paste the code? </p>
-						<Button
-							variant="outlined"
-							size="large"
-							color="primary"
-							onClick={this.onClick}
-						>
+						<ButtonOutlineLight size="large" onClick={this.onClick}>
 							Verify
-						</Button>
-					</div>
+						</ButtonOutlineLight>
+						<Fab
+							color="primary"
+							aria-label="Add"
+							className={classes.fabCopy}
+						>
+							<ArrowForward />
+						</Fab>
+					</React.Fragment>
 				) : (
-					<div>
+					<React.Fragment>
+						<Typography variant="h5" gutterBottom>
+							Verification Code
+						</Typography>
 						<Chip
 							variant="outlined"
 							label="AJY765439096GGDC876997"
+							className={classes.code}
 						/>
 						<p>
 							Copy the code and paste it in your Stack Overflow
 							profile at the bottom of your “About me”.
 						</p>
+						<br />
 						<p>Already paste the code? </p>
-						<Button
-							variant="outlined"
-							size="large"
-							color="primary"
-							onClick={this.onClick}
-						>
+						<ButtonOutlineLight size="large" onClick={this.onClick}>
 							Verify
-						</Button>
-					</div>
+						</ButtonOutlineLight>
+					</React.Fragment>
 				)}
-			</div>
+			</React.Fragment>
 		)
 	}
 }
