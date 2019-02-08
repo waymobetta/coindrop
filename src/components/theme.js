@@ -32,6 +32,10 @@ const rawTheme = createMuiTheme({
 	borderRadius: 34,
 	maxWidth: '1100px',
 	modalBorderRadius: 56,
+	boxShadow: {
+		boxShadow:
+			'0 12px 22px 0 rgba(99,108,123,0.1), 0 -12px 22px 0 rgba(99,108,123,0.05)',
+	},
 	boxTitle: {
 		fontSize: 16,
 		color: '#92979D',

@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
-import { ReactComponent as CommentBubles } from './assets/comment_bubbles.svg'
+import { ReactComponent as Twitter } from './assets/twitter.svg'
+import { ReactComponent as Reddit } from './assets/reddit.svg'
+import { ReactComponent as Medium } from './assets/medium.svg'
 import Grid from '@material-ui/core/Grid'
 import classNames from 'classnames'
 
@@ -19,24 +21,25 @@ const styles = () => ({
 })
 
 function SocialIcons(props) {
-	const { classes, className } = props
+	const { classes, className, ...rest } = props
 	return (
 		<Grid
+			item
 			container
 			justify="center"
 			alignItems="center"
 			xs={12}
 			className={classNames(classes.socialIcons, className)}
-			{...props}
+			{...rest}
 		>
 			<IconButton className={classes.button} aria-label="Delete">
-				<CommentBubles color="white" />
+				<Medium color="#A4A6A7" />
 			</IconButton>
 			<IconButton className={classes.button} aria-label="Delete">
-				<CommentBubles color="white" />
+				<Reddit color="#A4A6A7" />
 			</IconButton>
 			<IconButton className={classes.button} aria-label="Delete">
-				<CommentBubles color="white" />
+				<Twitter color="#A4A6A7" />
 			</IconButton>
 		</Grid>
 	)
@@ -44,7 +47,7 @@ function SocialIcons(props) {
 
 SocialIcons.propTypes = {
 	classes: PropTypes.object.isRequired,
-	className: PropTypes.object,
+	className: PropTypes.string,
 }
 
 export default withStyles(styles)(SocialIcons)

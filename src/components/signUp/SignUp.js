@@ -5,7 +5,7 @@ import Modal from '@material-ui/core/Modal'
 import SignUpForm from './SignUpForm'
 import styles from './SignUpStyles'
 import IconButton from '@material-ui/core/IconButton'
-import { ReactComponent as CommentBubles } from '../assets/comment_bubbles.svg'
+import Close from '@material-ui/icons/Close'
 
 function getModalStyle() {
 	const top = 50
@@ -46,10 +46,10 @@ class SignUp extends React.Component {
 						/>
 						<IconButton
 							className={classes.modalCloseButton}
-							aria-label="Delete"
+							aria-label="Close Modal"
 							onClick={this.closeButton}
 						>
-							<CommentBubles />
+							<Close nativeColor="white" />
 						</IconButton>
 					</div>
 				</Modal>

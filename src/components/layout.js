@@ -7,8 +7,8 @@ import { withStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
 import DashDrawer from './dashboard/dashDrawer'
 import DashHeader from './dashboard/dashHeader'
-import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
+import IconButton from '@material-ui/core/IconButton'
+import { ReactComponent as DrawerIcon } from './assets/drawerIcon.svg'
 import Hidden from '@material-ui/core/Hidden'
 import theme from './theme'
 import { MuiThemeProvider } from '@material-ui/core/styles'
@@ -72,8 +72,8 @@ const styles = theme => ({
 	},
 	mobileMenuButton: {
 		position: 'absolute',
-		top: 10,
-		right: 10,
+		top: 0,
+		right: 0,
 		zIndex: 9999,
 	},
 })
@@ -112,15 +112,13 @@ class Layout extends React.Component {
 					</nav>
 					<main className={classes.content}>
 						<Hidden mdUp>
-							<Fab
-								size="small"
-								color="secondary"
+							<IconButton
 								aria-label="Add"
 								className={classes.mobileMenuButton}
 								onClick={this.handleDrawerToggle}
 							>
-								<AddIcon />
-							</Fab>
+								<DrawerIcon color="gray" />
+							</IconButton>
 						</Hidden>
 						<DashHeader />
 						{children}

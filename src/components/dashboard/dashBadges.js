@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import theme from '../theme'
 
-const styles = () => ({
+const styles = theme => ({
 	badgeBoxPaper: {
 		position: 'relative',
 		borderRadius: 30,
@@ -18,6 +18,7 @@ const styles = () => ({
 		alignItems: 'center',
 		height: 200,
 		padding: 15,
+		...theme.boxShadow,
 	},
 	boxTitle: {
 		...theme.boxTitle,

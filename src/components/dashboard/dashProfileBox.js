@@ -24,11 +24,13 @@ const styles = theme => ({
 		width: 100,
 		height: 100,
 	},
-	fab: {
+	editProfileFab: {
 		margin: theme.spacing.unit,
 		position: 'absolute',
 		right: '-32px',
 		top: '20px',
+		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
+		backgroundColor: '#572FFF',
 	},
 	profileBoxPaper: {
 		position: 'relative',
@@ -43,6 +45,7 @@ const styles = theme => ({
 		[theme.breakpoints.down('sm')]: {
 			alignItems: 'center',
 		},
+		...theme.boxShadow,
 	},
 	boxTitle: {
 		...theme.boxTitle,
@@ -126,12 +129,11 @@ class DashProfileBox extends Component {
 					{!editProfile ? (
 						<>
 							<Fab
-								color="secondary"
 								aria-label="Edit"
-								className={classes.fab}
+								className={classes.editProfileFab}
 								onClick={this.handleEditProfile}
 							>
-								<EditIcon />
+								<EditIcon nativeColor="white" />
 							</Fab>
 							<Typography
 								ariant="subtitle2"

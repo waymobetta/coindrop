@@ -18,6 +18,7 @@ const styles = theme => ({
 		borderRadius: 30,
 		minHeight: 200,
 		padding: 10,
+		...theme.boxShadow,
 	},
 	boxTitle: {
 		...theme.boxTitle,

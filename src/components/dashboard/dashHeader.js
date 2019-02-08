@@ -24,6 +24,7 @@ const styles = theme => ({
 		backgroundColor: 'white',
 		borderRadius: 26,
 		marginBottom: 45,
+		...theme.boxShadow,
 	},
 	headerSearchForm: {
 		flexGrow: 1,

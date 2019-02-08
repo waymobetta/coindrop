@@ -9,8 +9,9 @@ import ScrollspyNav from 'react-scrollspy-nav'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import { Typography } from '@material-ui/core'
+import theme from '../../components/theme'
 
-const styles = theme => ({
+const styles = () => ({
 	root: {
 		display: 'flex',
 	},
@@ -19,6 +20,7 @@ const styles = theme => ({
 		borderRadius: 33,
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3,
+		...theme.boxShadow,
 	},
 	fixed: {
 		position: 'fixed',

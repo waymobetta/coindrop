@@ -10,13 +10,15 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import DashAccountItem from '../../components/dashboard/dashAccountItem'
+import theme from '../../components/theme'
 
-const styles = theme => ({
+const styles = () => ({
 	accountBoxPaper: {
 		position: 'relative',
 		height: 180,
 		borderRadius: 33,
 		flexGrow: 1,
+		...theme.boxShadow,
 		padding: theme.spacing.unit * 3,
 	},
 	fabEdit: {

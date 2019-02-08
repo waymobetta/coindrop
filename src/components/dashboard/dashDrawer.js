@@ -9,7 +9,12 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import { ReactComponent as CommentBubles } from '../assets/comment_bubbles.svg'
-
+import { ReactComponent as BoltIcon } from '../assets/boltIcon.svg'
+import { ReactComponent as CubeIcon } from '../assets/cubeIcon.svg'
+import { ReactComponent as StarIcon } from '../assets/starIcon.svg'
+import { ReactComponent as FileIcon } from '../assets/fileIcon.svg'
+import { ReactComponent as UserIcon } from '../assets/userIcon.svg'
+import Hidden from '@material-ui/core/Hidden'
 import Badge from '@material-ui/core/Badge'
 import SocialIcons from '../socialIcons'
 
@@ -117,6 +122,11 @@ const styles = theme => ({
 	logout: {
 		marginRight: 40,
 	},
+	dashDrawerIcon: {
+		height: 24,
+		width: 24,
+		color: '#CA34FF',
+	},
 })
 
 class DashDrawer extends React.Component {
@@ -131,16 +141,48 @@ class DashDrawer extends React.Component {
 		const { classes } = this.props
 		return (
 			<div className={classes.drawerWrapper}>
-				<LogoFull className={classes.drawerLogo} />
-				<Divider />
+				<Hidden xsDown>
+					<LogoFull className={classes.drawerLogo} />
+					<Divider />
+				</Hidden>
 
 				<List className={classes.list}>
 					{[
-						{ name: 'Profile', url: '/dashboard/dashboard' },
-						{ name: 'My Wallet', url: '/dashboard/wallet' },
-						{ name: 'Tasks', url: '/dashboard/tasks' },
-						{ name: 'Accounts', url: '/dashboard/accounts' },
-						{ name: 'Policy', url: '/dashboard/policy' },
+						{
+							name: 'Profile',
+							url: '/dashboard/dashboard',
+							icon: (
+								<UserIcon className={classes.dashDrawerIcon} />
+							),
+						},
+						{
+							name: 'My Wallet',
+							url: '/dashboard/wallet',
+							icon: (
+								<StarIcon className={classes.dashDrawerIcon} />
+							),
+						},
+						{
+							name: 'Tasks',
+							url: '/dashboard/tasks',
+							icon: (
+								<BoltIcon className={classes.dashDrawerIcon} />
+							),
+						},
+						{
+							name: 'Accounts',
+							url: '/dashboard/accounts',
+							icon: (
+								<CubeIcon className={classes.dashDrawerIcon} />
+							),
+						},
+						{
+							name: 'Policy',
+							url: '/dashboard/policy',
+							icon: (
+								<FileIcon className={classes.dashDrawerIcon} />
+							),
+						},
 					].map((page, index) => (
 						<Link
 							className={classes.itemLink}
@@ -155,7 +197,7 @@ class DashDrawer extends React.Component {
 								<ListItemIcon
 									className={{ root: classes.itemIcon }}
 								>
-									<CommentBubles color="white" />
+									{page.icon}
 								</ListItemIcon>
 
 								<ListItemText

@@ -18,7 +18,9 @@ const styles = {
 		backgroundColor: '#272B2F',
 		height: 220,
 		padding: '0px 15px',
-		margin: 0,
+		[theme.breakpoints.down('xs')]: {
+			height: 270,
+		},
 	},
 	grow: {
 		flexGrow: 1,
@@ -42,13 +44,21 @@ const styles = {
 		[theme.breakpoints.up('md')]: {
 			textAlign: 'left',
 		},
+		[theme.breakpoints.down('xs')]: {
+			marginTop: '0px',
+		},
 	},
 	footerLink: {
 		color: '#A5A5A5',
+		textTransform: 'capitalize',
 	},
 	footerLinks: {
 		textAlign: 'center',
 		margin: 'auto',
+	},
+	socialIconsHome: {
+		margin: '0px 20px 0px 20px',
+		border: '0px',
 	},
 }
 
@@ -120,7 +130,7 @@ class Footer extends React.Component {
 						</Typography>
 
 						<div
-							item
+							item="true"
 							xs={12}
 							sm={6}
 							className={classes.footerLinks}

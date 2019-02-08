@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
-import { ReactComponent as CommentBubles } from './assets/comment_bubbles.svg'
+import { ReactComponent as DrawerIcon } from './assets/drawerIcon.svg'
 import Hidden from '@material-ui/core/Hidden'
 import ButtonLight from '../components/ButtonLight'
 import ButtonOutlineDark from '../components/ButtonOutlineDark'
@@ -27,9 +27,9 @@ const styles = {
 	},
 	toggleButton: {
 		position: 'absolute',
-		top: 10,
-		right: 10,
-		fill: '#fff',
+		top: 0,
+		right: 0,
+		zIndex: 9999,
 	},
 	socialIconsHome: {
 		marginTop: 200,
@@ -65,14 +65,6 @@ class HomeMenu extends React.Component {
 		const { classes } = this.props
 		const sideList = (
 			<div className={classes.list}>
-				<IconButton
-					className={classes.toggleButton}
-					aria-label="Delete"
-					onClick={this.toggleDrawer('right', true)}
-				>
-					<CommentBubles />
-				</IconButton>
-
 				<Grid
 					item
 					container
@@ -108,7 +100,7 @@ class HomeMenu extends React.Component {
 						aria-label="Delete"
 						onClick={this.toggleDrawer('right', true)}
 					>
-						<CommentBubles />
+						<DrawerIcon color="white" />
 					</IconButton>
 
 					<SwipeableDrawer

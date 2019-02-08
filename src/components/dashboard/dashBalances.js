@@ -16,6 +16,7 @@ const styles = theme => ({
 		alignItems: 'center',
 		height: 200,
 		padding: 15,
+		...theme.boxShadow,
 	},
 	boxTitle: {
 		...theme.boxTitle,

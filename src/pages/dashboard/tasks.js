@@ -8,8 +8,9 @@ import withWidth from '@material-ui/core/withWidth'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import theme from '../../components/theme'
 
-const styles = theme => ({
+const styles = () => ({
 	tasksBoxPaper: {
 		position: 'relative',
 		height: 180,
@@ -17,6 +18,7 @@ const styles = theme => ({
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3,
 		marginTop: 30,
+		...theme.boxShadow,
 	},
 })
 

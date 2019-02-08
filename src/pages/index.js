@@ -19,29 +19,40 @@ import { ReactComponent as TasksIcon } from '../components/assets/TasksIcon.svg'
 
 const styles = theme => ({
 	root: {
-		// backgroundImage: `url(${heroImage})`,
-		// backgroundRepeat: 'no-repeat',
-		// backgroundPosition: 'top right',
+		maxWidth: 1100,
+		margin: 'auto',
+		flexGrow: 1,
 	},
 	row: {
 		flexGrow: 1,
-		maxWidth: 1100,
-		margin: 'auto',
-		padding: 10,
+		padding: 20,
 	},
 	fullRow: {
 		padding: 10,
 	},
 	hero1: {
 		minHeight: 660,
+		[theme.breakpoints.down('xs')]: {
+			textAlign: 'center',
+		},
 	},
 	hero2: {
 		minHeight: 400,
 		marginBottom: 300,
+		[theme.breakpoints.up('md')]: {
+			marginLeft: 'auto',
+			marginRight: 'auto',
+		},
+		[theme.breakpoints.down('xs')]: {
+			marginBottom: 100,
+		},
 	},
 	hero3: {
 		minHeight: 440,
 		background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
+		[theme.breakpoints.down('xs')]: {
+			minHeight: 270,
+		},
 	},
 	paper: {
 		padding: theme.spacing.unit * 2,
@@ -63,39 +74,7 @@ const styles = theme => ({
 		fill: '#CA34FF',
 		color: '#CA34FF',
 	},
-	hero3Box: {
-		backgroundColor: 'pink',
-		height: 360,
-		borderRadius: 48,
-		background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
-		boxShadow: '-4px 5px 26px 0 rgba(19,19,19,0.2)',
-		overflow: 'hidden',
-		position: 'relative',
-		marginTop: -100,
-		padding: 30,
-	},
-	hero3Cut: {
-		backgroundColor: '#47317A',
 
-		display: 'block',
-		position: 'absolute',
-		zIndex: 0,
-
-		[theme.breakpoints.up('xs')]: {
-			height: '300px',
-			width: '600px',
-			right: -170,
-			top: 200,
-			transform: 'rotate(-20deg)',
-		},
-		[theme.breakpoints.up('sm')]: {
-			height: '640px',
-			width: '950px',
-			right: -170,
-			top: 52,
-			transform: 'rotate(-45deg)',
-		},
-	},
 	collectBonus: {
 		zIndex: 9,
 	},
@@ -121,17 +100,105 @@ const styles = theme => ({
 		boxShadow:
 			'0 12px 22px 0 rgba(99,108,123,0.1), 0 -12px 22px 0 rgba(99,108,123,0.05)',
 	},
-	h3: {
-		color: '#FFF',
-		width: '85%',
-	},
-	subtitle1: {
-		color: '#FFF',
-		fontSize: 22,
-		marginTop: 30,
-	},
 	reputationSubTitle: {
 		marginBottom: 40,
+	},
+	hero1Title: {
+		fontSize: 45,
+		[theme.breakpoints.down('xs')]: {
+			textAlign: 'center',
+			fontSize: 30,
+		},
+	},
+	hero2Title: {
+		fontSize: 40,
+		[theme.breakpoints.down('xs')]: {
+			textAlign: 'center',
+			fontSize: 30,
+		},
+	},
+	hero3Box: {
+		backgroundColor: 'pink',
+
+		borderRadius: 48,
+		background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
+		boxShadow: '-4px 5px 26px 0 rgba(19,19,19,0.2)',
+		overflow: 'hidden',
+		position: 'relative',
+		padding: 30,
+		[theme.breakpoints.down('xs')]: {
+			height: 270,
+			top: -90,
+		},
+		[theme.breakpoints.up('sm')]: {
+			maxWidth: 580,
+			height: 270,
+			top: -90,
+		},
+		[theme.breakpoints.up('md')]: {
+			maxWidth: 980,
+			height: 320,
+			top: -210,
+		},
+	},
+	hero3Cut: {
+		backgroundColor: '#47317A',
+
+		display: 'block',
+		position: 'absolute',
+		zIndex: 0,
+
+		[theme.breakpoints.up('xs')]: {
+			height: '300px',
+			width: '600px',
+			right: -170,
+			top: 200,
+			transform: 'rotate(-20deg)',
+		},
+		[theme.breakpoints.up('sm')]: {
+			height: '460px',
+			width: '540px',
+			right: -170,
+			top: 52,
+			transform: 'rotate(-45deg)',
+		},
+		[theme.breakpoints.up('md')]: {
+			height: '500px',
+			width: '670px',
+			right: -170,
+			top: 52,
+			transform: 'rotate(-45deg)',
+		},
+	},
+	hero3Title: {
+		color: '#FFF',
+
+		[theme.breakpoints.down('xs')]: {
+			textAlign: 'center',
+			fontSize: 22,
+		},
+		[theme.breakpoints.up('sm')]: {
+			fontSize: 30,
+			marginBottom: 20,
+		},
+		[theme.breakpoints.up('md')]: {
+			fontSize: 40,
+			lineHeight: '60px',
+		},
+	},
+	hero3Subtitle: {
+		color: '#FFF',
+		[theme.breakpoints.down('xs')]: {
+			textAlign: 'center',
+			fontSize: 16,
+			marginTop: 20,
+		},
+		[theme.breakpoints.up('sm')]: {
+			fontSize: 20,
+		},
+		[theme.breakpoints.up('md')]: {
+			fontSize: 24,
+		},
 	},
 })
 
@@ -164,6 +231,7 @@ class Index extends React.Component {
 							<Typography
 								component="h1"
 								variant="h4"
+								className={classes.hero1Title}
 								gutterBottom
 							>
 								Free your reputation
@@ -190,30 +258,43 @@ class Index extends React.Component {
 						justify="center"
 						wrap="wrap-reverse"
 						alignItems="center"
+						md={11}
+						sm={12}
 					>
-						<Grid item xs={12} sm={6}>
+						<Grid item xs={12} sm={8} md={6}>
 							<Paper
 								elevation={1}
 								color="default"
 								className={classes.reputationBox}
 							>
-								<List className={classes.root}>
+								<List>
 									<ListItem>
-										<IconRecognition
-											className={classes.iconRecognition}
-										/>
+										<span>
+											<IconRecognition
+												className={
+													classes.iconRecognition
+												}
+											/>
+										</span>
+
 										<ListItemText primary="Gain recognition and tokens by micro-consulting for projects at your leisure." />
 									</ListItem>
 									<ListItem>
-										<TasksIcon
-											className={classes.iconTasks}
-										/>
+										<span>
+											<TasksIcon
+												className={classes.iconTasks}
+											/>
+										</span>
+
 										<ListItemText primary="Unlock badges for individual achievements." />
 									</ListItem>
 									<ListItem>
-										<UnlockIcon
-											className={classes.iconUnlock}
-										/>
+										<span>
+											<UnlockIcon
+												className={classes.iconUnlock}
+											/>
+										</span>
+
 										<ListItemText primary="Complete tasks and surveys to receive crypto micropayments." />
 									</ListItem>
 								</List>
@@ -222,10 +303,11 @@ class Index extends React.Component {
 								</Button>
 							</Paper>
 						</Grid>
-						<Grid item xs={12} sm={6}>
+						<Grid item xs={12} sm={4} md={6}>
 							<Typography
 								component="h1"
 								variant="h4"
+								className={classes.hero2Title}
 								gutterBottom
 							>
 								Engage with projects
@@ -241,20 +323,25 @@ class Index extends React.Component {
 					wrap="wrap-reverse"
 				>
 					<Grid
+						item
 						container
 						spacing={24}
 						className={classNames(classes.row, classes.hero3Box)}
 						justify="space-between"
 						alignItems="center"
+						xs={10}
 					>
 						<Grid item xs={12} sm={6}>
-							<Typography variant="h3" className={classes.h3}>
+							<Typography
+								variant="h3"
+								className={classes.hero3Title}
+							>
 								Sign up and receive a $5 Ether bonus
 							</Typography>
 							<Typography
 								variant="subtitle1"
 								gutterBottom
-								className={classes.subtitle1}
+								className={classes.hero3Subtitle}
 							>
 								This is a limited time offer!
 							</Typography>

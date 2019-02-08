@@ -8,10 +8,41 @@ import theme from './theme'
 import compose from 'recompose/compose'
 import withWidth from '@material-ui/core/withWidth'
 import Footer from '../components/footer'
+import classNames from 'classnames'
 
 const styles = () => ({
 	root: {
 		display: 'flex',
+	},
+	heroBg: {
+		[theme.breakpoints.down('xs')]: {
+			backgroundSize: '100% auto',
+			backgroundPosition: '60px 0px',
+			width: '100%',
+			height: 440,
+			top: -20,
+		},
+		[theme.breakpoints.up('sm')]: {
+			backgroundSize: '100% auto',
+			backgroundPosition: '320px -130px',
+			width: '100%',
+			height: 620,
+			top: -20,
+		},
+		[theme.breakpoints.up('md')]: {
+			backgroundSize: '80% auto',
+			backgroundPosition: '430px -60px',
+			width: '100%',
+			height: 720,
+			top: -20,
+		},
+		[theme.breakpoints.up('lg')]: {
+			backgroundSize: '100%',
+			backgroundPosition: '110px -90px',
+			width: '850px',
+			height: 760,
+			top: -20,
+		},
 	},
 })
 
@@ -20,14 +51,16 @@ class Landing extends React.Component {
 		super(props)
 	}
 	render() {
-		const { children } = this.props
+		const { children, classes } = this.props
 		return (
 			<div>
 				<React.Fragment>
 					<MuiThemeProvider theme={theme}>
 						<CssBaseline />
 						<AppBarHeader />
-						<div className="root--bg1" />
+						<div
+							className={classNames(classes.heroBg, 'root--bg1')}
+						/>
 						<div className="root--bg2" />
 						{children}
 						<Footer />
@@ -40,6 +73,7 @@ class Landing extends React.Component {
 
 Landing.propTypes = {
 	children: PropTypes.node.isRequired,
+	classes: PropTypes.object,
 }
 
 export default compose(

@@ -11,14 +11,16 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import Fab from '@material-ui/core/Fab'
 import EditIcon from '@material-ui/icons/Edit'
+import theme from '../../components/theme'
 
-const styles = theme => ({
+const styles = () => ({
 	walletBoxPaper: {
 		position: 'relative',
 		height: 180,
 		borderRadius: 33,
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3,
+		...theme.boxShadow,
 	},
 	fabEdit: {
 		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
