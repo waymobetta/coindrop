@@ -57,6 +57,58 @@ const rawTheme = createMuiTheme({
 			disableRipple: true, // No more ripple, on the whole application 💣!
 		},
 	},
+	overrides: {
+		MuiStepConnector: {
+			line: {
+				display: 'none',
+			},
+		},
+		MuiTypography: {
+			display3: {
+				fontSize: 22,
+			},
+		},
+		MuiInput: {
+			underline: {
+				'&&&&:hover:before': {
+					borderBottom: '1px solid #CCC',
+				},
+				'&:after': {
+					borderBottom: `1px solid #572fff`,
+				},
+			},
+		},
+		MuiButton: {
+			// Name of the component ⚛️ / style sheet
+			outlinedPrimary: {
+				// Name of the rule
+				backgroundColor: '#FFF',
+				borderRadius: 30,
+				fontSize: 16,
+				minWidth: 180,
+				color: '#D74EFF',
+				textTransform: 'capitalize',
+				border: '2px solid #E390FF',
+				padding: '10px 25px',
+				'&:hover': {
+					border: '2px solid #E390FF',
+				},
+			},
+			outlinedSecondary: {
+				// Name of the rule
+				color: 'white', // Some CSS
+				border: '2px solid #FFF',
+				padding: '10px 25px',
+				borderRadius: 30,
+				'&:hover': {
+					border: '2px solid #FFF',
+				},
+			},
+			textPrimary: {
+				color: '#E66BFF',
+			},
+		},
+	},
 })
 
 const fontHeader = {
@@ -107,7 +159,7 @@ const theme = {
 		h6: {
 			...rawTheme.typography.h6,
 			...fontHeader,
-			fontSize: 18,
+			fontSize: 22,
 		},
 		subtitle1: {
 			...rawTheme.typography.subtitle1,

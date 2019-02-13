@@ -9,13 +9,16 @@ import InputLabel from '@material-ui/core/InputLabel'
 import OopsImage from '../assets/oops.png'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import Fab from '@material-ui/core/Fab'
+import { ReactComponent as CloseIcon } from '../assets/close.svg'
+import { ReactComponent as VerifiedIcon } from '../assets/verified.svg'
 
 const styles = theme => ({
 	paper: {
 		textAlign: 'center',
 		color: '#fff',
 		backgroundColor: 'transparent',
-		padding: '20px',
+		padding: '40px 20px',
 		borderRadius: '67px',
 		height: 400,
 		maxWidth: 540,
@@ -26,6 +29,92 @@ const styles = theme => ({
 		alignItems: 'center',
 		position: 'relative',
 		border: '2px solid #fff',
+	},
+	paperNormal: {
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		padding: '40px 20px 30px 20px',
+		borderRadius: '67px',
+		height: 400,
+		maxWidth: 540,
+		margin: 'auto',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		position: 'relative',
+		...theme.boxShadow,
+	},
+	stepTitle: {
+		fontSize: 40,
+		color: '#FFFFFF',
+		fontWeight: 500,
+	},
+	verifiedBox: {
+		width: 300,
+		height: 300,
+		display: 'block',
+		margin: 'auto',
+	},
+	verifiedTitle: {
+		color: '#fff',
+		fontSize: '40px',
+		fontWeight: '500',
+		margin: 'auto',
+		textAlign: 'center',
+	},
+	verifiedIcon: {
+		width: 128,
+		height: 128,
+		display: 'block',
+		margin: '0px auto 30px auto',
+	},
+	inputWhite: {
+		'&:before': {
+			borderBottomColor: '#FFF',
+			borderWidth: 1,
+		},
+	},
+	inputLabel: {
+		color: '#FFF',
+	},
+	fabBackTopClose: {
+		top: -20,
+		right: -20,
+		position: 'absolute',
+		background: 'transparent',
+		boxShadow: 'none',
+	},
+	closeIcon: {
+		width: 24,
+		height: 24,
+	},
+	verifiedBg: {
+		background: 'linear-gradient(#572fff 0%, #bf41ff 100%)',
+		top: 0,
+		right: 0,
+		width: '100%',
+		height: '100vh',
+		display: 'block',
+		position: 'absolute',
+		zIndex: '-1',
+	},
+	claimEtherBg: {
+		background: 'linear-gradient(#572fff 0%, #bf41ff 100%)',
+		top: 0,
+		right: 0,
+		width: '100%',
+		height: '100vh',
+		display: 'block',
+		position: 'absolute',
+		zIndex: '-1',
+	},
+	claimEtherForm: {
+		width: '80%',
+	},
+	connectSubTitle: {
+		fontSize: 24,
+		color: '#FFF',
 	},
 })
 
@@ -58,51 +147,90 @@ class StepFinal extends React.Component {
 		const { show } = this.state
 		return show ? (
 			<div className={classes.root}>
-				<Typography variant="h6" gutterBottom align="center">
-					Congrats!
-				</Typography>
-				<Paper className={classes.paper} elevation={0}>
-					{canClaimEther && verified ? (
-						<div>
-							<p>Now claim your $5 in Ether </p>
+				{canClaimEther && verified ? (
+					<React.Fragment>
+						<div className={classes.claimEtherBg} />
+						<Typography
+							variant="h6"
+							gutterBottom
+							align="center"
+							classes={{ root: classes.stepTitle }}
+						>
+							Congrats!
+						</Typography>
+						<Paper className={classes.paper} elevation={0}>
+							<Typography
+								variant="h3"
+								gutterBottom
+								classes={{ root: classes.connectSubTitle }}
+							>
+								Now claim your $5 in Ether
+							</Typography>
 							<p>Enter your Ethereum address</p>
-							<form className={classes.form}>
+							<form className={classes.claimEtherForm}>
 								<FormControl margin="normal" required fullWidth>
-									<InputLabel htmlFor="redditUserName">
+									<InputLabel
+										htmlFor="walletAddress"
+										classes={{
+											root: classes.inputLabel,
+										}}
+									>
 										Wallet Address
 									</InputLabel>
 									<Input
-										id="redditUserName"
-										name="redditUserName"
+										id="walletAddress"
+										name="walletAddress"
+										classes={{
+											root: classes.inputWhite,
+										}}
 										autoFocus
 									/>
 								</FormControl>
 							</form>
 							<Button
 								variant="outlined"
-								size="large"
-								color="primary"
+								color="secondary"
 								onClick={this.onClick}
 							>
 								Get Paid
 							</Button>
 							<p>You don´t have one? Create Wallet</p>
-						</div>
-					) : (
-						<div>
-							<img src={OopsImage} />
-							<p>
-								To qualify for this offer you must have at least
-								100 Reddit Karma and/or 100 Stack Overflow
-								reputation.
-							</p>
-							<p>Come back to claim once you have reached 100!</p>
-						</div>
-					)}
-				</Paper>
+						</Paper>
+					</React.Fragment>
+				) : (
+					<Paper className={classes.paperNormal} elevation={0}>
+						<img src={OopsImage} />
+						<p>
+							To qualify for this offer you must have at least 100
+							Reddit Karma and/or 100 Stack Overflow reputation.
+						</p>
+						<p>
+							<b>Come back to claim once you have reached 100!</b>
+						</p>
+						<Fab
+							color="primary"
+							aria-label="Add"
+							className={classes.fabBackTopClose}
+						>
+							<CloseIcon
+								color="white"
+								className={classes.closeIcon}
+							/>
+						</Fab>
+					</Paper>
+				)}
 			</div>
 		) : (
-			<div>Verified!!!</div>
+			<React.Fragment>
+				<div className={classes.verifiedBg} />
+				<div className={classes.verifiedBox}>
+					<VerifiedIcon
+						className={classes.verifiedIcon}
+						color="white"
+					/>
+					<h3 className={classes.verifiedTitle}>Verified</h3>
+				</div>
+			</React.Fragment>
 		)
 	}
 }

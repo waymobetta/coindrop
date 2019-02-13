@@ -11,6 +11,7 @@ import ButtonOutlineLight from '../ButtonOutlineLight'
 import Fab from '@material-ui/core/Fab'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import Typography from '@material-ui/core/Typography'
+import { ReactComponent as CopyIcon } from '../assets/copy.svg'
 
 const styles = theme => ({
 	paper2: {
@@ -22,17 +23,26 @@ const styles = theme => ({
 	},
 	code: {
 		padding: 25,
-		borderRadius: 30,
+		borderRadius: 40,
+		border: '2px solid #707070',
+		height: 74,
+		maxWidth: '390px',
+		width: '100%',
+		fontSize: 18,
+		margin: '20px 0px',
 	},
 	fabCopy: {
 		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
 		backgroundColor: '#572FFF',
-		right: -50,
+		right: -27,
 		top: 210,
 		position: 'absolute',
 	},
 	root: {
 		position: 'relative',
+	},
+	connectSubTitle: {
+		fontSize: 24,
 	},
 })
 
@@ -56,50 +66,61 @@ class StepFour extends React.Component {
 			<React.Fragment>
 				{selectedPlatform === 'reddit' ? (
 					<React.Fragment>
-						<Typography variant="h5" gutterBottom>
+						<Typography
+							variant="h6"
+							gutterBottom
+							classes={{ root: classes.connectSubTitle }}
+						>
 							Verification Code
 						</Typography>
-						<Chip
-							variant="outlined"
-							label="AJY765439096GGDC876997"
-							className={classes.code}
-						/>
+
+						<span className={classes.code}>
+							AJY765439096GGDC876997
+						</span>
 						<p>
 							Copy the code and paste it in our subreddit using
 							this link.
 						</p>
-						<br />
 						<p>Already paste the code? </p>
-						<ButtonOutlineLight size="large" onClick={this.onClick}>
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={this.onClick}
+						>
 							Verify
-						</ButtonOutlineLight>
+						</Button>
 						<Fab
 							color="primary"
 							aria-label="Add"
 							className={classes.fabCopy}
 						>
-							<ArrowForward />
+							<CopyIcon />
 						</Fab>
 					</React.Fragment>
 				) : (
 					<React.Fragment>
-						<Typography variant="h5" gutterBottom>
+						<Typography
+							variant="h3"
+							gutterBottom
+							classes={{ root: classes.connectSubTitle }}
+						>
 							Verification Code
 						</Typography>
-						<Chip
-							variant="outlined"
-							label="AJY765439096GGDC876997"
-							className={classes.code}
-						/>
+						<span className={classes.code}>
+							AJY765439096GGDC876997
+						</span>
 						<p>
 							Copy the code and paste it in your Stack Overflow
 							profile at the bottom of your “About me”.
 						</p>
-						<br />
 						<p>Already paste the code? </p>
-						<ButtonOutlineLight size="large" onClick={this.onClick}>
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={this.onClick}
+						>
 							Verify
-						</ButtonOutlineLight>
+						</Button>
 					</React.Fragment>
 				)}
 			</React.Fragment>

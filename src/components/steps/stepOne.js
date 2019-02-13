@@ -4,13 +4,9 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ButtonOutlineLight from '../ButtonOutlineLight'
 
-const styles = theme => ({
-	paper2: {
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
-		padding: '20px',
-		borderRadius: '67px',
-		height: 400,
+const styles = () => ({
+	connectWelcome: {
+		fontSize: 32,
 	},
 })
 
@@ -25,9 +21,14 @@ class StepOne extends React.Component {
 	}
 
 	render() {
+		const { classes } = this.props
 		return (
 			<React.Fragment>
-				<Typography variant="h3" gutterBottom>
+				<Typography
+					variant="h4"
+					gutterBottom
+					classes={{ root: classes.connectWelcome }}
+				>
 					Welcome to Coindrop!
 				</Typography>
 				<Typography variant="subtitle1" gutterBottom>

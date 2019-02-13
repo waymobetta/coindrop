@@ -3,14 +3,23 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import AccountButton from '../AccountButton'
 import Typography from '@material-ui/core/Typography'
+import { ReactComponent as Reddit } from '../assets/reddit.svg'
+import { ReactComponent as StackOverflow } from '../assets/stackOverflow.svg'
+import classNames from 'classnames'
 
-const styles = theme => ({
-	paper2: {
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
-		padding: '20px',
-		borderRadius: '67px',
-		height: 400,
+const styles = () => ({
+	connectSubTitle: {
+		fontSize: 22,
+	},
+	leftIcon: {
+		width: 36,
+		height: 36,
+		float: 'left',
+		marginRight: 15,
+	},
+	redditIcon: {
+		backgroundColor: '#8C8C8C',
+		borderRadius: '40px',
 	},
 })
 
@@ -25,10 +34,14 @@ class StepTwo extends React.Component {
 	}
 
 	render() {
-		//const { classes } = this.props
+		const { classes } = this.props
 		return (
 			<React.Fragment>
-				<Typography variant="h3" gutterBottom>
+				<Typography
+					variant="h3"
+					gutterBottom
+					className={classes.connectSubTitle}
+				>
 					Choose one to start
 				</Typography>
 				<Typography variant="subtitle1" gutterBottom>
@@ -39,6 +52,15 @@ class StepTwo extends React.Component {
 					size="large"
 					color="primary"
 					onClick={this.onSelectOption.bind(this, 'reddit')}
+					render={
+						<Reddit
+							className={classNames(
+								classes.leftIcon,
+								classes.redditIcon
+							)}
+							color="#FFF"
+						/>
+					}
 				>
 					Reddit
 				</AccountButton>
@@ -47,6 +69,12 @@ class StepTwo extends React.Component {
 					size="large"
 					color="primary"
 					onClick={this.onSelectOption.bind(this, 'stackoverflow')}
+					render={
+						<StackOverflow
+							className={classes.leftIcon}
+							color="#8C8C8C"
+						/>
+					}
 				>
 					StackOverflow
 				</AccountButton>

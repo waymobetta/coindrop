@@ -2,7 +2,7 @@
 import React from 'react'
 //import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import Landing from '../components/LayoutConnect'
+import LayoutConnect from '../components/LayoutConnect'
 import SEO from '../components/seo'
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -18,22 +18,18 @@ import StepThree from '../components/steps/StepThree'
 import StepFour from '../components/steps/StepFour'
 import StepFinal from '../components/steps/StepFinal'
 import StepIcon from '@material-ui/core/StepIcon'
+import theme from '../components/theme'
 
-const styles = theme => ({
+const styles = () => ({
 	root: {
 		flexGrow: 1,
-		margin: 'auto',
-		height: '100%',
-		background: 'linear-gradient(#572fff 0%, #bf41ff 100%)',
-		borderBottomRightRadius: 250,
-		borderBottomLeftRadius: 250,
 	},
 	paper: {
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		padding: '20px',
+		padding: '40px 20px 30px 20px',
 		borderRadius: '67px',
-		height: 400,
+		minHeight: 400,
 		maxWidth: 540,
 		margin: 'auto',
 		display: 'flex',
@@ -41,6 +37,22 @@ const styles = theme => ({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		position: 'relative',
+		...theme.boxShadow,
+	},
+	paperSorry: {
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		padding: '40px 100px 30px 100px',
+		borderRadius: '67px',
+		maxWidth: 540,
+		margin: 'auto',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-around',
+		alignItems: 'center',
+		position: 'relative',
+		...theme.boxShadow,
+		height: 300,
 	},
 	grow: {
 		flexGrow: 1,
@@ -52,6 +64,9 @@ const styles = theme => ({
 	subGrid: {
 		height: 300,
 		marginTop: 200,
+		[theme.breakpoints.down('xs')]: {
+			marginTop: 40,
+		},
 	},
 	stepLabel: {
 		padding: 0,
@@ -74,6 +89,11 @@ const styles = theme => ({
 	},
 	stepIconText: {
 		display: 'none',
+	},
+	stepTitle: {
+		fontSize: 40,
+		color: '#FFFFFF',
+		fontWeight: 500,
 	},
 })
 
@@ -215,8 +235,13 @@ class Connect extends React.Component {
 		const { classes } = this.props
 		const steps = getSteps()
 		const { activeStep, canClaimEther, verified } = this.state
+		const finalStep = activeStep === steps.length
 		return (
-			<Landing>
+			<LayoutConnect
+				canClaimEther={canClaimEther}
+				verified={verified}
+				finalStep={finalStep}
+			>
 				<SEO
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
@@ -240,6 +265,7 @@ class Connect extends React.Component {
 								variant="h6"
 								gutterBottom
 								align="center"
+								classes={{ root: classes.stepTitle }}
 							>
 								{this.getStepTitle(activeStep)}
 							</Typography>
@@ -254,11 +280,17 @@ class Connect extends React.Component {
 											/>
 										) : (
 											<Paper
-												className={classes.paper}
+												className={classes.paperSorry}
 												elevation={10}
 											>
 												<React.Fragment>
-													<p>Sorry!!!</p>
+													<Typography
+														variant="h6"
+														gutterBottom
+														align="center"
+													>
+														Sorry!
+													</Typography>
 													<p>
 														It seems that there was
 														a problem and we
@@ -267,7 +299,6 @@ class Connect extends React.Component {
 													</p>
 													<Button
 														variant="outlined"
-														size="large"
 														color="primary"
 														onClick={this.tryAgain}
 													>
@@ -280,13 +311,12 @@ class Connect extends React.Component {
 								) : (
 									<Paper
 										className={classes.paper}
-										elevation={10}
+										elevation={0}
 									>
 										<React.Fragment>
 											{this.getStepContent(activeStep)}
 											<Stepper
 												activeStep={activeStep}
-												connector=""
 												classes={{
 													root: classes.stepper,
 												}}
@@ -335,7 +365,7 @@ class Connect extends React.Component {
 						</Grid>
 					</Grid>
 				</div>
-			</Landing>
+			</LayoutConnect>
 		)
 	}
 }

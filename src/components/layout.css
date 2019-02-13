@@ -20,6 +20,11 @@ a {
 	color: var(--purple);
 }
 
+p {
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
 a:hover {
 	color: var(--purple--light);
 }
@@ -28,6 +33,12 @@ a:hover {
 	display: block;
 	height: 32px;
 	width: 143px;
+}
+
+.header__logo__connect {
+	display: block;
+	height: 36px;
+	width: 158px;
 }
 
 .home__logo {

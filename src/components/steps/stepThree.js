@@ -11,6 +11,10 @@ import { ReactComponent as StackOverflow } from '../assets/stackOverflow.svg'
 import Fab from '@material-ui/core/Fab'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import ArrowBack from '@material-ui/icons/ArrowBack'
+import Typography from '@material-ui/core/Typography'
+import classNames from 'classnames'
+import stackHelp1 from '../assets/stackHelp1.png'
+import stackHelp2 from '../assets/stackHelp2.png'
 
 const styles = theme => ({
 	paper2: {
@@ -31,13 +35,13 @@ const styles = theme => ({
 	fabNext: {
 		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
 		backgroundColor: '#572FFF',
-		right: -50,
+		right: -27,
 		top: 210,
 		position: 'absolute',
 	},
 	form: {
 		position: 'relative',
-		width: 320,
+		width: '80%',
 	},
 	fabBackTopLeft: {
 		top: -20,
@@ -45,6 +49,28 @@ const styles = theme => ({
 		position: 'absolute',
 		background: 'transparent',
 		boxShadow: 'none',
+	},
+	inputLabel: {
+		color: '#FFF',
+	},
+	stackHelpBox: {
+		display: 'flex',
+		width: '700px',
+		justifyContent: 'space-between',
+		backgroundColor: '#fff',
+		borderRadius: 30,
+		padding: '10px 20px',
+		alignItems: 'center',
+	},
+	stackHelpBoxLeft: {
+		marginRight: '-220px',
+	},
+	stackHelpBoxRight: {
+		marginLeft: '-220px',
+	},
+	stackHelpBoxText: {
+		width: 200,
+		textAlign: 'left',
 	},
 })
 
@@ -153,7 +179,57 @@ class StepThree extends React.Component {
 							</React.Fragment>
 						) : (
 							<React.Fragment>
-								<p>Help finding stackOverflowId?</p>
+								<Typography variant="h6" gutterBottom>
+									Stack Overflow UserID
+								</Typography>
+
+								<p>Copy only the numbers</p>
+								<div
+									className={classNames(
+										classes.stackHelpBox,
+										classes.stackHelpBoxLeft
+									)}
+								>
+									<p
+										className={classNames(
+											classes.stackHelpBoxText
+										)}
+									>
+										1. You can find your UserID in the
+										search field.
+									</p>
+									<img
+										width="340"
+										height="48"
+										src={stackHelp1}
+										className={classNames(
+											classes.stackHelpBoxImage
+										)}
+									/>
+								</div>
+								<div
+									className={classNames(
+										classes.stackHelpBox,
+										classes.stackHelpBoxRight
+									)}
+								>
+									<img
+										width="373"
+										height="26"
+										src={stackHelp2}
+										className={classNames(
+											classes.stackHelpBoxImage
+										)}
+									/>
+									<p
+										className={classNames(
+											classes.stackHelpBoxText
+										)}
+									>
+										2.You can also find your UserID in the
+										browser.
+									</p>
+								</div>
 								<Fab
 									color="primary"
 									aria-label="Add"
