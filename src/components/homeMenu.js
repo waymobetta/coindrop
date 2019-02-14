@@ -74,19 +74,22 @@ class HomeMenu extends React.Component {
 					xs={12}
 					className={classes.buttons}
 				>
-					<ButtonLight
-						size="large"
+					<Button
+						variant="contained"
+						color="primary"
 						onClick={() => this.handleOpenSignUp('signUp', this)}
 						className={classes.drawerButton}
 					>
 						Sign Up
-					</ButtonLight>
-					<ButtonOutlineDark
-						size="large"
+					</Button>
+					<Button
+						variant="outlined"
+						color="secondary"
 						onClick={() => this.handleOpenSignUp('signIn', this)}
+						className={classes.drawerButton}
 					>
 						Sign In
-					</ButtonOutlineDark>
+					</Button>
 				</Grid>
 
 				<SocialIcons className={classes.socialIconsHome} />

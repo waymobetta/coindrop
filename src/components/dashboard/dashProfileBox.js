@@ -7,7 +7,6 @@ import Avatar from '@material-ui/core/Avatar'
 import profilePicture from '../../images/avatar-profile.png'
 import { withStyles } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
-import EditIcon from '@material-ui/icons/Edit'
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
@@ -15,8 +14,8 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Hidden from '@material-ui/core/Hidden'
-import ButtonDark from '../ButtonDark'
 import classNames from 'classnames'
+import { ReactComponent as Edit } from '../assets/edit.svg'
 
 const styles = theme => ({
 	bigAvatar: {
@@ -29,12 +28,10 @@ const styles = theme => ({
 		position: 'absolute',
 		right: '-32px',
 		top: '20px',
-		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
-		backgroundColor: '#572FFF',
 	},
 	profileBoxPaper: {
 		position: 'relative',
-		padding: '20px 20px',
+		padding: '20px 50px',
 		borderRadius: 30,
 		display: 'flex',
 		justifyContent: 'space-between',
@@ -54,10 +51,19 @@ const styles = theme => ({
 		padding: 0,
 	},
 	form: {
-		margin: '10px 30px',
+		margin: '0px',
 	},
 	centerAvatar: {
 		justifyContent: 'center',
+	},
+	alignRight: {
+		alignSelf: 'flex-end',
+		marginBottom: 30,
+	},
+	memberSince: {
+		alignSelf: 'flex-end',
+		display: 'flex',
+		alignItems: 'center',
 	},
 })
 
@@ -81,7 +87,7 @@ class DashProfileBox extends Component {
 		const { editProfile } = this.state
 		return (
 			<Grid item xs={12} sm={6}>
-				<Typography className={classes.boxTitle} component="subtitle1">
+				<Typography className={classes.boxTitle} variant="subtitle1">
 					Profile
 				</Typography>
 				<Paper className={classes.profileBoxPaper}>
@@ -119,8 +125,8 @@ class DashProfileBox extends Component {
 									/>
 								) : (
 									<React.Fragment>
-										<EditIcon />
-										<EditIcon />
+										<Edit />
+										<Edit />
 									</React.Fragment>
 								)}
 							</ListItem>
@@ -129,17 +135,19 @@ class DashProfileBox extends Component {
 					{!editProfile ? (
 						<>
 							<Fab
+								color="primary"
 								aria-label="Edit"
 								className={classes.editProfileFab}
 								onClick={this.handleEditProfile}
 							>
-								<EditIcon nativeColor="white" />
+								<Edit color="white" width="24" height="24" />
 							</Fab>
 							<Typography
 								ariant="subtitle2"
-								align="right"
 								gutterBottom
+								className={classes.memberSince}
 							>
+								<Edit color="grey" width="24" height="24" />
 								Member since 2019
 							</Typography>
 						</>
@@ -203,20 +211,22 @@ class DashProfileBox extends Component {
 								</form>
 								<Button
 									size="small"
-									color="primary"
+									color="secondary"
 									variant="text"
 									align="right"
+									className={classes.alignRight}
 									onClick={this.handleSaveProfile}
 								>
 									Change Password
 								</Button>
-								<ButtonDark
+								<Button
 									type="submit"
-									fullWidth
+									variant="contained"
+									color="secondary"
 									onClick={this.handleSaveProfile}
 								>
 									Save
-								</ButtonDark>
+								</Button>
 							</Grid>
 						</>
 					)}

@@ -8,7 +8,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import { ReactComponent as CommentBubles } from '../assets/comment_bubbles.svg'
+import { ReactComponent as Logout } from '../assets/logout.svg'
 import { ReactComponent as BoltIcon } from '../assets/boltIcon.svg'
 import { ReactComponent as CubeIcon } from '../assets/cubeIcon.svg'
 import { ReactComponent as StarIcon } from '../assets/starIcon.svg'
@@ -93,9 +93,9 @@ const styles = theme => ({
 	},
 	itemIcon: {
 		width: '24px',
-		height: '30px',
+		height: '24px',
 		fontSize: '24px',
-		lineHeight: '30px',
+		lineHeight: '24px',
 		float: 'left',
 		marginRight: '15px',
 		textAlign: 'center',
@@ -106,8 +106,11 @@ const styles = theme => ({
 	itemText: {
 		margin: '0',
 		lineHeight: '30px',
-		fontSize: '14px',
+		paddingLeft: 0,
+	},
+	itemTextPrimary: {
 		color: 'inherit',
+		fontWeight: '700',
 	},
 	badge: {
 		top: '50%',
@@ -195,7 +198,7 @@ class DashDrawer extends React.Component {
 								classes={{ root: classes.item }}
 							>
 								<ListItemIcon
-									className={{ root: classes.itemIcon }}
+									classes={{ root: classes.itemIcon }}
 								>
 									{page.icon}
 								</ListItemIcon>
@@ -203,7 +206,8 @@ class DashDrawer extends React.Component {
 								<ListItemText
 									primary={page.name}
 									classes={{
-										primary: classes.itemText,
+										root: classes.itemText,
+										primary: classes.itemTextPrimary,
 									}}
 								/>
 								{page.name === 'Tasks' && (
@@ -211,7 +215,7 @@ class DashDrawer extends React.Component {
 										badgeContent={2}
 										color="primary"
 										classes={{ badge: classes.badge }}
-									/>
+									>{` `}</Badge>
 								)}
 							</ListItem>
 						</Link>
@@ -220,18 +224,21 @@ class DashDrawer extends React.Component {
 				<Divider />
 				<SocialIcons />
 				<List className={classes.logout}>
-					<Link className={classes.itemLink} activeClassName="active">
+					<Link
+						className={classes.itemLink}
+						activeClassName="active"
+						to="/"
+					>
 						<ListItem classes={{ root: classes.item }}>
-							<ListItemIcon
-								className={{ root: classes.itemIcon }}
-							>
-								<CommentBubles color="white" />
+							<ListItemIcon classes={{ root: classes.itemIcon }}>
+								<Logout color="white" />
 							</ListItemIcon>
 
 							<ListItemText
 								primary="Logout"
 								classes={{
-									primary: classes.itemText,
+									root: classes.itemText,
+									primary: classes.itemTextPrimary,
 								}}
 							/>
 						</ListItem>

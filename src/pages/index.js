@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import ButtonLight from '../components/ButtonLight'
 import classNames from 'classnames'
 import { ReactComponent as IconRecognition } from '../components/assets/IconRecognition.svg'
 import { ReactComponent as UnlockIcon } from '../components/assets/UnlockIcon.svg'
@@ -190,7 +189,6 @@ const styles = theme => ({
 		color: '#FFF',
 		[theme.breakpoints.down('xs')]: {
 			textAlign: 'center',
-			fontSize: 16,
 			marginTop: 20,
 		},
 		[theme.breakpoints.up('sm')]: {
@@ -230,14 +228,16 @@ class Index extends React.Component {
 						<Grid item xs={12} sm={5}>
 							<Typography
 								component="h1"
-								variant="h4"
+								variant="h1"
+								color="textPrimary"
 								className={classes.hero1Title}
 								gutterBottom
 							>
 								Free your reputation
 							</Typography>
 							<Typography
-								variant="subtitle1"
+								variant="body1"
+								color="textPrimary"
 								gutterBottom
 								className={classes.reputationSubTitle}
 							>
@@ -246,7 +246,9 @@ class Index extends React.Component {
 								wallet address. Projects can then engage you on
 								a 1-to-1 basis.
 							</Typography>
-							<ButtonLight size="large">Get Started</ButtonLight>
+							<Button variant="contained" color="primary">
+								Get Started
+							</Button>
 						</Grid>
 						<Grid item xs={12} sm={7} />
 					</Grid>
@@ -258,6 +260,7 @@ class Index extends React.Component {
 						justify="center"
 						wrap="wrap-reverse"
 						alignItems="center"
+						item
 						md={11}
 						sm={12}
 					>
@@ -298,7 +301,11 @@ class Index extends React.Component {
 										<ListItemText primary="Complete tasks and surveys to receive crypto micropayments." />
 									</ListItem>
 								</List>
-								<Button size="medium" color="secondary">
+								<Button
+									variant="text"
+									color="secondary"
+									size="medium"
+								>
 									Get Started
 								</Button>
 							</Paper>
@@ -306,7 +313,8 @@ class Index extends React.Component {
 						<Grid item xs={12} sm={4} md={6}>
 							<Typography
 								component="h1"
-								variant="h4"
+								variant="h1"
+								color="textPrimary"
 								className={classes.hero2Title}
 								gutterBottom
 							>
@@ -333,13 +341,16 @@ class Index extends React.Component {
 					>
 						<Grid item xs={12} sm={6}>
 							<Typography
-								variant="h3"
+								component="h1"
+								variant="h1"
+								color="textPrimary"
 								className={classes.hero3Title}
 							>
 								Sign up and receive a $5 Ether bonus
 							</Typography>
 							<Typography
-								variant="subtitle1"
+								variant="subtitle2"
+								color="textPrimary"
 								gutterBottom
 								className={classes.hero3Subtitle}
 							>
@@ -347,12 +358,13 @@ class Index extends React.Component {
 							</Typography>
 						</Grid>
 						<Grid item xs={12} sm={6} container justify="center">
-							<ButtonLight
-								size="large"
+							<Button
+								variant="contained"
+								color="primary"
 								className={classes.collectBonus}
 							>
 								Collect Bonus
-							</ButtonLight>
+							</Button>
 						</Grid>
 						<div className={classes.hero3Cut} />
 					</Grid>

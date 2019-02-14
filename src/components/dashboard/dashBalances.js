@@ -48,7 +48,7 @@ class DashBalances extends Component {
 				<Hidden smDown>
 					<Typography
 						className={classes.boxTitle}
-						component="subtitle1"
+						variant="subtitle1"
 					>
 						Coindrop Balance
 					</Typography>

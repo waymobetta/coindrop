@@ -53,8 +53,8 @@ const styles = theme => ({
 		position: 'absolute',
 		width: 160,
 		height: 125,
-		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
-		backgroundColor: '#572FFF',
+		background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
+		backgroundColor: '#E390FF',
 		borderRadius: 30,
 		display: 'flex',
 		flexDirection: 'column',
@@ -102,7 +102,7 @@ class DashContributions extends React.Component {
 				<Hidden smDown>
 					<Typography
 						className={classes.boxTitle}
-						component="subtitle1"
+						variant="subtitle1"
 					>
 						Contributions
 					</Typography>

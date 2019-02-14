@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import NotificationsNone from '@material-ui/icons/NotificationsNone'
-import Search from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import FormControl from '@material-ui/core/FormControl'
@@ -11,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar'
 import profilePicture from '../../images/avatar-profile.png'
 import { withStyles } from '@material-ui/core/styles'
 import Hidden from '@material-ui/core/Hidden'
+import { ReactComponent as Magnifier } from '../assets/magnifier.svg'
 
 const styles = theme => ({
 	ProfileHeader: {
@@ -41,6 +41,10 @@ const styles = theme => ({
 		fontSize: 16,
 		fontWeight: 500,
 	},
+	icon24: {
+		width: 24,
+		height: 24,
+	},
 })
 
 class DashHeader extends Component {
@@ -54,7 +58,10 @@ class DashHeader extends Component {
 							id="input-with-icon-adornment"
 							startAdornment={
 								<InputAdornment position="start">
-									<Search />
+									<Magnifier
+										color="#B5B5B6"
+										className={classes.icon24}
+									/>
 								</InputAdornment>
 							}
 						/>

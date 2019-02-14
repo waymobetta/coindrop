@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 import styles from './SignUpStyles'
-import ButtonDark from '../ButtonDark'
 import IconButton from '@material-ui/core/IconButton'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
@@ -17,7 +16,8 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import Grid from '@material-ui/core/Grid'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
-import { ReactComponent as CommentBubles } from '../assets/comment_bubbles.svg'
+import { ReactComponent as Checked } from '../assets/checked.svg'
+import { ReactComponent as Unchecked } from '../assets/unchecked.svg'
 
 class SignUpForm extends React.Component {
 	constructor(props) {
@@ -36,7 +36,11 @@ class SignUpForm extends React.Component {
 			<main className={classes.main}>
 				<CssBaseline />
 				<Paper className={classes.paper} elevation={0}>
-					<Typography component="h1" variant="h5">
+					<Typography
+						component="h3"
+						variant="h3"
+						className={classes.signUpTitle}
+					>
 						{modalTitle}
 					</Typography>
 					{signUpMode ? (
@@ -109,30 +113,42 @@ class SignUpForm extends React.Component {
 									<FormControlLabel
 										control={
 											<Checkbox
-												icon={<CommentBubles />}
-												checkedIcon={<CommentBubles />}
+												color="primary"
+												icon={
+													<Unchecked color="#E8EAF4" />
+												}
+												checkedIcon={
+													<Checked color="#5AE2B9" />
+												}
 												value="checkedH"
 											/>
 										}
+										label="I agree with the "
+										className={classes.tosCheck}
 									/>
-									<p>
-										I agree with the{' '}
-										<Button size="small" variant="text">
-											Terms and Conditions
-										</Button>
-									</p>
+									<Button
+										size="small"
+										variant="text"
+										inline
+										className={classes.inlineLink}
+									>
+										Terms and Conditions
+									</Button>
 								</div>
 
-								<ButtonDark
+								<Button
 									type="submit"
 									fullWidth
+									variant="contained"
+									color="secondary"
 									className={classes.submit}
 								>
 									Sign Up
-								</ButtonDark>
+								</Button>
 								<Button
 									size="medium"
 									variant="text"
+									color="primary"
 									onClick={this.switchToSignIn}
 								>
 									Sign In
@@ -187,13 +203,15 @@ class SignUpForm extends React.Component {
 									/>
 								</FormControl>
 
-								<ButtonDark
+								<Button
 									type="submit"
 									fullWidth
 									className={classes.submit}
+									variant="contained"
+									color="secondary"
 								>
 									Sign In
-								</ButtonDark>
+								</Button>
 								<Button
 									size="medium"
 									variant="text"

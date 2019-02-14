@@ -9,6 +9,7 @@ const rawTheme = createMuiTheme({
 			ligth: '#FFF',
 			main: '#28282a',
 			dark: '#1e1e1f',
+			contrastText: '#fff',
 		},
 		secondary: {
 			light: '#fff5f8',
@@ -42,12 +43,13 @@ const rawTheme = createMuiTheme({
 		paddingBottom: 5,
 	},
 	typography: {
-		fontFamily: "'Work Sans', sans-serif",
+		fontFamily: "'Assistant', sans-serif",
 		fontSize: 14,
 		fontWeightLight: 300, // Work Sans
 		fontWeightRegular: 400, // Work Sans
-		fontWeightMedium: 700, // Roboto Condensed
-		fontFamilySecondary: "'Roboto Condensed', sans-serif",
+		fontWeightMedium: 600, // Roboto Condensed
+		fontWeightBold: 700, // Roboto Condensed
+		fontFamilySecondary: "'Assistant', sans-serif",
 		useNextVariants: true,
 	},
 	props: {
@@ -78,8 +80,37 @@ const rawTheme = createMuiTheme({
 				},
 			},
 		},
+		MuiFab: {
+			primary: {
+				background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
+				backgroundColor: '#E390FF',
+			},
+		},
 		MuiButton: {
 			// Name of the component ⚛️ / style sheet
+			containedPrimary: {
+				// Name of the rule
+				background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
+				backgroundColor: '#E390FF',
+				borderRadius: 30,
+				fontSize: 16,
+				minWidth: 180,
+				color: 'white',
+				padding: '16px 36px',
+				textTransform: 'capitalize',
+			},
+			containedSecondary: {
+				// Name of the rule
+				background: 'linear-gradient(45deg, #B43FFF 30%, #7A35FF 90%)',
+				backgroundColor: '#572FFF',
+				borderRadius: 30,
+				fontSize: 16,
+				minWidth: 180,
+				color: 'white',
+				padding: '16px 36px',
+				textTransform: 'capitalize',
+				boxShadow: '-4px 5px 26px 0 #CFB0FF',
+			},
 			outlinedPrimary: {
 				// Name of the rule
 				backgroundColor: '#FFF',
@@ -105,7 +136,19 @@ const rawTheme = createMuiTheme({
 				},
 			},
 			textPrimary: {
+				color: '#555555',
+				fontWeight: 'bold',
+			},
+			textSecondary: {
 				color: '#E66BFF',
+				fontWeight: 'bold',
+			},
+			sizeSmall: {
+				fontSize: 14,
+			},
+
+			sizeLarge: {
+				fontSize: 24,
 			},
 		},
 	},
@@ -134,17 +177,17 @@ const theme = {
 			...rawTheme.typography.h1,
 			...fontHeader,
 			letterSpacing: 0,
-			fontSize: 60,
+			fontSize: 45,
 		},
 		h2: {
 			...rawTheme.typography.h2,
 			...fontHeader,
-			fontSize: 45,
+			fontSize: 32,
 		},
 		h3: {
 			...rawTheme.typography.h3,
 			...fontHeader,
-			fontSize: 42,
+			fontSize: 24,
 		},
 		h4: {
 			...rawTheme.typography.h4,
@@ -164,6 +207,10 @@ const theme = {
 		subtitle1: {
 			...rawTheme.typography.subtitle1,
 			fontSize: 16,
+		},
+		subtitle2: {
+			...rawTheme.typography.subtitle1,
+			fontSize: 24,
 		},
 		body1: {
 			...rawTheme.typography.body2,

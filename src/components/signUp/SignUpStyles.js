@@ -9,15 +9,16 @@ const styles = theme => ({
 	},
 	main: {
 		width: 'auto',
-		display: 'block', // Fix IE 11 issue.
 		marginLeft: theme.spacing.unit * 3,
 		marginRight: theme.spacing.unit * 3,
-
+		display: 'flex',
+		flex: 1,
+		justifyContent: 'space-around',
 		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
 			width: 400,
 			marginLeft: 'auto',
 			marginRight: 'auto',
-			minHeight: 490,
+			minHeight: 400,
 		},
 	},
 	paper: {
@@ -26,8 +27,8 @@ const styles = theme => ({
 		alignItems: 'center',
 		justifyContent: 'space-evenly',
 		backgroundColor: 'transparent',
-
-		padding: '30px 48px',
+		width: '100%',
+		padding: '50px 48px 50px 48px',
 	},
 	form: {
 		width: '100%', // Fix IE 11 issue.
@@ -57,6 +58,15 @@ const styles = theme => ({
 	signupTOSLink: {
 		display: 'flex',
 		justify: 'flex-start',
+	},
+	inlineLink: {
+		textTransform: 'capitalize',
+	},
+	tosCheck: {
+		marginRight: 0,
+	},
+	signUpTitle: {
+		marginBottom: 70,
 	},
 })
 
