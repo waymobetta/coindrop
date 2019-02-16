@@ -19,6 +19,7 @@ const styles = theme => ({
 		boxShadow: theme.shadows[5],
 		outline: 'none',
 		borderRadius: theme.modalBorderRadius,
+		minWidth: 340,
 	},
 	main: {
 		width: 'auto',
@@ -27,7 +28,7 @@ const styles = theme => ({
 		display: 'flex',
 		flex: 1,
 		justifyContent: 'space-around',
-		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+		[theme.breakpoints.up('md')]: {
 			width: 600,
 		},
 		flexGrow: 1,
@@ -41,6 +42,9 @@ const styles = theme => ({
 		width: '100%',
 		minHeight: 380,
 		padding: '50px 10px 40px 10px',
+		[theme.breakpoints.down('sm')]: {
+			textAlign: 'center',
+		},
 	},
 	modalCloseButton: {
 		top: -20,
@@ -48,10 +52,14 @@ const styles = theme => ({
 		position: 'absolute',
 	},
 	etherellaImage: {
-		float: 'right',
+		//float: 'right',
 	},
 	gridContainer: {
 		flexGrow: 1,
+	},
+	backdropBg: {
+		background:
+			'linear-gradient(103deg, #572fffc2 0%, #bf41ffd4 46%, #bf41ffd9 100%)',
 	},
 })
 
@@ -82,6 +90,7 @@ class CollectEtherBanner extends React.Component {
 				aria-labelledby="simple-modal-title"
 				aria-describedby="simple-modal-description"
 				disableBackdropClick={true}
+				BackdropProps={{ classes: { root: classes.backdropBg } }}
 				open={this.props.open}
 				onClose={this.props.handleBannerClose}
 			>
@@ -98,8 +107,16 @@ class CollectEtherBanner extends React.Component {
 								justify="center"
 								alignItems="stretch"
 								className={classes.gridContainer}
+								wrap="wrap"
 							>
-								<Grid item xs={5}>
+								<Grid
+									item
+									container
+									sm={12}
+									md={5}
+									justify="center"
+									alignContent="center"
+								>
 									<img
 										width="228"
 										height="212"
@@ -112,7 +129,8 @@ class CollectEtherBanner extends React.Component {
 								<Grid
 									item
 									container
-									xs={7}
+									sm={12}
+									md={7}
 									justify="space-around"
 									alignContent="flex-start"
 									direction="column"

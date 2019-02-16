@@ -8,7 +8,7 @@ const styles = theme => ({
 		borderRadius: theme.borderRadius,
 		color: 'white',
 		padding: '6px 20px',
-		margin: '0px 10px',
+		margin: '0px 0px 0px 10px',
 		textTransform: 'capitalize',
 	},
 })

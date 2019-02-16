@@ -17,7 +17,7 @@ const styles = {
 	footer: {
 		backgroundColor: '#272B2F',
 		height: 220,
-		padding: '0px 15px',
+		//padding: '0px 15px',
 		[theme.breakpoints.down('xs')]: {
 			height: 270,
 		},
@@ -98,12 +98,7 @@ class Footer extends React.Component {
 	render() {
 		const { classes } = this.props
 		return (
-			<Grid
-				container
-				spacing={24}
-				className={classes.footer}
-				justify="center"
-			>
+			<Grid container className={classes.footer} justify="center">
 				<Grid
 					container
 					item

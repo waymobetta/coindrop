@@ -1,7 +1,12 @@
 const styles = theme => ({
 	modalPaper: {
 		position: 'absolute',
-		width: theme.spacing.unit * 50,
+		[theme.breakpoints.up('sm')]: {
+			width: 410,
+		},
+		[theme.breakpoints.down('xs')]: {
+			width: 340,
+		},
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
 		outline: 'none',
@@ -14,8 +19,7 @@ const styles = theme => ({
 		display: 'flex',
 		flex: 1,
 		justifyContent: 'space-around',
-		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-			width: 400,
+		[theme.breakpoints.up('sm')]: {
 			marginLeft: 'auto',
 			marginRight: 'auto',
 			minHeight: 400,
@@ -29,6 +33,9 @@ const styles = theme => ({
 		backgroundColor: 'transparent',
 		width: '100%',
 		padding: '50px 48px 50px 48px',
+		[theme.breakpoints.down('xs')]: {
+			padding: '30px 15px 20px 15px',
+		},
 	},
 	form: {
 		width: '100%', // Fix IE 11 issue.

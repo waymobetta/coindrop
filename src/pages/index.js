@@ -28,7 +28,7 @@ const styles = theme => ({
 		padding: 20,
 	},
 	fullRow: {
-		padding: 10,
+		//padding: 10,
 	},
 	hero1: {
 		minHeight: 660,
@@ -240,7 +240,7 @@ class Index extends React.Component {
 						wrap="wrap-reverse"
 						alignItems="center"
 					>
-						<Grid item xs={12} sm={5}>
+						<Grid item xs={12} sm={4}>
 							<Typography
 								component="h1"
 								variant="h1"
@@ -269,7 +269,7 @@ class Index extends React.Component {
 								Get Started
 							</Button>
 						</Grid>
-						<Grid item xs={12} sm={7} />
+						<Grid item xs={12} sm={8} />
 					</Grid>
 
 					<Grid
@@ -344,7 +344,6 @@ class Index extends React.Component {
 				</div>
 				<Grid
 					container
-					spacing={24}
 					className={classNames(classes.fullRow, classes.hero3)}
 					justify="center"
 					wrap="wrap-reverse"

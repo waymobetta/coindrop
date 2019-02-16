@@ -131,6 +131,7 @@ const rawTheme = createMuiTheme({
 				border: '2px solid #FFF',
 				padding: '10px 25px',
 				borderRadius: 30,
+				minWidth: 180,
 				'&:hover': {
 					border: '2px solid #FFF',
 				},
