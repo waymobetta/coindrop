@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
+import { ReactComponent as DownArrow } from '../assets/downArrow.svg'
 
 const styles = theme => ({
 	balanceBoxPaper: {
@@ -38,6 +39,10 @@ const styles = theme => ({
 		textAlign: 'center',
 		paddingTop: 20,
 	},
+	reverseIcon: {
+		transform: 'rotate(180deg)',
+		marginLEft: '-10px',
+	},
 })
 
 class DashBalances extends Component {
@@ -54,10 +59,18 @@ class DashBalances extends Component {
 					</Typography>
 				</Hidden>
 				<Paper className={classes.balanceBoxPaper}>
-					<span className={classes.currency}>USD</span>
+					<span className={classes.currency}>
+						USD <DownArrow color="#CA34FF" width="24" height="24" />
+						<DownArrow
+							color="#CA34FF"
+							width="24"
+							height="24"
+							className={classes.reverseIcon}
+						/>
+					</span>
 					<span className={classes.balanceUSD}>$5.00</span>
 					<span className={classes.balanceETH}>
-						ETC <b>0.005</b>
+						ETH <b>0.005</b>
 					</span>
 				</Paper>
 			</Grid>

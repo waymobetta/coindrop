@@ -15,6 +15,7 @@ import classNames from 'classnames'
 import { ReactComponent as IconRecognition } from '../components/assets/IconRecognition.svg'
 import { ReactComponent as UnlockIcon } from '../components/assets/UnlockIcon.svg'
 import { ReactComponent as TasksIcon } from '../components/assets/TasksIcon.svg'
+import CollectEtherBanner from '../components/collectEtherBanner'
 
 const styles = theme => ({
 	root: {
@@ -206,6 +207,16 @@ class Index extends React.Component {
 		this.state = {
 			isOpen: false,
 		}
+		this.toggleBanner = this.toggleBanner.bind(this)
+		this.handleBannerClose = this.handleBannerClose.bind(this)
+	}
+	toggleBanner() {
+		this.setState({
+			isOpen: !this.state.isOpen,
+		})
+	}
+	handleBannerClose = () => {
+		this.setState({ isOpen: false })
 	}
 	componentDidMount() {}
 	render() {
@@ -217,6 +228,10 @@ class Index extends React.Component {
 					keywords={['coinDrop', 'application', 'react']}
 				/>
 				<div className={classes.root}>
+					<CollectEtherBanner
+						open={this.state.isOpen}
+						handleBannerClose={this.handleBannerClose}
+					/>
 					<Grid
 						container
 						spacing={24}
@@ -246,7 +261,11 @@ class Index extends React.Component {
 								wallet address. Projects can then engage you on
 								a 1-to-1 basis.
 							</Typography>
-							<Button variant="contained" color="primary">
+							<Button
+								variant="contained"
+								color="primary"
+								onClick={this.toggleBanner}
+							>
 								Get Started
 							</Button>
 						</Grid>

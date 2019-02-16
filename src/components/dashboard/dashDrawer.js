@@ -153,35 +153,35 @@ class DashDrawer extends React.Component {
 					{[
 						{
 							name: 'Profile',
-							url: '/dashboard/dashboard',
+							url: '/dashboard/dashboard/',
 							icon: (
 								<UserIcon className={classes.dashDrawerIcon} />
 							),
 						},
 						{
 							name: 'My Wallet',
-							url: '/dashboard/wallet',
+							url: '/dashboard/wallet/',
 							icon: (
 								<StarIcon className={classes.dashDrawerIcon} />
 							),
 						},
 						{
 							name: 'Tasks',
-							url: '/dashboard/tasks',
+							url: '/dashboard/tasks/',
 							icon: (
 								<BoltIcon className={classes.dashDrawerIcon} />
 							),
 						},
 						{
 							name: 'Accounts',
-							url: '/dashboard/accounts',
+							url: '/dashboard/accounts/',
 							icon: (
 								<CubeIcon className={classes.dashDrawerIcon} />
 							),
 						},
 						{
 							name: 'Policy',
-							url: '/dashboard/policy',
+							url: '/dashboard/policy/',
 							icon: (
 								<FileIcon className={classes.dashDrawerIcon} />
 							),

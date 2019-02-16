@@ -42,8 +42,8 @@ class DashBadges extends Component {
 				</Hidden>
 
 				<Paper className={classes.badgeBoxPaper}>
-					<Typography ariant="subtitle2" align="right" gutterBottom>
-						No badges yet
+					<Typography ariant="body1" align="right" gutterBottom>
+						You don´t have badges yet.
 					</Typography>
 				</Paper>
 			</Grid>

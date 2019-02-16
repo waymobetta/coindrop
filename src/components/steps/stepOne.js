@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import ButtonOutlineLight from '../ButtonOutlineLight'
+import Button from '@material-ui/core/Button'
 
 const styles = () => ({
 	connectWelcome: {
@@ -35,9 +35,13 @@ class StepOne extends React.Component {
 					Connect your accounts to Coindrop and receive your first
 					Ether payment
 				</Typography>
-				<ButtonOutlineLight size="large" onClick={this.onClick}>
+				<Button
+					variant="outlined"
+					color="primary"
+					onClick={this.onClick}
+				>
 					Get Paid
-				</ButtonOutlineLight>
+				</Button>
 			</React.Fragment>
 		)
 	}

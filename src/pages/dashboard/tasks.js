@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import theme from '../../components/theme'
+import Hidden from '@material-ui/core/Hidden'
 
 const styles = () => ({
 	tasksBoxPaper: {
@@ -19,6 +20,18 @@ const styles = () => ({
 		padding: theme.spacing.unit * 3,
 		marginTop: 30,
 		...theme.boxShadow,
+		[theme.breakpoints.down('sm')]: {
+			textAlign: 'center',
+		},
+	},
+	boxTitle: {
+		...theme.boxTitle,
+		[theme.breakpoints.down('sm')]: {
+			width: '100%',
+			fontSize: '26px',
+			color: '#363C44',
+			marginBottom: 30,
+		},
 	},
 })
 
@@ -34,9 +47,18 @@ class Tasks extends React.Component {
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
 				/>
+				<Hidden mdUp>
+					<Typography
+						variant="h2"
+						component="h2"
+						className={classes.boxTitle}
+					>
+						Tasks
+					</Typography>
+				</Hidden>
 				<Grid item xs={12} sm={10}>
 					<Paper className={classes.tasksBoxPaper}>
-						<Typography variant="h5" component="h3">
+						<Typography variant="h6">
 							Welcome to Coindrop!
 						</Typography>
 						<Typography ariant="subtitle2" gutterBottom>

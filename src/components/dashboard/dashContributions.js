@@ -19,6 +19,9 @@ const styles = theme => ({
 		minHeight: 200,
 		padding: 10,
 		...theme.boxShadow,
+		[theme.breakpoints.down('xs')]: {
+			padding: '30px 30px',
+		},
 	},
 	boxTitle: {
 		...theme.boxTitle,
@@ -28,14 +31,20 @@ const styles = theme => ({
 	},
 	contributionTabs: {
 		borderBottom: '1px solid #ccc',
+		width: 'calc(100% - 140px)',
 		[theme.breakpoints.down('xs')]: {
 			display: 'flex',
 			flexDirection: 'column',
+			minHeight: '140px',
+			width: '100%',
 		},
 	},
 	dotBadge: {
 		margin: '10px 0px',
 		color: '#C8C8C8',
+		[theme.breakpoints.down('xs')]: {
+			margin: '5px 0px',
+		},
 	},
 	dot: {
 		left: 0,
@@ -47,6 +56,9 @@ const styles = theme => ({
 		color: '#C8C8C8',
 		'&.active': {
 			color: '#656565',
+		},
+		[theme.breakpoints.down('xs')]: {
+			justifyContent: 'flex-start',
 		},
 	},
 	earningBox: {
@@ -67,8 +79,8 @@ const styles = theme => ({
 			right: -30,
 		},
 		[theme.breakpoints.down('xs')]: {
-			top: 10,
-			right: 10,
+			top: 30,
+			right: 30,
 		},
 	},
 	number: {

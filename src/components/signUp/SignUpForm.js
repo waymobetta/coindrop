@@ -129,7 +129,6 @@ class SignUpForm extends React.Component {
 									<Button
 										size="small"
 										variant="text"
-										inline
 										className={classes.inlineLink}
 									>
 										Terms and Conditions

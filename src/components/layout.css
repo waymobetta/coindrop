@@ -80,3 +80,7 @@ a:hover {
 	position: absolute;
 	top: -220px;
 }
+
+.isActive span {
+	color: red !important;
+}

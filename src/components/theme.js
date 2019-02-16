@@ -192,7 +192,7 @@ const theme = {
 		h4: {
 			...rawTheme.typography.h4,
 			...fontHeader,
-			fontSize: 42,
+			fontSize: 18,
 		},
 		h5: {
 			...rawTheme.typography.h5,
