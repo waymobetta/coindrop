@@ -15,33 +15,35 @@ const styles = () => ({
 		display: 'flex',
 	},
 	heroBg: {
-		[theme.breakpoints.down('xs')]: {
-			backgroundSize: '100% auto',
-			backgroundPosition: '60px 0px',
+		[theme.breakpoints.up('xs')]: {
+			backgroundSize: '180%',
+			backgroundPosition: '90% top',
 			width: '100%',
-			height: 440,
-			top: -20,
+			height: 760,
 		},
 		[theme.breakpoints.up('sm')]: {
-			backgroundSize: '100% auto',
-			backgroundPosition: '320px -130px',
+			backgroundSize: '160%',
+			backgroundPosition: '70% top',
 			width: '100%',
-			height: 620,
-			top: -20,
+			height: 760,
 		},
 		[theme.breakpoints.up('md')]: {
-			backgroundSize: '68% auto',
-			backgroundPosition: '540px -60px',
+			backgroundSize: '120%',
+			backgroundPosition: 'top right',
 			width: '100%',
-			height: 720,
-			top: -20,
+			height: 760,
 		},
 		[theme.breakpoints.up('lg')]: {
 			backgroundSize: '100%',
-			backgroundPosition: '110px -150px',
-			width: 910,
+			backgroundPosition: 'top right',
+			width: '100%',
 			height: 760,
-			top: -20,
+		},
+		[theme.breakpoints.up('xl')]: {
+			backgroundSize: '120%',
+			backgroundPosition: '-240px -180px',
+			width: '100%',
+			height: 760,
 		},
 	},
 })
@@ -61,7 +63,6 @@ class Landing extends React.Component {
 						<div
 							className={classNames(classes.heroBg, 'root--bg1')}
 						/>
-						<div className="root--bg2" />
 						{children}
 						<Footer />
 					</MuiThemeProvider>

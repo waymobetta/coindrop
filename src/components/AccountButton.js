@@ -26,6 +26,7 @@ const styles = theme => ({
 		lineHeight: '36px',
 		verticalAlign: 'middle',
 		fontWeight: 'normal',
+		fontSize: '14px',
 	},
 	rightIcon: {
 		marginLeft: theme.spacing.unit,

@@ -8,9 +8,6 @@ import { ReactComponent as StackOverflow } from '../assets/stackOverflow.svg'
 import classNames from 'classnames'
 
 const styles = () => ({
-	connectSubTitle: {
-		fontSize: 22,
-	},
 	leftIcon: {
 		width: 36,
 		height: 36,
@@ -37,14 +34,10 @@ class StepTwo extends React.Component {
 		const { classes } = this.props
 		return (
 			<React.Fragment>
-				<Typography
-					variant="h3"
-					gutterBottom
-					className={classes.connectSubTitle}
-				>
+				<Typography variant="h3" gutterBottom>
 					Choose one to start
 				</Typography>
-				<Typography variant="subtitle1" gutterBottom>
+				<Typography variant="subtitle2" gutterBottom>
 					You can connect more accounts later
 				</Typography>
 				<AccountButton

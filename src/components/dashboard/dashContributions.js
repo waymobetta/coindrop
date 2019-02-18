@@ -110,8 +110,8 @@ class DashContributions extends React.Component {
 		const { classes } = this.props
 		const { value } = this.state
 		return (
-			<Grid item xs={12} sm={6}>
-				<Hidden smDown>
+			<Grid item xs={12} sm={10} md={10} lg={6}>
+				<Hidden xsDown>
 					<Typography
 						className={classes.boxTitle}
 						variant="subtitle1"

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -7,8 +6,6 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import { ReactComponent as DrawerIcon } from './assets/drawerIcon.svg'
 import Hidden from '@material-ui/core/Hidden'
-import ButtonLight from '../components/ButtonLight'
-import ButtonOutlineDark from '../components/ButtonOutlineDark'
 import SocialIcons from './socialIcons'
 import Grid from '@material-ui/core/Grid'
 import theme from './theme'

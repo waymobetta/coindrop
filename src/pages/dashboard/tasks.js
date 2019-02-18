@@ -61,7 +61,7 @@ class Tasks extends React.Component {
 						<Typography variant="h6">
 							Welcome to Coindrop!
 						</Typography>
-						<Typography ariant="subtitle2" gutterBottom>
+						<Typography gutterBottom>
 							You don´t have any tasks yet.
 						</Typography>
 					</Paper>

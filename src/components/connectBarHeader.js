@@ -14,7 +14,7 @@ import SignUp from './SignUp'
 import ButtonHeader from './ButtonHeader'
 import { ReactComponent as LogoDarkWhite } from '../components/assets/coindrop_logo_white.svg'
 import { ReactComponent as Envelope } from '../components/assets/envelope.svg'
-const styles = {
+const styles = theme => ({
 	root: {
 		flexGrow: 1,
 		margin: 'auto',
@@ -29,9 +29,11 @@ const styles = {
 	contactIcon: {
 		width: 24,
 		height: 24,
-		marginRight: 10,
+		[theme.breakpoints.up('sm')]: {
+			marginRight: 10,
+		},
 	},
-}
+})
 
 class ConnectBarHeader extends React.Component {
 	constructor(props) {

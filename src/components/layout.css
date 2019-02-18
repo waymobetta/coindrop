@@ -19,6 +19,7 @@ h5 {
 
 a {
 	color: var(--purple);
+	text-decoration: none;
 }
 
 p {
@@ -52,11 +53,13 @@ a:hover {
 }
 
 .root--bg1 {
-	background-image: url(assets/illustration_Mesa.png);
+	/* background-image: url(assets/illustration_Mesa.png); */
+	background-image: url(../images/surf_1920.jpg);
 	background-repeat: no-repeat;
 	position: absolute;
 	display: block;
 	right: 0px;
+	top: 0px;
 	z-index: -1;
 }
 

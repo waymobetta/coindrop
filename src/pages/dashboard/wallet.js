@@ -96,11 +96,7 @@ class Wallet extends React.Component {
 						</Typography>
 					</Hidden>
 					<Paper className={classes.walletBoxPaper}>
-						<Typography
-							ariant="subtitle2"
-							gutterBottom
-							className={classes.ethAddress}
-						>
+						<Typography gutterBottom className={classes.ethAddress}>
 							0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0
 						</Typography>
 						<Hidden smUp>

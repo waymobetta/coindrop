@@ -1,23 +1,15 @@
-/* eslint-disable */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import { ReactComponent as CommentBubles } from '../components/assets/comment_bubbles.svg'
 import theme from './theme'
 import SocialIcons from './socialIcons'
 const styles = {
 	footer: {
 		backgroundColor: '#272B2F',
 		height: 220,
-		//padding: '0px 15px',
 		[theme.breakpoints.down('xs')]: {
 			height: 270,
 		},
@@ -60,10 +52,6 @@ const styles = {
 		margin: '0px 20px 0px 20px',
 		border: '0px',
 	},
-}
-
-function ListItemLink(props) {
-	return <ListItem button disableGutters component="a" {...props} />
 }
 
 class Footer extends React.Component {

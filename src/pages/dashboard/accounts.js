@@ -87,7 +87,7 @@ class Accounts extends React.Component {
 						Accounts
 					</Typography>
 				</Hidden>
-				<Grid item xs={12} sm={10} spacing={40}>
+				<Grid item xs={12} sm={10}>
 					<Hidden smDown>
 						<Typography
 							variant="h6"

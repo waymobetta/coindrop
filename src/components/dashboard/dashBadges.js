@@ -31,8 +31,8 @@ class DashBadges extends Component {
 	render() {
 		const { classes } = this.props
 		return (
-			<Grid item xs={12} sm={4}>
-				<Hidden smDown>
+			<Grid item xs={12} sm={6} md={6} lg={4}>
+				<Hidden xsDown>
 					<Typography
 						className={classes.boxTitle}
 						variant="subtitle1"

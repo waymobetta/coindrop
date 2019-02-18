@@ -10,8 +10,10 @@ import OopsImage from '../assets/oops.png'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Fab from '@material-ui/core/Fab'
+import classNames from 'classnames'
 import { ReactComponent as CloseIcon } from '../assets/close.svg'
 import { ReactComponent as VerifiedIcon } from '../assets/verified.svg'
+import PillCloud from '../steps/pillCloud'
 
 const styles = theme => ({
 	paper: {
@@ -55,6 +57,12 @@ const styles = theme => ({
 		height: 300,
 		display: 'block',
 		margin: 'auto',
+		position: 'absolute',
+		zIndex: '99',
+		left: '0',
+		right: '0',
+		margin: '0px auto',
+		top: '30%',
 	},
 	verifiedTitle: {
 		color: '#fff',
@@ -112,8 +120,7 @@ const styles = theme => ({
 	claimEtherForm: {
 		width: '80%',
 	},
-	connectSubTitle: {
-		fontSize: 24,
+	textWhite: {
 		color: '#FFF',
 	},
 })
@@ -122,14 +129,14 @@ class StepFinal extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			show: false,
+			showVerified: false,
 		}
 	}
 
 	componentDidMount() {
 		this.timerHandle = setTimeout(() => {
 			this.setState({
-				show: true,
+				showVerified: true,
 			})
 			this.timerHandle = 0
 		}, 2000)
@@ -144,8 +151,8 @@ class StepFinal extends React.Component {
 
 	render() {
 		const { classes, canClaimEther, verified } = this.props
-		const { show } = this.state
-		return show ? (
+		const { showVerified } = this.state
+		return showVerified ? (
 			<div className={classes.root}>
 				{canClaimEther && verified ? (
 					<React.Fragment>
@@ -162,11 +169,17 @@ class StepFinal extends React.Component {
 							<Typography
 								variant="h3"
 								gutterBottom
-								classes={{ root: classes.connectSubTitle }}
+								classes={{ root: classes.textWhite }}
 							>
 								Now claim your $5 in Ether
 							</Typography>
-							<p>Enter your Ethereum address</p>
+							<Typography
+								variant="subtitle2"
+								classes={{ root: classes.textWhite }}
+								gutterBottom
+							>
+								Enter your Ethereum address
+							</Typography>
 							<form className={classes.claimEtherForm}>
 								<FormControl margin="normal" required fullWidth>
 									<InputLabel
@@ -194,19 +207,25 @@ class StepFinal extends React.Component {
 							>
 								Get Paid
 							</Button>
-							<p>You don´t have one? Create Wallet</p>
+							<Typography
+								variant="subtitle2"
+								classes={{ root: classes.textWhite }}
+								gutterBottom
+							>
+								You don´t have one? Create Wallet
+							</Typography>
 						</Paper>
 					</React.Fragment>
 				) : (
 					<Paper className={classes.paperNormal} elevation={0}>
 						<img src={OopsImage} />
-						<p>
+						<Typography variant="subtitle2" gutterBottom>
 							To qualify for this offer you must have at least 100
 							Reddit Karma and/or 100 Stack Overflow reputation.
-						</p>
-						<p>
-							<b>Come back to claim once you have reached 100!</b>
-						</p>
+						</Typography>
+						<Typography variant="subtitle2" gutterBottom>
+							Come back to claim once you have reached 100!
+						</Typography>
 						<Fab
 							color="primary"
 							aria-label="Add"
@@ -222,13 +241,15 @@ class StepFinal extends React.Component {
 			</div>
 		) : (
 			<React.Fragment>
-				<div className={classes.verifiedBg} />
-				<div className={classes.verifiedBox}>
-					<VerifiedIcon
-						className={classes.verifiedIcon}
-						color="white"
-					/>
-					<h3 className={classes.verifiedTitle}>Verified</h3>
+				<div className={classes.verifiedBg}>
+					<div className={classes.verifiedBox}>
+						<VerifiedIcon
+							className={classes.verifiedIcon}
+							color="white"
+						/>
+						<h3 className={classes.verifiedTitle}>Verified</h3>
+					</div>
+					<PillCloud />
 				</div>
 			</React.Fragment>
 		)

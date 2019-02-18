@@ -43,13 +43,13 @@ const styles = theme => ({
 		[theme.breakpoints.up('md')]: {
 			alignItems: 'flex-start',
 		},
-		[theme.breakpoints.down('sm')]: {
+		[theme.breakpoints.down('xs')]: {
 			alignItems: 'center',
 			background: 'transparent',
 			boxShadow: 'none',
 			padding: '20px 40px',
 		},
-		[theme.breakpoints.up('md')]: {
+		[theme.breakpoints.up('sm')]: {
 			...theme.boxShadow,
 		},
 	},
@@ -109,17 +109,17 @@ class DashProfileBox extends Component {
 		const { editProfile } = this.state
 		return (
 			<React.Fragment>
-				<Hidden mdUp>
+				<Hidden smUp>
 					<Typography
 						variant="h2"
 						component="h2"
 						className={classes.boxTitle}
 					>
-						Accounts
+						Profile
 					</Typography>
 				</Hidden>
-				<Grid item xs={12} sm={6}>
-					<Hidden smDown>
+				<Grid item xs={12} sm={12} md={10} lg={5}>
+					<Hidden xsDown>
 						<Typography
 							className={classes.boxTitle}
 							variant="subtitle1"
@@ -142,7 +142,7 @@ class DashProfileBox extends Component {
 							<p>Hunter Gebron</p>
 							<p>hunter27@gmail.com</p>
 						</Hidden>
-						<Hidden smDown>
+						<Hidden xsDown>
 							<List className={classes.profileList}>
 								<ListItem
 									className={classNames(
@@ -190,7 +190,6 @@ class DashProfileBox extends Component {
 								</Fab>
 								<Hidden smDown>
 									<Typography
-										ariant="subtitle2"
 										gutterBottom
 										className={classes.memberSince}
 									>

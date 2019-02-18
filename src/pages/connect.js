@@ -1,6 +1,4 @@
-/* eslint-disable */
 import React from 'react'
-//import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import LayoutConnect from '../components/LayoutConnect'
 import SEO from '../components/seo'
@@ -17,12 +15,18 @@ import StepTwo from '../components/steps/StepTwo'
 import StepThree from '../components/steps/StepThree'
 import StepFour from '../components/steps/StepFour'
 import StepFinal from '../components/steps/StepFinal'
-import StepIcon from '@material-ui/core/StepIcon'
 import theme from '../components/theme'
+import { Link } from 'gatsby'
+import classNames from 'classnames'
 
 const styles = () => ({
 	root: {
 		flexGrow: 1,
+		height: 'calc(100vh - 64px)',
+	},
+	connectGrid: {
+		height: 'calc(100vh - 64px)',
+		textAlign: 'center',
 	},
 	paper: {
 		textAlign: 'center',
@@ -61,9 +65,9 @@ const styles = () => ({
 		backgroundColor: '#272B2F',
 		height: 200,
 	},
-	subGrid: {
-		height: 300,
-		marginTop: 200,
+	subGrid: {},
+	firstStepGrid: {
+		marginTop: 140,
 		[theme.breakpoints.down('xs')]: {
 			marginTop: 40,
 		},
@@ -241,6 +245,7 @@ class Connect extends React.Component {
 				canClaimEther={canClaimEther}
 				verified={verified}
 				finalStep={finalStep}
+				activeStep={activeStep}
 			>
 				<SEO
 					title="Home"
@@ -251,15 +256,18 @@ class Connect extends React.Component {
 						container
 						spacing={0}
 						justify="center"
-						alignContent="space-around"
-						alignItems="center"
+						alignItems="flex-start"
+						className={classes.connectGrid}
 					>
 						<Grid
 							item
 							xs={10}
 							sm={8}
 							md={6}
-							className={classes.subGrid}
+							className={classNames(
+								activeStep === 0 && classes.firstStepGrid,
+								classes.subGrid
+							)}
 						>
 							<Typography
 								variant="h6"
@@ -285,18 +293,22 @@ class Connect extends React.Component {
 											>
 												<React.Fragment>
 													<Typography
-														variant="h6"
+														variant="h2"
 														gutterBottom
 														align="center"
 													>
 														Sorry!
 													</Typography>
-													<p>
+													<Typography
+														variant="subtitle2"
+														gutterBottom
+														align="center"
+													>
 														It seems that there was
 														a problem and we
 														couldn´t connect your
 														account.
-													</p>
+													</Typography>
 													<Button
 														variant="outlined"
 														color="primary"
@@ -323,7 +335,6 @@ class Connect extends React.Component {
 											>
 												{steps.map((label, index) => {
 													const props = {}
-													const labelProps = {}
 													if (
 														this.isStepSkipped(
 															index
@@ -360,6 +371,17 @@ class Connect extends React.Component {
 											</Stepper>
 										</React.Fragment>
 									</Paper>
+								)}
+								{activeStep === 0 && (
+									<Link
+										className={classes.itemLink}
+										activeClassName="active"
+										to="dashboard/dashboard/"
+									>
+										<Button variant="text" color="primary">
+											Connect Later
+										</Button>
+									</Link>
 								)}
 							</React.Fragment>
 						</Grid>

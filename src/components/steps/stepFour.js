@@ -1,15 +1,8 @@
-/* eslint-disable */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import FormControl from '@material-ui/core/FormControl'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import Chip from '@material-ui/core/Chip'
-import ButtonOutlineLight from '../ButtonOutlineLight'
 import Fab from '@material-ui/core/Fab'
-import ArrowForward from '@material-ui/icons/ArrowForward'
 import Typography from '@material-ui/core/Typography'
 import { ReactComponent as CopyIcon } from '../assets/copy.svg'
 
@@ -41,9 +34,6 @@ const styles = theme => ({
 	root: {
 		position: 'relative',
 	},
-	connectSubTitle: {
-		fontSize: 24,
-	},
 })
 
 class StepFour extends React.Component {
@@ -60,28 +50,25 @@ class StepFour extends React.Component {
 	}
 
 	render() {
-		const { classes, canClaimEther, selectedPlatform } = this.props
-		console.log(canClaimEther)
+		const { classes, selectedPlatform } = this.props
 		return (
 			<React.Fragment>
 				{selectedPlatform === 'reddit' ? (
 					<React.Fragment>
-						<Typography
-							variant="h6"
-							gutterBottom
-							classes={{ root: classes.connectSubTitle }}
-						>
+						<Typography variant="h3" gutterBottom>
 							Verification Code
 						</Typography>
 
 						<span className={classes.code}>
 							AJY765439096GGDC876997
 						</span>
-						<p>
+						<Typography variant="subtitle2" gutterBottom>
 							Copy the code and paste it in our subreddit using
 							this link.
-						</p>
-						<p>Already paste the code? </p>
+						</Typography>
+						<Typography variant="subtitle2" gutterBottom>
+							Already paste the code?
+						</Typography>
 						<Button
 							variant="outlined"
 							color="primary"
@@ -131,6 +118,7 @@ class StepFour extends React.Component {
 StepFour.propTypes = {
 	classes: PropTypes.object.isRequired,
 	selectedPlatform: PropTypes.string,
+	onClick: PropTypes.func,
 }
 
 export default withStyles(styles)(StepFour)

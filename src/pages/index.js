@@ -121,7 +121,7 @@ const styles = theme => ({
 		backgroundColor: 'pink',
 
 		borderRadius: 48,
-		background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
+		background: 'linear-gradient(103deg, #BF41FF 20%, #572FFF 100%)',
 		boxShadow: '-4px 5px 26px 0 rgba(19,19,19,0.2)',
 		overflow: 'hidden',
 		position: 'relative',
@@ -240,7 +240,7 @@ class Index extends React.Component {
 						wrap="wrap-reverse"
 						alignItems="center"
 					>
-						<Grid item xs={12} sm={4}>
+						<Grid item xs={12} sm={5}>
 							<Typography
 								component="h1"
 								variant="h1"
@@ -269,7 +269,7 @@ class Index extends React.Component {
 								Get Started
 							</Button>
 						</Grid>
-						<Grid item xs={12} sm={8} />
+						<Grid item xs={12} sm={7} />
 					</Grid>
 
 					<Grid
@@ -367,7 +367,6 @@ class Index extends React.Component {
 								Sign up and receive a $5 Ether bonus
 							</Typography>
 							<Typography
-								variant="subtitle2"
 								color="textPrimary"
 								gutterBottom
 								className={classes.hero3Subtitle}

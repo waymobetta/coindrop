@@ -53,7 +53,6 @@ const rawTheme = createMuiTheme({
 		useNextVariants: true,
 	},
 	props: {
-		// Name of the component ⚛️
 		MuiButtonBase: {
 			// The properties to apply
 			disableRipple: true, // No more ripple, on the whole application 💣!
@@ -87,9 +86,7 @@ const rawTheme = createMuiTheme({
 			},
 		},
 		MuiButton: {
-			// Name of the component ⚛️ / style sheet
 			containedPrimary: {
-				// Name of the rule
 				background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
 				backgroundColor: '#E390FF',
 				borderRadius: 30,
@@ -100,7 +97,6 @@ const rawTheme = createMuiTheme({
 				textTransform: 'capitalize',
 			},
 			containedSecondary: {
-				// Name of the rule
 				background: 'linear-gradient(45deg, #B43FFF 30%, #7A35FF 90%)',
 				backgroundColor: '#572FFF',
 				borderRadius: 30,
@@ -112,22 +108,22 @@ const rawTheme = createMuiTheme({
 				boxShadow: '-4px 5px 26px 0 #CFB0FF',
 			},
 			outlinedPrimary: {
-				// Name of the rule
 				backgroundColor: '#FFF',
 				borderRadius: 30,
 				fontSize: 16,
 				minWidth: 180,
 				color: '#D74EFF',
 				textTransform: 'capitalize',
-				border: '2px solid #E390FF',
+				border: '2px solid #D74EFF',
 				padding: '10px 25px',
+				boxShadow: '-3px 5px 10px 0 #F6D9FF',
 				'&:hover': {
-					border: '2px solid #E390FF',
+					border: '2px solid #D74EFF',
+					backgroundColor: '#FFF',
 				},
 			},
 			outlinedSecondary: {
-				// Name of the rule
-				color: 'white', // Some CSS
+				color: 'white',
 				border: '2px solid #FFF',
 				padding: '10px 25px',
 				borderRadius: 30,
@@ -139,10 +135,19 @@ const rawTheme = createMuiTheme({
 			textPrimary: {
 				color: '#555555',
 				fontWeight: 'bold',
+				textDecoration: 'none',
+				'&:hover': {
+					backgroundColor: 'transparent',
+					color: '#666666',
+				},
 			},
 			textSecondary: {
 				color: '#E66BFF',
 				fontWeight: 'bold',
+				textDecoration: 'none',
+				'&:hover': {
+					backgroundColor: 'transparent',
+				},
 			},
 			sizeSmall: {
 				fontSize: 14,
@@ -211,7 +216,7 @@ const theme = {
 		},
 		subtitle2: {
 			...rawTheme.typography.subtitle1,
-			fontSize: 24,
+			fontSize: 18,
 		},
 		body1: {
 			...rawTheme.typography.body2,

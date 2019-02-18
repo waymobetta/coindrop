@@ -5,9 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
 const styles = () => ({
-	connectWelcome: {
-		fontSize: 32,
-	},
+	connectWelcome: {},
 })
 
 class StepOne extends React.Component {
@@ -25,13 +23,13 @@ class StepOne extends React.Component {
 		return (
 			<React.Fragment>
 				<Typography
-					variant="h4"
+					variant="h2"
 					gutterBottom
 					classes={{ root: classes.connectWelcome }}
 				>
 					Welcome to Coindrop!
 				</Typography>
-				<Typography variant="subtitle1" gutterBottom>
+				<Typography variant="subtitle2" gutterBottom>
 					Connect your accounts to Coindrop and receive your first
 					Ether payment
 				</Typography>

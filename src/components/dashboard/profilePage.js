@@ -56,13 +56,6 @@ class ProfilePage extends React.Component {
 					>
 						<DashProfileBox />
 						<DashBalances />
-					</Grid>
-					<Grid
-						container
-						spacing={40}
-						className={classes.root}
-						justify="flex-start"
-					>
 						<DashBadges />
 						<DashContributions />
 					</Grid>

@@ -7,17 +7,17 @@ import theme from './theme'
 import compose from 'recompose/compose'
 import withWidth from '@material-ui/core/withWidth'
 import ConnectBarHeader from '../components/ConnectBarHeader'
+import PillCloud from '../components/steps/pillCloud'
 
 const styles = () => ({
 	root: {
 		display: 'flex',
 	},
-
 	connectBg: {
 		top: 0,
 		right: 0,
 		width: '100%',
-		height: 440,
+		height: '400px',
 		display: 'block',
 		position: 'absolute',
 		zIndex: '-1',
@@ -25,6 +25,17 @@ const styles = () => ({
 		background: 'linear-gradient(#572fff 0%, #bf41ff 100%)',
 		borderBottomRightRadius: 250,
 		borderBottomLeftRadius: 250,
+	},
+	connectFull: {
+		top: 0,
+		right: 0,
+		width: '100%',
+		height: '100%',
+		display: 'block',
+		position: 'absolute',
+		zIndex: '-1',
+		margin: 'auto',
+		backgroundColor: '#FFF',
 	},
 })
 
@@ -39,6 +50,7 @@ class LayoutConnect extends React.Component {
 			canClaimEther,
 			finalStep,
 			verified,
+			activeStep,
 		} = this.props
 		return (
 			<div>
@@ -46,15 +58,25 @@ class LayoutConnect extends React.Component {
 					<MuiThemeProvider theme={theme}>
 						<CssBaseline />
 						{finalStep && verified && canClaimEther ? (
-							<div />
-						) : (
 							<React.Fragment>
 								<ConnectBarHeader />
+								<div className={classes.connectBg} />
+								<PillCloud />
+							</React.Fragment>
+						) : (
+							<React.Fragment>
+								{activeStep !== 0 && <ConnectBarHeader />}
+
 								<div className={classes.connectBg} />
 							</React.Fragment>
 						)}
 
 						{children}
+						{activeStep === 0 && (
+							<div className={classes.connectFull}>
+								<PillCloud />
+							</div>
+						)}
 					</MuiThemeProvider>
 				</React.Fragment>
 			</div>
@@ -68,6 +90,7 @@ LayoutConnect.propTypes = {
 	canClaimEther: PropTypes.bool,
 	finalStep: PropTypes.bool,
 	verified: PropTypes.bool,
+	activeStep: PropTypes.number,
 }
 
 export default compose(
