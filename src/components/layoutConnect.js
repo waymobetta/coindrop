@@ -22,9 +22,15 @@ const styles = () => ({
 		position: 'absolute',
 		zIndex: '-1',
 		margin: 'auto',
-		background: 'linear-gradient(#572fff 0%, #bf41ff 100%)',
+		background:
+			'linear-gradient(-127deg, #8337FF 0%, #bf41ff 86%, #bf41ff 100%)',
+		boxShadow: '0 10px 20px 0 rgba(184,91,255,0.46)',
 		borderBottomRightRadius: 250,
 		borderBottomLeftRadius: 250,
+		[theme.breakpoints.down('xs')]: {
+			borderBottomRightRadius: 50,
+			borderBottomLeftRadius: 50,
+		},
 	},
 	connectFull: {
 		top: 0,

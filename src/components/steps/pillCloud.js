@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 
-const styles = () => ({
+const styles = theme => ({
 	pillWrapper: {
 		width: '100%',
 		height: '100%',
@@ -31,18 +31,34 @@ const styles = () => ({
 	pill1: {
 		zoom: 0.3,
 		transform: 'translate3d(20vw, 10vh, 200px) rotate(45deg)',
+		[theme.breakpoints.down('xs')]: {
+			zoom: 0.1,
+			transform: 'translate3d(20vw, 10vh, 200px) rotate(45deg)',
+		},
 	},
 	pill2: {
 		zoom: 0.5,
 		transform: 'translate3d(30vw, 100vh, 200px) rotate(45deg)',
+		[theme.breakpoints.down('xs')]: {
+			zoom: 0.3,
+			transform: 'translate3d(30vw, 210vh, 200px) rotate(45deg)',
+		},
 	},
 	pill3: {
 		zoom: 0.7,
 		transform: 'translate3d(20vw, 10vh, 200px) rotate(45deg)',
+		[theme.breakpoints.down('xs')]: {
+			zoom: 0.4,
+			transform: 'translate3d(60vw, 0vh, 200px) rotate(45deg)',
+		},
 	},
 	pill4: {
 		zoom: 1,
 		transform: 'translate3d(60vw, 50vh, 200px) rotate(45deg)',
+		[theme.breakpoints.down('xs')]: {
+			zoom: 0.5,
+			transform: 'translate3d(60vw, 100vh, 200px) rotate(45deg)',
+		},
 	},
 })
 

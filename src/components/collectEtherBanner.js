@@ -172,6 +172,7 @@ class CollectEtherBanner extends React.Component {
 					<IconButton
 						className={classes.modalCloseButton}
 						aria-label="Close Modal"
+						color="secondary"
 						onClick={this.closeButton}
 					>
 						<Close nativeColor="white" />

@@ -9,7 +9,7 @@ const styles = theme => ({
 		borderRadius: theme.borderRadius,
 		width: '90%',
 		color: '#3C4249',
-		padding: '16px 36px',
+		padding: '16px 16px',
 		textTransform: 'capitalize',
 		marginBottom: 15,
 		border: '1px solid #FFF',
@@ -21,19 +21,21 @@ const styles = theme => ({
 		},
 	},
 	label: {
-		textAlign: 'left',
-		display: 'block',
-		lineHeight: '36px',
-		verticalAlign: 'middle',
 		fontWeight: 'normal',
 		fontSize: '14px',
+		display: 'flex',
+		justifyContent: 'space-between',
 	},
 	rightIcon: {
 		marginLeft: theme.spacing.unit,
 		float: 'right',
 		fill: '#CA34FF',
-		width: 36,
-		height: 36,
+		width: 32,
+		height: 32,
+	},
+	text: {
+		flexGrow: 2,
+		textAlign: 'left',
 	},
 })
 
@@ -48,7 +50,7 @@ function AccountButton(props) {
 			{...rest}
 		>
 			{props.render}
-			{props.children}
+			<span className={classes.text}>{props.children}</span>
 			<ArrowForward className={classes.rightIcon} />
 		</Button>
 	)

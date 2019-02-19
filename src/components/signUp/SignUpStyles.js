@@ -63,11 +63,12 @@ const styles = theme => ({
 		position: 'absolute',
 	},
 	signupTOSLink: {
-		display: 'flex',
-		justify: 'flex-start',
+		fontSize: '14px',
 	},
 	inlineLink: {
-		textTransform: 'capitalize',
+		textTransform: 'none',
+		verticalAlign: 'middle',
+		fontWeight: '700',
 	},
 	tosCheck: {
 		marginRight: 0,

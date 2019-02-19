@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
+import IconButton from '@material-ui/core/IconButton'
 import { ReactComponent as Reddit } from '../assets/reddit.svg'
 import { ReactComponent as StackOverflow } from '../assets/stackOverflow.svg'
 import Fab from '@material-ui/core/Fab'
@@ -27,6 +28,9 @@ const styles = theme => ({
 	reddit: {
 		width: 36,
 		height: 36,
+		backgroundColor: '#8C8C8C',
+		borderRadius: '40px',
+		color: '#fff',
 	},
 	stackOverflow: {
 		width: 36,
@@ -36,8 +40,12 @@ const styles = theme => ({
 		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
 		backgroundColor: '#572FFF',
 		right: -27,
-		top: 210,
+		bottom: 80,
 		position: 'absolute',
+		[theme.breakpoints.down('xs')]: {
+			bottom: 0,
+			right: 0,
+		},
 	},
 	form: {
 		position: 'relative',
@@ -49,6 +57,7 @@ const styles = theme => ({
 		position: 'absolute',
 		background: 'transparent',
 		boxShadow: 'none',
+		color: '#fff',
 	},
 	inputLabel: {
 		color: '#FFF',
@@ -61,16 +70,40 @@ const styles = theme => ({
 		borderRadius: 30,
 		padding: '10px 20px',
 		alignItems: 'center',
+		[theme.breakpoints.down('xs')]: {
+			width: '100%',
+			display: 'flex',
+			flexDirection: 'column',
+			'&:nth-child(2n)': {
+				flexDirection: 'column-reverse',
+			},
+		},
 	},
 	stackHelpBoxLeft: {
 		marginRight: '-220px',
+		[theme.breakpoints.down('xs')]: {
+			marginRight: 0,
+		},
 	},
 	stackHelpBoxRight: {
 		marginLeft: '-220px',
+		[theme.breakpoints.down('xs')]: {
+			marginLeft: 0,
+		},
 	},
 	stackHelpBoxText: {
 		width: 200,
 		textAlign: 'left',
+		[theme.breakpoints.down('xs')]: {
+			width: '100%',
+			textAlign: 'center',
+		},
+	},
+	stackHelpBoxImage: {
+		[theme.breakpoints.down('xs')]: {
+			width: '100%',
+			height: 'auto',
+		},
 	},
 })
 
@@ -230,14 +263,14 @@ class StepThree extends React.Component {
 										browser.
 									</p>
 								</div>
-								<Fab
-									color="primary"
-									aria-label="Add"
+								<IconButton
 									className={classes.fabBackTopLeft}
 									onClick={this.hideStackHelp}
+									aria-label="Close Modal"
+									color="secondary"
 								>
 									<ArrowBack />
-								</Fab>
+								</IconButton>
 							</React.Fragment>
 						)}
 					</React.Fragment>

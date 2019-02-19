@@ -16,6 +16,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Hidden from '@material-ui/core/Hidden'
 import classNames from 'classnames'
 import { ReactComponent as Edit } from '../assets/edit.svg'
+import { ReactComponent as Camera } from '../assets/camera.svg'
+import { ReactComponent as Upload } from '../assets/upload.svg'
 
 const styles = theme => ({
 	bigAvatar: {
@@ -58,6 +60,9 @@ const styles = theme => ({
 			background: '#fff',
 			...theme.boxShadow,
 		},
+		[theme.breakpoints.up('md')]: {
+			alignItems: 'center',
+		},
 	},
 	boxTitle: {
 		...theme.boxTitle,
@@ -70,6 +75,7 @@ const styles = theme => ({
 	},
 	profileList: {
 		padding: 0,
+		width: '100%',
 	},
 	form: {
 		margin: '0px',
@@ -86,6 +92,19 @@ const styles = theme => ({
 		alignSelf: 'flex-end',
 		display: 'flex',
 		alignItems: 'center',
+	},
+	pictureControls: {
+		background: '#fff',
+		...theme.boxShadow,
+		width: 40,
+		height: 80,
+		borderRadius: 30,
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-evenly',
+		alignItems: 'center',
+		position: 'absolute',
+		right: 20,
 	},
 })
 
@@ -141,6 +160,20 @@ class DashProfileBox extends Component {
 							/>
 							<p>Hunter Gebron</p>
 							<p>hunter27@gmail.com</p>
+							{editProfile && (
+								<div className={classes.pictureControls}>
+									<Camera
+										color="#CA34FF"
+										width="24"
+										height="24"
+									/>
+									<Upload
+										color="#CA34FF"
+										width="24"
+										height="24"
+									/>
+								</div>
+							)}
 						</Hidden>
 						<Hidden xsDown>
 							<List className={classes.profileList}>
@@ -166,10 +199,20 @@ class DashProfileBox extends Component {
 											}}
 										/>
 									) : (
-										<React.Fragment>
-											<Edit />
-											<Edit />
-										</React.Fragment>
+										<div
+											className={classes.pictureControls}
+										>
+											<Camera
+												color="#CA34FF"
+												width="24"
+												height="24"
+											/>
+											<Upload
+												color="#CA34FF"
+												width="24"
+												height="24"
+											/>
+										</div>
 									)}
 								</ListItem>
 							</List>

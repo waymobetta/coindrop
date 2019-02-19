@@ -22,10 +22,10 @@ import classNames from 'classnames'
 const styles = () => ({
 	root: {
 		flexGrow: 1,
-		height: 'calc(100vh - 64px)',
+		height: 'calc(100vh - 84px)',
 	},
 	connectGrid: {
-		height: 'calc(100vh - 64px)',
+		height: 'calc(100vh - 84px)',
 		textAlign: 'center',
 	},
 	paper: {
@@ -69,7 +69,7 @@ const styles = () => ({
 	firstStepGrid: {
 		marginTop: 140,
 		[theme.breakpoints.down('xs')]: {
-			marginTop: 40,
+			marginTop: 60,
 		},
 	},
 	stepLabel: {
@@ -102,7 +102,12 @@ const styles = () => ({
 })
 
 function getSteps() {
-	return ['Step 1', 'Create an ad group', 'Create an ad', 'Verification Code']
+	return [
+		'Welcome',
+		'Connect Accounts',
+		'Connect Accounts',
+		'Verification Code',
+	]
 }
 
 class Connect extends React.Component {

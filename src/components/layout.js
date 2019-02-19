@@ -16,7 +16,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 const styles = theme => ({
 	root: {
 		display: 'flex',
-		height: '100vh',
+		minHeight: '100vh',
 	},
 	drawer: {
 		[theme.breakpoints.up('md')]: {

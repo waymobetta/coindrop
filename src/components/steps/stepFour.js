@@ -27,12 +27,25 @@ const styles = theme => ({
 	fabCopy: {
 		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
 		backgroundColor: '#572FFF',
-		right: -27,
-		top: 210,
 		position: 'absolute',
+		right: -27,
+		bottom: 140,
+		[theme.breakpoints.down('xs')]: {
+			bottom: 0,
+			right: 0,
+		},
 	},
 	root: {
 		position: 'relative',
+	},
+	alreadyPasted: {
+		borderTop: '1px solid #ccc',
+		paddingTop: 15,
+		marginTop: 15,
+		width: '80%',
+	},
+	copyText: {
+		width: '60%',
 	},
 })
 
@@ -62,11 +75,19 @@ class StepFour extends React.Component {
 						<span className={classes.code}>
 							AJY765439096GGDC876997
 						</span>
-						<Typography variant="subtitle2" gutterBottom>
+						<Typography
+							variant="subtitle2"
+							gutterBottom
+							className={classes.copyText}
+						>
 							Copy the code and paste it in our subreddit using
 							this link.
 						</Typography>
-						<Typography variant="subtitle2" gutterBottom>
+						<Typography
+							variant="subtitle2"
+							gutterBottom
+							className={classes.alreadyPasted}
+						>
 							Already paste the code?
 						</Typography>
 						<Button
@@ -96,11 +117,22 @@ class StepFour extends React.Component {
 						<span className={classes.code}>
 							AJY765439096GGDC876997
 						</span>
-						<p>
-							Copy the code and paste it in your Stack Overflow
+						<Typography
+							variant="subtitle2"
+							gutterBottom
+							className={classes.copyText}
+						>
+							Copy the code and paste it in your
+							<b> Stack Overflow </b>
 							profile at the bottom of your “About me”.
-						</p>
-						<p>Already paste the code? </p>
+						</Typography>
+						<Typography
+							variant="subtitle2"
+							gutterBottom
+							className={classes.alreadyPasted}
+						>
+							Already paste the code?
+						</Typography>
 						<Button
 							variant="outlined"
 							color="primary"
@@ -108,6 +140,13 @@ class StepFour extends React.Component {
 						>
 							Verify
 						</Button>
+						<Fab
+							color="primary"
+							aria-label="Add"
+							className={classes.fabCopy}
+						>
+							<CopyIcon />
+						</Fab>
 					</React.Fragment>
 				)}
 			</React.Fragment>

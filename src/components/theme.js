@@ -85,6 +85,20 @@ const rawTheme = createMuiTheme({
 				backgroundColor: '#E390FF',
 			},
 		},
+		MuiIconButton: {
+			colorSecondary: {
+				'&:hover': {
+					backgroundColor: 'transparent',
+				},
+			},
+		},
+		MuiListItemText: {
+			inset: {
+				'&:first-child': {
+					paddingLeft: 15,
+				},
+			},
+		},
 		MuiButton: {
 			containedPrimary: {
 				background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',

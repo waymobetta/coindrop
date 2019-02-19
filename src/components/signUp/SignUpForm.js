@@ -18,6 +18,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import { ReactComponent as Checked } from '../assets/checked.svg'
 import { ReactComponent as Unchecked } from '../assets/unchecked.svg'
+import { Link as GatsbyLink } from 'gatsby'
+import Link from '@material-ui/core/Link'
+
+const TOSLink = props => <GatsbyLink {...props} />
 
 class SignUpForm extends React.Component {
 	constructor(props) {
@@ -126,13 +130,16 @@ class SignUpForm extends React.Component {
 										label="I agree with the "
 										className={classes.tosCheck}
 									/>
-									<Button
-										size="small"
-										variant="text"
+									<Link
+										component={TOSLink}
 										className={classes.inlineLink}
+										activeClassName="active"
+										variant="body2"
+										to="dashboard/dashboard/"
 									>
-										Terms and Conditions
-									</Button>
+										{' '}
+										terms and conditions.
+									</Link>
 								</div>
 
 								<Button

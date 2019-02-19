@@ -14,17 +14,28 @@ import Hidden from '@material-ui/core/Hidden'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import classNames from 'classnames'
 
 const styles = () => ({
 	root: {
 		display: 'flex',
+	},
+	legalBoxNavigation: {
+		position: 'relative',
+		borderRadius: 33,
+		flexGrow: 1,
+		padding: 30,
+		...theme.boxShadow,
+		width: '220px',
 	},
 	legalBoxPaper: {
 		position: 'relative',
 		borderRadius: 33,
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3,
+		backgroundColor: 'transparent',
 		...theme.boxShadow,
+		boxShadow: 'none',
 	},
 	fixed: {
 		position: 'fixed',
@@ -42,8 +53,21 @@ const styles = () => ({
 			marginBottom: 30,
 		},
 	},
-	insetLink: {
-		paddingLeft: '10px !important',
+	mainLink: {
+		fontWeight: '700',
+		color: '#979797',
+		fontSize: '15px',
+	},
+	subLink: {
+		fontSize: '13px',
+		fontWeight: '700',
+		color: '#979797',
+	},
+	tosListItem: {
+		padding: '3px',
+	},
+	insetPadding: {
+		paddingLeft: '10px',
 	},
 })
 
@@ -78,11 +102,15 @@ function generate(classes) {
 		},
 	].map((it, index) => (
 		<a key={index} href={`#${it.url}`}>
-			<ListItem>
+			<ListItem classes={{ root: classes.tosListItem }}>
 				<ListItemText
 					primary={it.name}
 					inset={it.inset ? it.inset : false}
-					classes={{ inset: classes.insetLink }}
+					classes={{
+						primary: classNames(
+							it.inset ? classes.subLink : classes.mainLink
+						),
+					}}
 				/>
 			</ListItem>
 		</a>
@@ -126,7 +154,7 @@ class Policy extends React.Component {
 									Legal
 								</Typography>
 							</Hidden>
-							<Paper className={classes.legalBoxPaper}>
+							<Paper className={classes.legalBoxNavigation}>
 								<ScrollspyNav
 									scrollTargetIds={[
 										'section_1',
@@ -136,13 +164,11 @@ class Policy extends React.Component {
 										'section_2',
 										'section_3',
 									]}
-									activeNavClass="isActive"
+									activeNavClass={'isActiveTos'}
 									scrollDuration="1000"
 									headerBackground="true"
 								>
-									<List dense={true}>
-										{generate(classes)}
-									</List>
+									<List>{generate(classes)}</List>
 								</ScrollspyNav>
 							</Paper>
 						</Grid>

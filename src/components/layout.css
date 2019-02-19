@@ -84,6 +84,6 @@ a:hover {
 	top: -220px;
 }
 
-.isActive span {
-	color: red !important;
+.isActiveTos span {
+	color: #ca34ff !important;
 }

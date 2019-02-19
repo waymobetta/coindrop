@@ -9,8 +9,8 @@ import classNames from 'classnames'
 
 const styles = () => ({
 	leftIcon: {
-		width: 36,
-		height: 36,
+		width: 32,
+		height: 32,
 		float: 'left',
 		marginRight: 15,
 	},
