@@ -34,15 +34,15 @@ module.exports = {
 				icon: true,
 				viewBox: false,
 			},
-    },
-    {
-      resolve: 'gatsby-plugin-web-font-loader',
-      options: {
-        google: {
-          families: ['Titillium Web:200,300,400,600,700']
-        }
-      }
-    }
+		},
+		{
+			resolve: 'gatsby-plugin-web-font-loader',
+			options: {
+				google: {
+					families: ['Assistant:300,400,600'],
+				},
+			},
+		},
 		// this (optional) plugin enables Progressive Web App + Offline functionality
 		// To learn more, visit: https://gatsby.app/offline
 		// 'gatsby-plugin-offline',
