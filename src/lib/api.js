@@ -58,8 +58,45 @@ export const currentUser = async () => {
     return await Auth.currentAuthenticatedUser()
 }
 
+export const accessToken = () => {
+	return localStorage.getItem('accessToken')
+}
+
+export const getWallet = async () => {
+	const { body: result, ok } = await client.apis.wallet.wallet_show()
+
+	if (!ok) {
+		throw new Error('could not get user wallet')
+	}
+
+	return result
+}
+
+export const updateWallet = async (newWalletAddress) => {
+	const { body: result, ok } = await client.apis.wallet.wallet_update({
+		payload: {
+			walletAddress: newWalletAddress
+		}
+	})
+
+	if (!ok) {
+		throw new Error('could not update user wallet')
+	}
+
+	return result
+}
+
 async function initClient () {
-  client = await Swagger({ spec })
+	client = await Swagger({
+		spec,
+		requestInterceptor(req) {
+			const token = accessToken()
+			if (token) {
+				req.headers['Authorization'] = `Bearer ${token}`;
+				return req
+			}
+		}
+	})
   window.client = client
 }
 

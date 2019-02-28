@@ -13,6 +13,7 @@ import Fab from '@material-ui/core/Fab'
 import { ReactComponent as Edit } from '../../components/assets/edit.svg'
 import theme from '../../components/theme'
 import Button from '@material-ui/core/Button'
+import { updateWallet } from '../../lib/api'
 
 const styles = () => ({
 	walletBoxPaper: {
@@ -67,7 +68,23 @@ const styles = () => ({
 class Wallet extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			walletAddress: '',
+			// test value
+			newWalletAddress: '0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0'
+		}
 	}
+
+	async handleWalletEdit(event) {
+		event.preventDefault()
+
+		try {
+			await updateWallet(this.state.newWalletAddress)
+		} catch(err) {
+			console.error(err)
+		}
+	}
+
 	render() {
 		const { classes } = this.props
 		return (
@@ -116,6 +133,7 @@ class Wallet extends React.Component {
 								color="primary"
 								aria-label="Edit"
 								className={classes.editWalletFab}
+								onClick={event => this.handleWalletEdit(event)}
 							>
 								<Edit color="white" width="24" height="24" />
 							</Fab>
