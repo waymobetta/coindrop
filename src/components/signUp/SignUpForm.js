@@ -20,17 +20,66 @@ import { ReactComponent as Checked } from '../assets/checked.svg'
 import { ReactComponent as Unchecked } from '../assets/unchecked.svg'
 import { Link as GatsbyLink } from 'gatsby'
 import Link from '@material-ui/core/Link'
+import { navigate } from "gatsby"
+
+import { login } from '../../lib/api'
 
 const TOSLink = props => <GatsbyLink {...props} />
 
 class SignUpForm extends React.Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			email: '',
+			emailError: '',
+			errorMessage: '',
+			successMessage: '',
+			password: '',
+			passwordConfirm: '',
+		}
+
 		this.switchToSignIn = this.switchToSignIn.bind(this)
 	}
 	switchToSignIn() {
 		this.props.switchToSignIn()
 	}
+
+	async handleLogin(event) {
+		event.preventDefault()
+		this.clearErrors()
+
+		const { email, password } = this.state
+		try {
+			await login(email, password)
+
+			this.setState({
+				successMessage: 'Logging in...'
+			})
+
+			navigate('/dashboard/dashboard')
+		} catch(err) {
+			if (err.code == 'UserNotFoundException') {
+				this.setState({
+					emailError: err.message
+				})
+				return
+			}
+
+			this.setState({
+				errorMessage: err.message
+			})
+		}
+	}
+
+	clearErrors() {
+		this.setState({
+			errorMessage: '',
+			successMessage: '',
+			emailError: ''
+		})
+	}
+
 	render() {
 		const { classes, signUpMode } = this.props
 		const showPassword = true
@@ -47,6 +96,16 @@ class SignUpForm extends React.Component {
 					>
 						{modalTitle}
 					</Typography>
+					{this.state.successMessage &&
+						<div>
+							{this.state.successMessage}
+						</div>
+					}
+					{this.state.errorMessage &&
+						<div>
+							{this.state.errorMessage}
+						</div>
+					}
 					{signUpMode ? (
 						<form className={classes.form}>
 							<Grid
@@ -63,6 +122,9 @@ class SignUpForm extends React.Component {
 										id="email"
 										name="email"
 										autoFocus
+										onChange={event => this.setState({
+											email: event.target.value
+										})}
 										classes={{
 											underline: classes.cssUnderline,
 										}}
@@ -78,9 +140,11 @@ class SignUpForm extends React.Component {
 											</InputAdornment>
 										}
 									/>
-									<FormHelperText id="component-error-text">
-										Email already taken
-									</FormHelperText>
+									{this.state.emailError &&
+										<FormHelperText id="component-error-text">
+											{this.state.emailError}
+										</FormHelperText>
+									}
 								</FormControl>
 								<FormControl margin="normal" required fullWidth>
 									<Input
@@ -88,6 +152,9 @@ class SignUpForm extends React.Component {
 										type="password"
 										id="password"
 										placeholder="Password"
+										onChange={event => this.setState({
+											password: event.target.value
+										})}
 										classes={{
 											underline: classes.cssUnderline,
 										}}
@@ -104,6 +171,9 @@ class SignUpForm extends React.Component {
 										name="repeatPassword"
 										type="repeatPassword"
 										id="repeatPassword"
+										onChange={event => this.setState({
+											passwordConfirm: event.target.value
+										})}
 										classes={{
 											underline: classes.cssUnderline,
 										}}
@@ -162,7 +232,7 @@ class SignUpForm extends React.Component {
 							</Grid>
 						</form>
 					) : (
-						<form className={classes.form}>
+						<form className={classes.form} onSubmit={event => this.handleLogin(event)}>
 							<Grid
 								container
 								alignContent="space-between"
@@ -178,6 +248,9 @@ class SignUpForm extends React.Component {
 										name="email"
 										autoComplete="email"
 										autoFocus
+										onChange={event => this.setState({
+											email: event.target.value
+										})}
 										classes={{
 											underline: classes.cssUnderline,
 										}}
@@ -193,9 +266,11 @@ class SignUpForm extends React.Component {
 											</InputAdornment>
 										}
 									/>
-									<FormHelperText id="component-error-text">
-										Email already taken
-									</FormHelperText>
+									{this.state.emailError &&
+										<FormHelperText id="component-error-text">
+											{this.state.emailError}
+										</FormHelperText>
+									}
 								</FormControl>
 								<FormControl margin="normal" required fullWidth>
 									<Input
@@ -203,6 +278,9 @@ class SignUpForm extends React.Component {
 										type="password"
 										id="password"
 										placeholder="Password"
+										onChange={event => this.setState({
+											password: event.target.value
+										})}
 										classes={{
 											underline: classes.cssUnderline,
 										}}
