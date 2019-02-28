@@ -22,7 +22,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import Link from '@material-ui/core/Link'
 import { navigate } from "gatsby"
 
-import { login } from '../../lib/api'
+import { login, signup } from '../../lib/api'
 
 const TOSLink = props => <GatsbyLink {...props} />
 
@@ -34,9 +34,11 @@ class SignUpForm extends React.Component {
 			email: '',
 			emailError: '',
 			errorMessage: '',
-			successMessage: '',
 			password: '',
 			passwordConfirm: '',
+			passwordError: '',
+			successMessage: '',
+			acceptTerms: false,
 		}
 
 		this.switchToSignIn = this.switchToSignIn.bind(this)
@@ -72,11 +74,55 @@ class SignUpForm extends React.Component {
 		}
 	}
 
+	async handleSignup(event) {
+		event.preventDefault()
+		this.clearErrors()
+
+		const { email, password, passwordConfirm, acceptTerms } = this.state
+
+		if (password !== passwordConfirm) {
+			this.setState({
+				passwordError: 'Passwords do not match'
+			})
+			return
+		}
+
+		if (!acceptTerms) {
+			this.setState({
+				errorMessage: 'Must agree to the terms'
+			})
+			return
+		}
+
+		try {
+			await signup(email, password)
+
+			this.setState({
+				successMessage: 'Signing up...'
+			})
+
+			navigate('/dashboard/dashboard')
+		} catch(err) {
+			this.setState({
+				errorMessage: err.message
+			})
+		}
+	}
+
+	async handleTermsClick(event) {
+		event.preventDefault()
+
+		this.setState({
+			acceptTerms: event.target.checked
+		})
+	}
+
 	clearErrors() {
 		this.setState({
 			errorMessage: '',
 			successMessage: '',
-			emailError: ''
+			emailError: '',
+			passwordError: ''
 		})
 	}
 
@@ -107,7 +153,7 @@ class SignUpForm extends React.Component {
 						</div>
 					}
 					{signUpMode ? (
-						<form className={classes.form}>
+						<form className={classes.form} onSubmit={event => this.handleSignup(event)}>
 							<Grid
 								container
 								alignContent="space-between"
@@ -169,7 +215,7 @@ class SignUpForm extends React.Component {
 									<Input
 										placeholder="Repeat Password"
 										name="repeatPassword"
-										type="repeatPassword"
+										type="password"
 										id="repeatPassword"
 										onChange={event => this.setState({
 											passwordConfirm: event.target.value
@@ -178,9 +224,11 @@ class SignUpForm extends React.Component {
 											underline: classes.cssUnderline,
 										}}
 									/>
-									<FormHelperText id="component-error-text">
-										Password does not match
-									</FormHelperText>
+									{this.state.passwordError &&
+										<FormHelperText id="component-error-text">
+											{this.state.passwordError}
+										</FormHelperText>
+									}
 								</FormControl>
 
 								<div className={classes.signupTOSLink}>
@@ -199,6 +247,7 @@ class SignUpForm extends React.Component {
 										}
 										label="I agree with the "
 										className={classes.tosCheck}
+										onClick={event => this.handleTermsClick(event)}
 									/>
 									<Link
 										component={TOSLink}

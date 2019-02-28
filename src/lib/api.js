@@ -22,6 +22,16 @@ export const login = async (email, password) => {
 	return jwtToken
 }
 
+export const signup = async (email, password) => {
+	const newUser = await Auth.signUp(email, password)
+
+	console.log(newUser)
+
+	//localStorage.setItem('accessToken', jwtToken)
+
+	return newUser
+}
+
 export const logout = () => {
 	localStorage.removeItem('accessToken')
 }

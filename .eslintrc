@@ -19,7 +19,8 @@
   "rules": {
     "strict": 0,
 		"react/prop-types": 0,
-    "no-console": "off"
+    "no-console": "off",
+    "no-debugger": "off"
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"]
 }
