@@ -1,6 +1,14 @@
+import Swagger from 'swagger-client'
+import spec from '../swagger/swagger.json'
 import Amplify, { Auth } from 'aws-amplify'
 //import dotenv from 'dotenv'
 //dotenv.config()
+
+export const baseURL = process.env.API_BASE_URL || 'http://localhost:5000/v1'
+
+spec.host = baseURL.replace(/.*\/\/([\w+:]+)\/.*/, '$1')
+
+let client
 
 Amplify.configure({
   Auth: {
@@ -25,11 +33,17 @@ export const login = async (email, password) => {
 export const signup = async (email, password) => {
 	const newUser = await Auth.signUp(email, password)
 
-	console.log(newUser)
+	const { body: result, ok } = await client.apis.user.user_create({
+		payload: {
+			cognitoAuthUserId: newUser.userSub
+		}
+	})
 
-	//localStorage.setItem('accessToken', jwtToken)
+	if (!ok) {
+		throw new Error('could not create user')
+	}
 
-	return newUser
+	return result
 }
 
 export const logout = () => {
@@ -39,3 +53,14 @@ export const logout = () => {
 export const isLoggedIn = () => {
 	return !!localStorage.getItem('accessToken')
 }
+
+export const currentUser = async () => {
+    return await Auth.currentAuthenticatedUser()
+}
+
+async function initClient () {
+  client = await Swagger({ spec })
+  window.client = client
+}
+
+initClient()
