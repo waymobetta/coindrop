@@ -381,7 +381,7 @@ class Connect extends React.Component {
 									<Link
 										className={classes.itemLink}
 										activeClassName="active"
-										to="dashboard/dashboard/"
+										to="dashboard/home/"
 									>
 										<Button variant="text" color="primary">
 											Connect Later

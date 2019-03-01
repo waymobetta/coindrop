@@ -153,7 +153,7 @@ class DashDrawer extends React.Component {
 					{[
 						{
 							name: 'Profile',
-							url: '/dashboard/dashboard/',
+							url: '/dashboard/home/',
 							icon: (
 								<UserIcon className={classes.dashDrawerIcon} />
 							),

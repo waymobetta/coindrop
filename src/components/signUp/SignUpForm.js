@@ -41,10 +41,12 @@ class SignUpForm extends React.Component {
 			acceptTerms: false,
 		}
 
-		this.switchToSignIn = this.switchToSignIn.bind(this)
 	}
 	switchToSignIn() {
 		this.props.switchToSignIn()
+	}
+	forgotPassword() {
+		navigate('/forgot-password')
 	}
 
 	async handleLogin(event) {
@@ -59,7 +61,7 @@ class SignUpForm extends React.Component {
 				successMessage: 'Logging in...'
 			})
 
-			navigate('/dashboard/dashboard')
+			navigate('/dashboard/home/')
 		} catch(err) {
 			if (err.code == 'UserNotFoundException') {
 				this.setState({
@@ -101,7 +103,7 @@ class SignUpForm extends React.Component {
 				successMessage: 'Signing up...'
 			})
 
-			navigate('/dashboard/dashboard')
+			navigate('/dashboard/home/')
 		} catch(err) {
 			this.setState({
 				errorMessage: err.message
@@ -254,7 +256,7 @@ class SignUpForm extends React.Component {
 										className={classes.inlineLink}
 										activeClassName="active"
 										variant="body2"
-										to="dashboard/dashboard/"
+										to="dashboard/home/"
 									>
 										{' '}
 										terms and conditions.
@@ -274,7 +276,7 @@ class SignUpForm extends React.Component {
 									size="medium"
 									variant="text"
 									color="primary"
-									onClick={this.switchToSignIn}
+									onClick={() => this.switchToSignIn()}
 								>
 									Sign In
 								</Button>
@@ -348,7 +350,7 @@ class SignUpForm extends React.Component {
 								<Button
 									size="medium"
 									variant="text"
-									onClick={this.switchToSignIn}
+									onClick={() => this.forgotPassword()}
 								>
 									Forgot Password?
 								</Button>
