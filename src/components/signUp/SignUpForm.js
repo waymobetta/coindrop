@@ -22,7 +22,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import Link from '@material-ui/core/Link'
 import { navigate } from "gatsby"
 
-import { login, signup } from '../../lib/api'
+import { login, signup, sendResetPasswordLink, resetPassword } from '../../lib/api'
 
 const TOSLink = props => <GatsbyLink {...props} />
 
@@ -39,6 +39,8 @@ class SignUpForm extends React.Component {
 			passwordError: '',
 			successMessage: '',
 			acceptTerms: false,
+			forgotPasswordMode: false,
+			resetPasswordCode: null,
 		}
 
 	}
@@ -46,7 +48,47 @@ class SignUpForm extends React.Component {
 		this.props.switchToSignIn()
 	}
 	forgotPassword() {
-		navigate('/forgot-password')
+		this.setState({
+			forgotPasswordMode: true
+		})
+	}
+
+	async handleForgotPassword(event) {
+		event.preventDefault()
+		this.clearErrors()
+		const { email } = this.state
+
+		try {
+			await sendResetPasswordLink(email)
+			this.setState({
+				resetPasswordMode: true
+			})
+		} catch(err) {
+			this.setState({
+				errorMessage: err.message
+			})
+		}
+	}
+
+	async handleResetPassword(event) {
+		event.preventDefault()
+		this.clearErrors()
+
+		const { email, resetPasswordCode, password:newPassword} = this.state
+
+		try {
+			await resetPassword(email, resetPasswordCode, newPassword)
+			this.setState({
+				successMessage: 'Password updated',
+				resetPasswordMode: false,
+				forgotPasswordMode: false,
+				signUpMode: false,
+			})
+		} catch(err) {
+			this.setState({
+				errorMessage: err.message
+			})
+		}
 	}
 
 	async handleLogin(event) {
@@ -130,8 +172,18 @@ class SignUpForm extends React.Component {
 
 	render() {
 		const { classes, signUpMode } = this.props
+		const { forgotPasswordMode, resetPasswordMode } = this.state
 		const showPassword = true
-		const modalTitle = signUpMode ? 'Sign Up' : 'Sign In'
+		let modalTitle = 'Sign In'
+		if (signUpMode) {
+			modalTitle = 'Sign Up'
+		}
+		if (forgotPasswordMode) {
+			modalTitle = 'Forgot Password'
+		}
+		if (resetPasswordMode) {
+			modalTitle = 'Reset Password'
+		}
 
 		return (
 			<main className={classes.main}>
@@ -283,6 +335,101 @@ class SignUpForm extends React.Component {
 							</Grid>
 						</form>
 					) : (
+
+						resetPasswordMode ? (
+							<form className={classes.form} onSubmit={event => this.handleResetPassword(event)}>
+							<Grid
+								container
+								alignContent="space-between"
+								justify="space-between"
+								direction="column"
+								alignItems="center"
+								spacing={0}
+							>
+								<FormControl margin="normal" required fullWidth>
+									<Input
+										placeholder="Verification Code"
+										id="code"
+										name="code"
+										onChange={event => this.setState({
+											resetPasswordCode: event.target.value
+										})}
+										classes={{
+											underline: classes.cssUnderline,
+										}}
+									/>
+								</FormControl>
+								<FormControl margin="normal" required fullWidth>
+									<Input
+										placeholder="New Password"
+										id="newPassword"
+										name="newPassword"
+										autoComplete="newPassword"
+										type="password"
+										autoFocus
+										onChange={event => this.setState({
+											password: event.target.value
+										})}
+										classes={{
+											underline: classes.cssUnderline,
+										}}
+									/>
+								</FormControl>
+								<Button
+									type="submit"
+									fullWidth
+									className={classes.submit}
+									variant="contained"
+									color="secondary"
+								>
+									Reset Password
+								</Button>
+							</Grid>
+							</form>
+						) :
+
+						forgotPasswordMode ? (
+							<form className={classes.form} onSubmit={event => this.handleForgotPassword(event)}>
+							<Grid
+								container
+								alignContent="space-between"
+								justify="space-between"
+								direction="column"
+								alignItems="center"
+								spacing={0}
+							>
+								<FormControl margin="normal" required fullWidth>
+									<Input
+										placeholder="Email Address"
+										id="email"
+										name="email"
+										autoComplete="email"
+										autoFocus
+										onChange={event => this.setState({
+											email: event.target.value
+										})}
+										classes={{
+											underline: classes.cssUnderline,
+										}}
+									/>
+									{this.state.emailError &&
+										<FormHelperText id="component-error-text">
+											{this.state.emailError}
+										</FormHelperText>
+									}
+								</FormControl>
+								<Button
+									type="submit"
+									fullWidth
+									className={classes.submit}
+									variant="contained"
+									color="secondary"
+								>
+									Send reset password link
+								</Button>
+							</Grid>
+							</form>
+						) : (
 						<form className={classes.form} onSubmit={event => this.handleLogin(event)}>
 							<Grid
 								container
@@ -356,7 +503,7 @@ class SignUpForm extends React.Component {
 								</Button>
 							</Grid>
 						</form>
-					)}
+					))}
 				</Paper>
 			</main>
 		)

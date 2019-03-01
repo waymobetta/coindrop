@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Landing from '../components/landing'
+//import Landing from '../components/landing'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
 import theme from '../components/theme'
-import ForgotPassword from '../components/layout'
+import ForgotPassword from '../components/forgotPassword'
+
+// TODO!
 
 const styles = () => ({
 	walletBoxPaper: {
@@ -57,7 +59,7 @@ const styles = () => ({
 	},
 })
 
-class Wallet extends React.Component {
+class Component extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -66,21 +68,17 @@ class Wallet extends React.Component {
 
 	render() {
 		return (
-			<Landing>
-				<ForgotPassword>
-					TODO
-				</ForgotPassword>
-			</Landing>
+			<ForgotPassword />
 		)
 	}
 }
 
-Wallet.propTypes = {
+Component.propTypes = {
 	classes: PropTypes.object,
 	width: PropTypes.string,
 }
 
 export default compose(
-	withStyles(styles, { withTheme: true }),
+	withStyles(styles, { withTheme: false }),
 	withWidth()
-)(Wallet)
+)(Component)

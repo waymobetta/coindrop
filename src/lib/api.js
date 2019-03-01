@@ -30,6 +30,14 @@ export const login = async (email, password) => {
 	return jwtToken
 }
 
+export const sendResetPasswordLink = async (email) => {
+	return await Auth.forgotPassword(email)
+}
+
+export const resetPassword = async (email, confirmationCode, newPassword) => {
+	return Auth.forgotPasswordSubmit(email, confirmationCode, newPassword)
+}
+
 export const signup = async (email, password) => {
 	const newUser = await Auth.signUp(email, password)
 
