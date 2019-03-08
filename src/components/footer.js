@@ -27,6 +27,8 @@ const styles = {
 	footerHeader: {
 		color: 'white',
 		margin: 'auto 0px',
+		fontWeight: 'bold',
+		letterSpacing: '0.13px',
 		[theme.breakpoints.down('sm')]: {
 			textAlign: 'center',
 			marginTop: '30px',
@@ -43,6 +45,9 @@ const styles = {
 	footerLink: {
 		color: '#A5A5A5',
 		textTransform: 'capitalize',
+		fontWeight: 'bold',
+		letterSpacing: '0.13px',
+		margin: '0px 15px',
 	},
 	footerLinks: {
 		textAlign: 'center',
@@ -51,6 +56,7 @@ const styles = {
 	socialIconsHome: {
 		margin: '0px 20px 0px 20px',
 		border: '0px',
+		justifyContent: 'center',
 	},
 }
 
@@ -105,19 +111,14 @@ class Footer extends React.Component {
 					>
 						<Typography
 							component="h6"
-							variant="h6"
+							variant="subtitle1"
 							gutterBottom
 							className={classes.footerHeader}
 						>
 							Coindrop 2019
 						</Typography>
 
-						<div
-							item="true"
-							xs={12}
-							sm={6}
-							className={classes.footerLinks}
-						>
+						<div item="true" xs={12} sm={6} className={classes.footerLinks}>
 							<Button
 								size="small"
 								variant="text"
@@ -151,10 +152,7 @@ class Footer extends React.Component {
 							Join us!
 						</Typography>
 
-						<SocialIcons
-							className={classes.socialIconsHome}
-							xs={7}
-						/>
+						<SocialIcons className={classes.socialIconsHome} xs={7} />
 					</Grid>
 				</Grid>
 			</Grid>

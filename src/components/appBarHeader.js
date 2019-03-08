@@ -12,18 +12,38 @@ import HomeMenu from './homeMenu'
 import SignUp from './SignUp'
 import ButtonHeader from './ButtonHeader'
 import { ReactComponent as LogoFull } from '../components/assets/coindrop_logo_full.svg'
+import theme from './theme'
 const styles = {
 	root: {
 		flexGrow: 1,
 		maxWidth: 1110,
 		margin: 'auto',
-		padding: 10,
+		padding: '10px 0px',
 	},
 	appBar: {
 		backgroundColor: 'transparent',
 	},
 	grow: {
 		flexGrow: 1,
+	},
+	appBarToolbar: {
+		[theme.breakpoints.down('md')]: {
+			padding: '0px 20px',
+		},
+	},
+	noBg: {
+		backgroundColor: 'transparent',
+		'&:hover': {
+			backgroundColor: 'transparent',
+		},
+	},
+	basicText: {
+		textTransform: 'capitalize',
+		fontSize: '16px',
+		'&:hover': {
+			backgroundColor: 'transparent',
+			color: '#888',
+		},
 	},
 }
 
@@ -74,7 +94,7 @@ class AppBarHeader extends React.Component {
 					classes={{ root: classes.appBar }}
 					elevation={0}
 				>
-					<Toolbar>
+					<Toolbar disableGutters className={classes.appBarToolbar}>
 						<Grid
 							container
 							alignContent="space-between"
@@ -94,6 +114,7 @@ class AppBarHeader extends React.Component {
 									<Button
 										component={Link}
 										to="/login/"
+										className={classes.basicText}
 										activeClassName="active"
 									>
 										Learn More
@@ -101,22 +122,13 @@ class AppBarHeader extends React.Component {
 								</Grid>
 								<Grid item>
 									<ButtonHeader
-										onClick={() =>
-											this.handleSignUpOpen(
-												'signIn',
-												this
-											)
-										}
+										className={classes.noBg}
+										onClick={() => this.handleSignUpOpen('signIn', this)}
 									>
 										Login
 									</ButtonHeader>
 									<ButtonHeader
-										onClick={() =>
-											this.handleSignUpOpen(
-												'signUp',
-												this
-											)
-										}
+										onClick={() => this.handleSignUpOpen('signUp', this)}
 									>
 										Sign Up
 									</ButtonHeader>

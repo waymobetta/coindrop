@@ -41,7 +41,7 @@ const styles = theme => ({
 		backgroundColor: 'transparent',
 		width: '100%',
 		minHeight: 380,
-		padding: '50px 10px 40px 10px',
+		padding: '60px 10px 60px 10px',
 		[theme.breakpoints.down('sm')]: {
 			textAlign: 'center',
 		},
@@ -57,9 +57,54 @@ const styles = theme => ({
 	gridContainer: {
 		flexGrow: 1,
 	},
+	gridContainerRight: {
+		maxHeight: 260,
+	},
 	backdropBg: {
 		background:
-			'linear-gradient(103deg, #572fffc2 0%, #bf41ffd4 46%, #bf41ffd9 100%)',
+			'linear-gradient(113deg, #572fffde 10%, #572fffc2 46%, #bf41ffd9 100%)',
+	},
+	h2: {
+		fontSize: '30px',
+		color: '#3D3D3D',
+	},
+	h4: {
+		maxWidth: '230px',
+		fontWeight: 'normal',
+		lineHeight: '24px',
+		letterSpacing: '0.25px',
+		marginBottom: 50,
+		[theme.breakpoints.down('sm')]: {
+			maxWidth: '80%',
+			textAlign: 'center',
+			margin: '0px auto 30px auto',
+		},
+	},
+	textPrimary: {
+		color: '#BBBDBF',
+		fontWeight: '600',
+		[theme.breakpoints.down('sm')]: {
+			width: '100%',
+		},
+	},
+	secondary: {
+		width: 176,
+		textTransform: 'none',
+		[theme.breakpoints.down('sm')]: {
+			width: '100%',
+		},
+	},
+	tosMayApply: {
+		display: 'block',
+		position: 'absolute',
+		right: '0px',
+		left: '0px',
+		margin: '0 auto',
+		width: '100%',
+		textAlign: 'center',
+		bottom: '-30px',
+		color: '#fff',
+		fontSize: '14px',
 	},
 })
 
@@ -94,10 +139,7 @@ class CollectEtherBanner extends React.Component {
 				open={this.props.open}
 				onClose={this.props.handleBannerClose}
 			>
-				<div
-					style={getModalStyle()}
-					className={classes.modalBannerPaper}
-				>
+				<div style={getModalStyle()} className={classes.modalBannerPaper}>
 					<main className={classes.main}>
 						<CssBaseline />
 						<Paper className={classes.paper} elevation={0}>
@@ -121,9 +163,7 @@ class CollectEtherBanner extends React.Component {
 										width="228"
 										height="212"
 										src={etherealla}
-										className={classNames(
-											classes.etherellaImage
-										)}
+										className={classNames(classes.etherellaImage)}
 									/>
 								</Grid>
 								<Grid
@@ -134,11 +174,13 @@ class CollectEtherBanner extends React.Component {
 									justify="space-around"
 									alignContent="flex-start"
 									direction="column"
+									className={classes.gridContainerRight}
 								>
 									<Typography
 										component="h2"
 										variant="h2"
 										color="textPrimary"
+										className={classes.h2}
 										gutterBottom
 									>
 										Collect $5 in Ether!
@@ -146,14 +188,15 @@ class CollectEtherBanner extends React.Component {
 									<Typography
 										variant="h4"
 										color="textPrimary"
+										className={classes.h4}
 										gutterBottom
 									>
-										Sign up and receive this special bonus
-										treat
+										Sign up and receive this special bonus treat
 									</Typography>
 									<Typography
 										variant="subtitle1"
 										color="textPrimary"
+										className={classes.textPrimary}
 										gutterBottom
 									>
 										This is a limited time offer
@@ -161,13 +204,17 @@ class CollectEtherBanner extends React.Component {
 									<Button
 										variant="contained"
 										color="secondary"
+										className={classes.secondary}
 										onClick={this.closeButton}
 									>
-										Get It
+										Get it
 									</Button>
 								</Grid>
 							</Grid>
 						</Paper>
+						<span className={classes.tosMayApply}>
+							*Terms and Conditions apply.
+						</span>
 					</main>
 					<IconButton
 						className={classes.modalCloseButton}
