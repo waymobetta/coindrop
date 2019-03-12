@@ -32,13 +32,13 @@ function SocialIcons(props) {
 			className={classNames(classes.socialIcons, className)}
 			{...rest}
 		>
-			<IconButton className={classes.button} aria-label="Delete">
+			<IconButton className={classes.button} aria-label="Delete" href="https://medium.com/@metaxchain" target="_blank">
 				<Medium color="#A4A6A7" />
 			</IconButton>
-			<IconButton className={classes.button} aria-label="Delete">
+			<IconButton className={classes.button} aria-label="Delete" href="https://www.reddit.com/r/adChain/" target="_blank">
 				<Reddit color="#A4A6A7" />
 			</IconButton>
-			<IconButton className={classes.button} aria-label="Delete">
+			<IconButton className={classes.button} aria-label="Delete" href="https://twitter.com/metaxchain" target="_blank">
 				<Twitter color="#A4A6A7" />
 			</IconButton>
 		</Grid>
