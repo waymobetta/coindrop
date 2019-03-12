@@ -29,7 +29,6 @@ const TOSLink = props => <GatsbyLink {...props} />
 class SignUpForm extends React.Component {
 	constructor(props) {
 		super(props)
-
 		this.state = {
 			email: '',
 			emailError: '',
@@ -228,17 +227,6 @@ class SignUpForm extends React.Component {
 										classes={{
 											underline: classes.cssUnderline,
 										}}
-										endAdornment={
-											<InputAdornment position="end">
-												<IconButton aria-label="Toggle password visibility">
-													{showPassword ? (
-														<Visibility />
-													) : (
-														<VisibilityOff />
-													)}
-												</IconButton>
-											</InputAdornment>
-										}
 									/>
 									{this.state.emailError &&
 										<FormHelperText id="component-error-text">
@@ -258,6 +246,17 @@ class SignUpForm extends React.Component {
 										classes={{
 											underline: classes.cssUnderline,
 										}}
+										endAdornment={
+											<InputAdornment position="end">
+												<IconButton aria-label="Toggle password visibility">
+													{showPassword ? (
+														<Visibility />
+													) : (
+														<VisibilityOff />
+													)}
+												</IconButton>
+											</InputAdornment>
+										}
 									/>
 								</FormControl>
 								<FormControl
@@ -277,6 +276,17 @@ class SignUpForm extends React.Component {
 										classes={{
 											underline: classes.cssUnderline,
 										}}
+										endAdornment={
+											<InputAdornment position="end">
+												<IconButton aria-label="Toggle password visibility">
+													{showPassword ? (
+														<Visibility />
+													) : (
+														<VisibilityOff />
+													)}
+												</IconButton>
+											</InputAdornment>
+										}
 									/>
 									{this.state.passwordError &&
 										<FormHelperText id="component-error-text">
@@ -452,17 +462,6 @@ class SignUpForm extends React.Component {
 										classes={{
 											underline: classes.cssUnderline,
 										}}
-										endAdornment={
-											<InputAdornment position="end">
-												<IconButton aria-label="Toggle password visibility">
-													{showPassword ? (
-														<Visibility />
-													) : (
-														<VisibilityOff />
-													)}
-												</IconButton>
-											</InputAdornment>
-										}
 									/>
 									{this.state.emailError &&
 										<FormHelperText id="component-error-text">
@@ -482,6 +481,17 @@ class SignUpForm extends React.Component {
 										classes={{
 											underline: classes.cssUnderline,
 										}}
+										endAdornment={
+											<InputAdornment position="end">
+												<IconButton aria-label="Toggle password visibility">
+													{showPassword ? (
+														<Visibility />
+													) : (
+														<VisibilityOff />
+													)}
+												</IconButton>
+											</InputAdornment>
+										}
 									/>
 								</FormControl>
 

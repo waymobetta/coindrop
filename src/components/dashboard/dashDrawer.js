@@ -12,7 +12,7 @@ import { ReactComponent as Logout } from '../assets/logout.svg'
 import { ReactComponent as BoltIcon } from '../assets/boltIcon.svg'
 import { ReactComponent as CubeIcon } from '../assets/cubeIcon.svg'
 import { ReactComponent as StarIcon } from '../assets/starIcon.svg'
-import { ReactComponent as FileIcon } from '../assets/fileIcon.svg'
+//import { ReactComponent as FileIcon } from '../assets/fileIcon.svg'
 import { ReactComponent as UserIcon } from '../assets/userIcon.svg'
 import Hidden from '@material-ui/core/Hidden'
 import Badge from '@material-ui/core/Badge'
@@ -179,6 +179,7 @@ class DashDrawer extends React.Component {
 								<CubeIcon className={classes.dashDrawerIcon} />
 							),
 						},
+						/*
 						{
 							name: 'Policy',
 							url: '/dashboard/policy/',
@@ -186,6 +187,7 @@ class DashDrawer extends React.Component {
 								<FileIcon className={classes.dashDrawerIcon} />
 							),
 						},
+						*/
 					].map((page, index) => (
 						<Link
 							className={classes.itemLink}
@@ -227,7 +229,7 @@ class DashDrawer extends React.Component {
 					<Link
 						className={classes.itemLink}
 						activeClassName="active"
-						to="/"
+						to="/logout"
 					>
 						<ListItem classes={{ root: classes.item }}>
 							<ListItemIcon classes={{ root: classes.itemIcon }}>

@@ -63,8 +63,13 @@ export const logout = () => {
   localStorage.removeItem('userId')
 }
 
-export const isLoggedIn = () => {
-	return !!localStorage.getItem('accessToken')
+export const isLoggedIn = async () => {
+  try {
+    await currentUser()
+    return true
+  } catch(err) {
+    return false
+  }
 }
 
 export const currentUser = async () => {

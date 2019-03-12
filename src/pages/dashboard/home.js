@@ -5,9 +5,11 @@ import SEO from '../../components/seo'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
+import { navigate } from "gatsby"
 import ProfilePage from '../../components/dashboard/profilePage'
 import {
-	getProfile
+	getProfile,
+	isLoggedIn
 } from '../../lib/api'
 
 const styles = theme => ({
@@ -38,6 +40,10 @@ class Dashboard extends React.Component {
 
 	async componentDidMount() {
 		try {
+			if (! (await isLoggedIn())) {
+				navigate('/')
+				return
+			}
 			const {name, email} = await getProfile()
 			this.setState({name, email})
 		} catch(err) {
