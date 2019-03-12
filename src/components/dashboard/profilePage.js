@@ -35,16 +35,21 @@ const styles = theme => ({
 })
 
 class ProfilePage extends React.Component {
-	state = {
-		value: 0,
+	constructor(props) {
+		super(props)
+		this.state = {
+			value: 0,
+		}
 	}
 
-	handleChange = (event, value) => {
+	handleChange(event, value) {
 		this.setState({ value })
 	}
+
 	render() {
-		const { classes } = this.props
+		const { classes, name, email } = this.props
 		const { value } = this.state
+
 		return (
 			<>
 				<Hidden xsDown>
@@ -54,7 +59,7 @@ class ProfilePage extends React.Component {
 						className={classes.root}
 						justify="flex-start"
 					>
-						<DashProfileBox />
+						<DashProfileBox name={name} email={email} />
 						<DashBalances />
 						<DashBadges />
 						<DashContributions />
@@ -66,7 +71,7 @@ class ProfilePage extends React.Component {
 					<Tabs
 						centered
 						value={value}
-						onChange={this.handleChange}
+						onChange={(event, value) => this.handleChange(event, value)}
 						classes={{
 							root: classes.mobileTabsRoot,
 							indicator: classes.indicator,
@@ -97,6 +102,8 @@ class ProfilePage extends React.Component {
 ProfilePage.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
+	email: PropTypes.string,
+	name: PropTypes.string,
 }
 
 export default compose(

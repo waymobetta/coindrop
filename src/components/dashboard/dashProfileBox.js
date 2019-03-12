@@ -4,7 +4,6 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import FormControl from '@material-ui/core/FormControl'
 import Avatar from '@material-ui/core/Avatar'
-import profilePicture from '../../images/avatar-profile.png'
 import { withStyles } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
 import Input from '@material-ui/core/Input'
@@ -15,6 +14,8 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Hidden from '@material-ui/core/Hidden'
 import classNames from 'classnames'
+import gravatar from 'gravatar'
+import moment from 'moment'
 import { ReactComponent as Edit } from '../assets/edit.svg'
 import { ReactComponent as Camera } from '../assets/camera.svg'
 import { ReactComponent as Upload } from '../assets/upload.svg'
@@ -113,6 +114,7 @@ class DashProfileBox extends Component {
 		super(props)
 		this.state = {
 			editProfile: false,
+			memberSinceYear: moment().year()
 		}
 	}
 
@@ -124,8 +126,10 @@ class DashProfileBox extends Component {
 		this.setState({ editProfile: false })
 	}
 	render() {
-		const { classes } = this.props
-		const { editProfile } = this.state
+		const { classes, name, email } = this.props
+		const { editProfile, memberSinceYear } = this.state
+		const gravatarUrl = gravatar.url(email, {s: 150})
+
 		return (
 			<React.Fragment>
 				<Hidden smUp>
@@ -154,12 +158,12 @@ class DashProfileBox extends Component {
 					>
 						<Hidden smUp>
 							<Avatar
-								alt="Remy Sharp"
-								src={profilePicture}
+								alt=""
+								src={gravatarUrl}
 								className={classes.bigAvatar}
 							/>
-							<p>Hunter Gebron</p>
-							<p>hunter27@gmail.com</p>
+							<p>{name}</p>
+							<p>{email}</p>
 							{editProfile && (
 								<div className={classes.pictureControls}>
 									<Camera
@@ -183,14 +187,14 @@ class DashProfileBox extends Component {
 									)}
 								>
 									<Avatar
-										alt="Remy Sharp"
-										src={profilePicture}
+										alt=""
+										src={gravatarUrl}
 										className={classes.bigAvatar}
 									/>
 									{!editProfile ? (
 										<ListItemText
-											primary="Hunter"
-											secondary="hunter27@gmail.com"
+											primary={name}
+											secondary={email}
 											primaryTypographyProps={{
 												variant: 'h6',
 											}}
@@ -241,7 +245,7 @@ class DashProfileBox extends Component {
 											width="24"
 											height="24"
 										/>
-										Member since 2019
+										Member since {memberSinceYear}
 									</Typography>
 								</Hidden>
 							</>

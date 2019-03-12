@@ -10,8 +10,11 @@ import DashHeader from './dashboard/dashHeader'
 import IconButton from '@material-ui/core/IconButton'
 import { ReactComponent as DrawerIcon } from './assets/drawerIcon.svg'
 import Hidden from '@material-ui/core/Hidden'
-import theme from './theme'
 import { MuiThemeProvider } from '@material-ui/core/styles'
+import theme from './theme'
+import {
+	getProfile
+} from '../lib/api'
 
 const styles = theme => ({
 	root: {
@@ -84,6 +87,16 @@ class Layout extends React.Component {
 		super(props)
 		this.state = {
 			mobileOpen: false,
+			email: '',
+		}
+	}
+
+	async componentDidMount() {
+		try {
+			const {email} = await getProfile()
+			this.setState({email})
+		} catch(err) {
+			console.error(err)
 		}
 	}
 
@@ -94,6 +107,8 @@ class Layout extends React.Component {
 	render() {
 		const { classes, width, children } = this.props
 		const matches = width == 'xs' || width == 'sm'
+		const { email } = this.state
+
 		return (
 			<MuiThemeProvider theme={theme}>
 				<div className={classes.root}>
@@ -121,7 +136,7 @@ class Layout extends React.Component {
 								<DrawerIcon color="gray" />
 							</IconButton>
 						</Hidden>
-						<DashHeader />
+						<DashHeader email={email} />
 						{children}
 					</main>
 				</div>

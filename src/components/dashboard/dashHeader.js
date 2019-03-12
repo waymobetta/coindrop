@@ -7,9 +7,9 @@ import InputBase from '@material-ui/core/InputBase'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import FormControl from '@material-ui/core/FormControl'
 import Avatar from '@material-ui/core/Avatar'
-import profilePicture from '../../images/avatar-profile.png'
 import { withStyles } from '@material-ui/core/styles'
 import Hidden from '@material-ui/core/Hidden'
+import gravatar from 'gravatar'
 import { ReactComponent as Magnifier } from '../assets/magnifier.svg'
 
 const styles = theme => ({
@@ -49,7 +49,9 @@ const styles = theme => ({
 
 class DashHeader extends Component {
 	render() {
-		const { classes } = this.props
+		const { classes, email } = this.props
+		const gravatarUrl = gravatar.url(email, {s: 100})
+
 		return (
 			<Hidden xsDown>
 				<Paper className={classes.ProfileHeader} elevation={1}>
@@ -72,11 +74,11 @@ class DashHeader extends Component {
 						component="h3"
 						className={classes.email}
 					>
-						hunter@email.com
+						{email}
 					</Typography>
 					<Avatar
-						alt="Remy Sharp"
-						src={profilePicture}
+						alt=""
+						src={gravatarUrl}
 						className={classes.bigAvatar}
 						onClick={this.handleDrawerToggle}
 					/>

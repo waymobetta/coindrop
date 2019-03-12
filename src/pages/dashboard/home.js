@@ -6,6 +6,9 @@ import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
 import ProfilePage from '../../components/dashboard/profilePage'
+import {
+	getProfile
+} from '../../lib/api'
 
 const styles = theme => ({
 	root: {
@@ -26,15 +29,32 @@ const styles = theme => ({
 class Dashboard extends React.Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			name: '',
+			email: ''
+		}
 	}
+
+	async componentDidMount() {
+		try {
+			const {name, email} = await getProfile()
+			this.setState({name, email})
+		} catch(err) {
+			console.error(err)
+		}
+	}
+
 	render() {
+		const {name, email} = this.state
+
 		return (
 			<Layout>
 				<SEO
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
 				/>
-				<ProfilePage />
+				<ProfilePage name={name} email={email} />
 			</Layout>
 		)
 	}

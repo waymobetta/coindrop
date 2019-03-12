@@ -94,6 +94,21 @@ export const getUserId = async () => {
     return res.body.id
 }
 
+export const getEmail = async () => {
+  const user = await currentUser()
+  return user.attributes.email
+}
+
+export const getProfile = async () => {
+  // TODO: backend profiles api
+  const email = await getEmail()
+
+  return {
+    name: '',
+    email
+  }
+}
+
 export const accessToken = () => {
 	return localStorage.getItem('accessToken')
 }
