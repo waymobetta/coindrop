@@ -27,6 +27,9 @@ export const login = async (email, password) => {
 
 	localStorage.setItem('accessToken', jwtToken)
 
+  const userId = await getUserId(await getCognitoUserId())
+	localStorage.setItem('userId', userId)
+
 	return jwtToken
 }
 
@@ -55,7 +58,9 @@ export const signup = async (email, password) => {
 }
 
 export const logout = () => {
-	localStorage.removeItem('accessToken')
+  Auth.signOut({ global: true })
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('userId')
 }
 
 export const isLoggedIn = () => {
@@ -66,12 +71,35 @@ export const currentUser = async () => {
     return await Auth.currentAuthenticatedUser()
 }
 
+export const getCognitoUserId = async () => {
+    return (await Auth.currentAuthenticatedUser()).username
+}
+
+export const getUserId = async () => {
+    const cached = localStorage.getItem('userId')
+    if (cached) {
+      return cached
+    }
+
+    const cognitoUserId = await getCognitoUserId()
+
+    if (!cognitoUserId) {
+      throw new Error('User not logged in')
+    }
+
+    const res = await client.apis.users.users_list({
+      cognitoAuthUserId: cognitoUserId
+    })
+
+    return res.body.id
+}
+
 export const accessToken = () => {
 	return localStorage.getItem('accessToken')
 }
 
 export const getWallet = async () => {
-	const { body: result, ok } = await client.apis.wallet.wallet_show()
+	const { body: result, ok } = await client.apis.wallets.wallets_show()
 
 	if (!ok) {
 		throw new Error('could not get user wallet')
@@ -81,7 +109,7 @@ export const getWallet = async () => {
 }
 
 export const updateWallet = async (newWalletAddress) => {
-	const { body: result, ok } = await client.apis.wallet.wallet_update({
+	const { body: result, ok } = await client.apis.wallets.wallets_update({
 		payload: {
 			walletAddress: newWalletAddress
 		}
@@ -89,6 +117,32 @@ export const updateWallet = async (newWalletAddress) => {
 
 	if (!ok) {
 		throw new Error('could not update user wallet')
+	}
+
+	return result
+}
+
+export const getTasks = async (userId) => {
+	const { body: result, ok } = await client.apis.tasks.tasks_list({
+		payload: {
+			userId,
+		}
+	})
+
+	if (!ok) {
+		throw new Error('could not get user tasks')
+	}
+
+	return result.tasks
+}
+
+export const getTask = async (taskId) => {
+	const { body: result, ok } = await client.apis.tasks.tasks_show({
+			taskId
+		})
+
+	if (!ok) {
+		throw new Error('could not get user tasks')
 	}
 
 	return result

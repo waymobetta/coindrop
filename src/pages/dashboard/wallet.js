@@ -13,7 +13,10 @@ import Fab from '@material-ui/core/Fab'
 import { ReactComponent as Edit } from '../../components/assets/edit.svg'
 import theme from '../../components/theme'
 import Button from '@material-ui/core/Button'
-import { updateWallet } from '../../lib/api'
+import {
+	getWallet,
+	updateWallet
+} from '../../lib/api'
 
 const styles = () => ({
 	walletBoxPaper: {
@@ -75,6 +78,15 @@ class Wallet extends React.Component {
 		}
 	}
 
+	async componentDidMount() {
+		try {
+			const wallet = await getWallet()
+			console.log(wallet.address)
+		} catch(err) {
+			console.error(err)
+		}
+	}
+
 	async handleWalletEdit(event) {
 		event.preventDefault()
 
@@ -83,6 +95,8 @@ class Wallet extends React.Component {
 		} catch(err) {
 			console.error(err)
 		}
+
+		console.log('updated')
 	}
 
 	render() {

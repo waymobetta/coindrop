@@ -10,6 +10,10 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import theme from '../../components/theme'
 import Hidden from '@material-ui/core/Hidden'
+import {
+	//getTasks,
+	//getTask
+} from '../../lib/api'
 
 const styles = () => ({
 	tasksBoxPaper: {
@@ -39,6 +43,20 @@ class Tasks extends React.Component {
 	constructor(props) {
 		super(props)
 	}
+
+	async componentWillMount() {
+		try {
+			//const tasks = await getTasks()
+			//console.log(tasks)
+
+			//const taskId = '6bc25651-c46d-448b-a88e-ff2e2ed3b54c'
+			//const task = await getTask(taskId)
+			//console.log(task)
+		} catch(err) {
+			console.error(err)
+		}
+	}
+
 	render() {
 		const { classes } = this.props
 		return (
