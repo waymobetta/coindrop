@@ -10,6 +10,7 @@
     "aws-amplify": "^1.1.19",
     "dotenv": "^6.2.0",
     "gatsby": "^2.1.18",
+    "gatsby-cli": "^2.4.15",
     "gatsby-image": "^2.0.30",
     "gatsby-plugin-manifest": "^2.0.19",
     "gatsby-plugin-offline": "^2.0.24",
