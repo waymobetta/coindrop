@@ -39,7 +39,7 @@ module.exports = {
 			resolve: 'gatsby-plugin-web-font-loader',
 			options: {
 				google: {
-					families: ['Assistant:300,400,600'],
+					families: ['Assistant:300,400,600,700,800'],
 				},
 			},
 		},

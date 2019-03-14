@@ -10,6 +10,8 @@ const styles = theme => ({
 		padding: '6px 20px',
 		margin: '0px 0px 0px 10px',
 		textTransform: 'capitalize',
+		fontSize: '16px',
+		fontWeight: 700,
 		[theme.breakpoints.down('xs')]: {
 			minWidth: 'auto',
 			padding: '6px 6px',

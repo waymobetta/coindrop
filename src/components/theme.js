@@ -29,6 +29,9 @@ const rawTheme = createMuiTheme({
 			xLight: green[50],
 			dark: green[700],
 		},
+		text: {
+			primary: '#4D4D4D',
+		},
 	},
 	borderRadius: 34,
 	maxWidth: '1100px',
@@ -48,7 +51,7 @@ const rawTheme = createMuiTheme({
 		fontWeightLight: 300, // Work Sans
 		fontWeightRegular: 400, // Work Sans
 		fontWeightMedium: 600, // Roboto Condensed
-		fontWeightBold: 700, // Roboto Condensed
+		fontWeightBold: 800, // Roboto Condensed
 		fontFamilySecondary: "'Assistant', sans-serif",
 		useNextVariants: true,
 	},
@@ -65,8 +68,21 @@ const rawTheme = createMuiTheme({
 			},
 		},
 		MuiTypography: {
+			h1: {
+				fontWeight: 700,
+				letterSpacing: '0.56px',
+			},
+			h2: {
+				fontWeight: 700,
+				letterSpacing: '0.56px',
+			},
 			display3: {
 				fontSize: 22,
+			},
+			body1: {
+				letterSpacing: '0.27px',
+				lineHeight: '25px',
+				color: '#4D4D4D',
 			},
 		},
 		MuiInput: {
@@ -109,6 +125,9 @@ const rawTheme = createMuiTheme({
 				color: 'white',
 				padding: '16px 36px',
 				textTransform: 'capitalize',
+				boxShadow: 'none',
+				fontWeight: '700',
+				letterSpacing: '0.53px',
 			},
 			containedSecondary: {
 				background: 'linear-gradient(45deg, #B43FFF 30%, #7A35FF 90%)',
@@ -120,6 +139,7 @@ const rawTheme = createMuiTheme({
 				padding: '16px 36px',
 				textTransform: 'capitalize',
 				boxShadow: '-4px 5px 26px 0 #CFB0FF',
+				fontWeight: '700',
 			},
 			outlinedPrimary: {
 				backgroundColor: '#FFF',
@@ -158,6 +178,7 @@ const rawTheme = createMuiTheme({
 			textSecondary: {
 				color: '#E66BFF',
 				fontWeight: 'bold',
+				letterSpacing: '2.4px',
 				textDecoration: 'none',
 				'&:hover': {
 					backgroundColor: 'transparent',

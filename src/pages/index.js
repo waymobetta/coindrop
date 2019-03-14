@@ -34,22 +34,26 @@ const styles = theme => ({
 		minHeight: 660,
 		[theme.breakpoints.down('xs')]: {
 			textAlign: 'center',
+			marginTop: 30,
 		},
 	},
 	hero2: {
 		minHeight: 400,
 		marginBottom: 300,
+		marginTop: 200,
 		[theme.breakpoints.up('md')]: {
 			marginLeft: 'auto',
 			marginRight: 'auto',
 		},
 		[theme.breakpoints.down('xs')]: {
 			marginBottom: 100,
+			marginTop: 0,
 		},
 	},
 	hero3: {
 		minHeight: 440,
-		background: 'linear-gradient(45deg, #B53FFF 30%, #E390FF 90%)',
+		marginTop: 100,
+		background: 'linear-gradient(45deg, #BF41FF 30%, #9039FF 90%)',
 		[theme.breakpoints.down('xs')]: {
 			minHeight: 270,
 		},
@@ -94,8 +98,8 @@ const styles = theme => ({
 		color: '#CA34FF',
 	},
 	reputationBox: {
-		borderRadius: 34,
-		padding: 20,
+		borderRadius: 45,
+		padding: 30,
 		textAlign: 'right',
 		boxShadow:
 			'0 12px 22px 0 rgba(99,108,123,0.1), 0 -12px 22px 0 rgba(99,108,123,0.05)',
@@ -120,12 +124,12 @@ const styles = theme => ({
 	hero3Box: {
 		backgroundColor: 'pink',
 
-		borderRadius: 48,
+		borderRadius: 67,
 		background: 'linear-gradient(103deg, #BF41FF 20%, #572FFF 100%)',
 		boxShadow: '-4px 5px 26px 0 rgba(19,19,19,0.2)',
-		overflow: 'hidden',
+
 		position: 'relative',
-		padding: 30,
+		padding: '30px 30px 20px 50px',
 		[theme.breakpoints.down('xs')]: {
 			height: 270,
 			top: -90,
@@ -137,8 +141,21 @@ const styles = theme => ({
 		},
 		[theme.breakpoints.up('md')]: {
 			maxWidth: 980,
-			height: 320,
+			height: 360,
 			top: -210,
+		},
+	},
+	hero3CutWrapper: {
+		overflow: 'hidden',
+		height: 360,
+		width: '100%',
+		display: 'block',
+		position: 'absolute',
+		left: 0,
+		top: 0,
+		borderRadius: 64,
+		[theme.breakpoints.down('xs')]: {
+			height: '270px',
 		},
 	},
 	hero3Cut: {
@@ -153,26 +170,26 @@ const styles = theme => ({
 			width: '600px',
 			right: -170,
 			top: 200,
-			transform: 'rotate(-20deg)',
+			transform: 'rotate(-37deg)',
 		},
 		[theme.breakpoints.up('sm')]: {
 			height: '460px',
 			width: '540px',
 			right: -170,
 			top: 52,
-			transform: 'rotate(-45deg)',
+			transform: 'rotate(-37deg)',
 		},
 		[theme.breakpoints.up('md')]: {
-			height: '500px',
-			width: '670px',
-			right: -170,
-			top: 52,
-			transform: 'rotate(-45deg)',
+			height: '380px',
+			width: '780px',
+			right: -110,
+			top: 112,
+			transform: 'rotate(-37deg)',
 		},
 	},
 	hero3Title: {
 		color: '#FFF',
-
+		zIndex: 99,
 		[theme.breakpoints.down('xs')]: {
 			textAlign: 'center',
 			fontSize: 22,
@@ -199,6 +216,54 @@ const styles = theme => ({
 			fontSize: 24,
 		},
 	},
+	underline: {
+		textDecoration: 'underline',
+		textUnderlinePosition: 'under',
+	},
+	tosMayApply: {
+		display: 'block',
+		position: 'absolute',
+		right: '0px',
+		left: '0px',
+		margin: '0 auto',
+		width: '100%',
+		textAlign: 'center',
+		bottom: '-30px',
+		color: '#fff',
+		fontSize: '15px',
+	},
+	pill: {
+		width: '900px',
+		height: '300px',
+		display: 'block',
+		position: 'absolute',
+		borderRadius: '300px',
+		transform: 'rotate(-42deg)',
+		background: 'linear-gradient(-90deg, #A13CFF 40%, #B53FFF 100%)',
+		zIndex: 0,
+	},
+	pill1: {
+		transform: 'translate3d(-580px, 260px, 0px) rotate(-35deg)',
+		opacity: '0.6',
+		[theme.breakpoints.down('xs')]: {
+			zoom: 0.6,
+			transform: 'translate3d(-580px, 260px, 0px) rotate(-35deg)',
+		},
+	},
+	pill2: {
+		width: '570px',
+		height: '200px',
+		background: 'linear-gradient(90deg, #9633f3 40%, #B53FFF 100%)',
+		transform: 'translate3d(340px, -105px, 0px) rotate(-37deg)',
+		opacity: '0.6',
+		[theme.breakpoints.down('xs')]: {
+			zoom: 0.6,
+			transform: 'linear-gradient(90deg, #9633f3 40%, #B53FFF 100%)',
+		},
+	},
+	hero3GridLeft: {
+		zIndex: 9,
+	},
 })
 
 class Index extends React.Component {
@@ -223,10 +288,7 @@ class Index extends React.Component {
 		const { classes } = this.props
 		return (
 			<Landing>
-				<SEO
-					title="Home"
-					keywords={['coinDrop', 'application', 'react']}
-				/>
+				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
 				<div className={classes.root}>
 					<CollectEtherBanner
 						open={this.state.isOpen}
@@ -256,10 +318,9 @@ class Index extends React.Component {
 								gutterBottom
 								className={classes.reputationSubTitle}
 							>
-								Free your reputation on Reddit and Stack
-								Overflow by connecting it to your Ethereum
-								wallet address. Projects can then engage you on
-								a 1-to-1 basis.
+								Free your reputation on Reddit and Stack Overflow by connecting
+								it to your Ethereum wallet address. Projects can then engage you
+								on a 1-to-1 basis.
 							</Typography>
 							<Button
 								variant="contained"
@@ -283,7 +344,7 @@ class Index extends React.Component {
 						md={11}
 						sm={12}
 					>
-						<Grid item xs={12} sm={8} md={6}>
+						<Grid item xs={12} sm={8} md={7}>
 							<Paper
 								elevation={1}
 								color="default"
@@ -292,44 +353,29 @@ class Index extends React.Component {
 								<List>
 									<ListItem>
 										<span>
-											<IconRecognition
-												className={
-													classes.iconRecognition
-												}
-											/>
+											<IconRecognition className={classes.iconRecognition} />
 										</span>
-
 										<ListItemText primary="Gain recognition and tokens by micro-consulting for projects at your leisure." />
 									</ListItem>
 									<ListItem>
 										<span>
-											<TasksIcon
-												className={classes.iconTasks}
-											/>
+											<UnlockIcon className={classes.iconUnlock} />
 										</span>
-
 										<ListItemText primary="Unlock badges for individual achievements." />
 									</ListItem>
 									<ListItem>
 										<span>
-											<UnlockIcon
-												className={classes.iconUnlock}
-											/>
+											<TasksIcon className={classes.iconTasks} />
 										</span>
-
 										<ListItemText primary="Complete tasks and surveys to receive crypto micropayments." />
 									</ListItem>
 								</List>
-								<Button
-									variant="text"
-									color="secondary"
-									size="medium"
-								>
+								<Button variant="text" color="secondary" size="medium">
 									Get Started
 								</Button>
 							</Paper>
 						</Grid>
-						<Grid item xs={12} sm={4} md={6}>
+						<Grid item xs={12} sm={4} md={5}>
 							<Typography
 								component="h1"
 								variant="h1"
@@ -357,14 +403,20 @@ class Index extends React.Component {
 						alignItems="center"
 						xs={10}
 					>
-						<Grid item xs={12} sm={6}>
+						<span className={classes.hero3CutWrapper}>
+							<div className={classes.hero3Cut} />
+							<span className={classNames(classes.pill, classes.pill1)} />
+							<span className={classNames(classes.pill, classes.pill2)} />
+						</span>
+						<Grid item xs={12} sm={5} className={classes.hero3GridLeft}>
 							<Typography
 								component="h1"
 								variant="h1"
 								color="textPrimary"
 								className={classes.hero3Title}
 							>
-								Sign up and receive a $5 Ether bonus
+								Sign up and receive a $5 Ether{' '}
+								<span className={classes.underline}>bonus</span>
 							</Typography>
 							<Typography
 								color="textPrimary"
@@ -374,7 +426,7 @@ class Index extends React.Component {
 								This is a limited time offer!
 							</Typography>
 						</Grid>
-						<Grid item xs={12} sm={6} container justify="center">
+						<Grid item xs={12} sm={6} md={4} container justify="center">
 							<Button
 								variant="contained"
 								color="primary"
@@ -383,7 +435,9 @@ class Index extends React.Component {
 								Collect Bonus
 							</Button>
 						</Grid>
-						<div className={classes.hero3Cut} />
+						<span className={classes.tosMayApply}>
+							*Terms and Conditions apply.
+						</span>
 					</Grid>
 				</Grid>
 			</Landing>
