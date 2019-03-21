@@ -5,29 +5,53 @@ import SEO from '../../components/seo'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
-import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import theme from '../../components/theme'
 import Hidden from '@material-ui/core/Hidden'
-import {
-	//getTasks,
-	//getTask
-} from '../../lib/api'
-
-const styles = () => ({
-	tasksBoxPaper: {
-		position: 'relative',
-		height: 180,
-		borderRadius: 33,
-		flexGrow: 1,
-		padding: theme.spacing.unit * 3,
-		marginTop: 30,
-		...theme.boxShadow,
-		[theme.breakpoints.down('sm')]: {
-			textAlign: 'center',
-		},
+import DashTask from '../../components/dashboard/dashTask'
+import //getTasks,
+//getTask
+'../../lib/api'
+const tasks = [
+	{
+		id: '0001',
+		name: 'AdChain',
+		subTitle: 'Sub Title',
+		date: 'Today',
+		amount: '$6 (1000 ADT)',
+		badge: 'Educational Badge',
+		summary: 'Watch a short video about adChain and take a quiz!',
 	},
+	{
+		id: '0002',
+		name: 'AdChain',
+		subTitle: 'Sub Title',
+		date: 'Today',
+		amount: '$6 (1000 ADT)',
+		badge: 'Educational Badge',
+		summary: 'Watch a short video about adChain and take a quiz!',
+	},
+	{
+		id: '0003',
+		name: 'AdChain',
+		subTitle: 'Sub Title',
+		date: 'Today',
+		amount: '$6 (1000 ADT)',
+		badge: 'Educational Badge',
+		summary: 'Watch a short video about adChain and take a quiz!',
+	},
+	{
+		id: '0004',
+		name: 'AdChain',
+		subTitle: 'Sub Title',
+		date: 'Today',
+		amount: '$6 (1000 ADT)',
+		badge: 'Educational Badge',
+		summary: 'Watch a short video about adChain and take a quiz!',
+	},
+]
+const styles = () => ({
 	boxTitle: {
 		...theme.boxTitle,
 		[theme.breakpoints.down('sm')]: {
@@ -48,11 +72,10 @@ class Tasks extends React.Component {
 		try {
 			//const tasks = await getTasks()
 			//console.log(tasks)
-
 			//const taskId = '6bc25651-c46d-448b-a88e-ff2e2ed3b54c'
 			//const task = await getTask(taskId)
 			//console.log(task)
-		} catch(err) {
+		} catch (err) {
 			console.error(err)
 		}
 	}
@@ -61,28 +84,21 @@ class Tasks extends React.Component {
 		const { classes } = this.props
 		return (
 			<Layout>
-				<SEO
-					title="Home"
-					keywords={['coinDrop', 'application', 'react']}
-				/>
+				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
 				<Hidden mdUp>
-					<Typography
-						variant="h2"
-						component="h2"
-						className={classes.boxTitle}
-					>
+					<Typography variant="h2" component="h2" className={classes.boxTitle}>
 						Tasks
 					</Typography>
 				</Hidden>
-				<Grid item xs={12} sm={10}>
-					<Paper className={classes.tasksBoxPaper}>
-						<Typography variant="h6">
-							Welcome to Coindrop!
-						</Typography>
-						<Typography gutterBottom>
-							You don´t have any tasks yet.
-						</Typography>
-					</Paper>
+				<Grid
+					container
+					spacing={40}
+					className={classes.root}
+					justify="flex-start"
+				>
+					{tasks.map(task => (
+						<DashTask key={task.id} data={task} />
+					))}
 				</Grid>
 			</Layout>
 		)
