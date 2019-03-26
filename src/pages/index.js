@@ -123,7 +123,6 @@ const styles = theme => ({
 	},
 	hero3Box: {
 		backgroundColor: 'pink',
-
 		borderRadius: 67,
 		background: 'linear-gradient(103deg, #BF41FF 20%, #572FFF 100%)',
 		boxShadow: '-4px 5px 26px 0 rgba(19,19,19,0.2)',
@@ -154,9 +153,16 @@ const styles = theme => ({
 		left: 0,
 		top: 0,
 		borderRadius: 64,
-		[theme.breakpoints.down('xs')]: {
+		[theme.breakpoints.down('sm')]: {
 			height: '270px',
 		},
+	},
+	hero3CutWrapperInn: {
+		overflow: 'hidden',
+		position: 'relative',
+		width: '100%',
+		height: '100%',
+		display: 'block',
 	},
 	hero3Cut: {
 		backgroundColor: '#47317A',
@@ -176,7 +182,7 @@ const styles = theme => ({
 			height: '460px',
 			width: '540px',
 			right: -170,
-			top: 52,
+			top: 65,
 			transform: 'rotate(-37deg)',
 		},
 		[theme.breakpoints.up('md')]: {
@@ -404,9 +410,11 @@ class Index extends React.Component {
 						xs={10}
 					>
 						<span className={classes.hero3CutWrapper}>
-							<div className={classes.hero3Cut} />
-							<span className={classNames(classes.pill, classes.pill1)} />
-							<span className={classNames(classes.pill, classes.pill2)} />
+							<span className={classes.hero3CutWrapperInn}>
+								<div className={classes.hero3Cut} />
+								<span className={classNames(classes.pill, classes.pill1)} />
+								<span className={classNames(classes.pill, classes.pill2)} />
+							</span>
 						</span>
 						<Grid item xs={12} sm={5} className={classes.hero3GridLeft}>
 							<Typography

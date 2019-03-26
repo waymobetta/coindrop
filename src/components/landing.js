@@ -17,6 +17,10 @@ const styles = () => ({
 	root: {
 		display: 'flex',
 	},
+	homeWrapper: {
+		position: 'relative',
+		overflow: 'hidden',
+	},
 	heroBg: {
 		width: '100%',
 		height: 760,
@@ -94,7 +98,7 @@ class Landing extends React.Component {
 	render() {
 		const { children, classes } = this.props
 		return (
-			<div>
+			<div className={classes.homeWrapper}>
 				<React.Fragment>
 					<MuiThemeProvider theme={theme}>
 						<CssBaseline />
