@@ -57,7 +57,7 @@ class AppBarHeader extends React.Component {
 		}
 		this.handleOpen = this.handleOpen.bind(this)
 		this.handleClose = this.handleClose.bind(this)
-		this.handleSignUpOpen = this.handleSignUpOpen.bind(this)
+		// this.handleSignUpOpen = this.handleSignUpOpen.bind(this)
 		this.handleSignUpClose = this.handleSignUpClose.bind(this)
 	}
 
@@ -128,7 +128,7 @@ class AppBarHeader extends React.Component {
 										Login
 									</ButtonHeader>
 									<ButtonHeader
-										onClick={() => this.handleSignUpOpen('signUp', this)}
+										onClick={() => this.handleSignUpOpen('signUp')}
 									>
 										Sign Up
 									</ButtonHeader>

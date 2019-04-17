@@ -27,34 +27,33 @@ class SignUp extends React.Component {
 		this.props.onClose()
 	}
 	render() {
+		console.log('rendered')
 		const { classes } = this.props
 
 		return (
-			<>
-				<Modal
-					aria-labelledby="simple-modal-title"
-					aria-describedby="simple-modal-description"
-					disableBackdropClick={true}
-					open={this.props.open}
-					onClose={this.props.onClose}
-				>
-					<div style={getModalStyle()} className={classes.modalPaper}>
-						<SignUpForm
-							closeSignUp={this.closeButton}
-							signUpMode={this.props.signUpMode}
-							switchToSignIn={this.props.switchToSignIn}
-						/>
-						<IconButton
-							className={classes.modalCloseButton}
-							aria-label="Close Modal"
-							color="secondary"
-							onClick={this.closeButton}
-						>
-							<Close nativeColor="white" />
-						</IconButton>
-					</div>
-				</Modal>
-			</>
+			<Modal
+				aria-labelledby="simple-modal-title"
+				aria-describedby="simple-modal-description"
+				disableBackdropClick={true}
+				open={this.props.open}
+				onClose={this.props.onClose}
+			>
+				<div style={getModalStyle()} className={classes.modalPaper}>
+					<SignUpForm
+						closeSignUp={this.closeButton}
+						signUpMode={this.props.signUpMode}
+						switchToSignIn={this.props.switchToSignIn}
+					/>
+					<IconButton
+						className={classes.modalCloseButton}
+						aria-label="Close Modal"
+						color="secondary"
+						onClick={this.closeButton}
+					>
+						<Close nativeColor="white" />
+					</IconButton>
+				</div>
+			</Modal>
 		)
 	}
 }

@@ -4,9 +4,10 @@ import Amplify, { Auth } from 'aws-amplify'
 //import dotenv from 'dotenv'
 //dotenv.config()
 
-export const baseURL = process.env.API_BASE_URL || 'http://localhost:5000/v1'
+const baseURL = 'http://api.coindrop.io/v1/'
+// export const baseURL = process.env.API_BASE_URL || 'http://localhost:5000/v1'
 
-spec.host = baseURL.replace(/.*\/\/([\w+:]+)\/.*/, '$1')
+spec.host = baseURL.replace(/.*\/\/([\w.:]+)\/.*/, '$1')
 
 let client
 

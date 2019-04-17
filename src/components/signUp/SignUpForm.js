@@ -152,12 +152,8 @@ class SignUpForm extends React.Component {
 		}
 	}
 
-	async handleTermsClick(event) {
-		event.preventDefault()
-
-		this.setState({
-			acceptTerms: event.target.checked
-		})
+	handleTermsClick = (event) => {
+		this.setState({ acceptTerms: event.target.checked })
 	}
 
 	clearErrors() {
@@ -306,19 +302,19 @@ class SignUpForm extends React.Component {
 												checkedIcon={
 													<Checked color="#5AE2B9" />
 												}
+												onChange={() => this.handleTermsClick(event)}
 												value="checkedH"
 											/>
 										}
 										label="I agree with the "
 										className={classes.tosCheck}
-										onClick={event => this.handleTermsClick(event)}
 									/>
 									<Link
 										component={TOSLink}
 										className={classes.inlineLink}
 										activeClassName="active"
 										variant="body2"
-										to="dashboard/home/"
+										to="/dashboard/home/"
 									>
 										{' '}
 										terms and conditions.
