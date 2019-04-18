@@ -13,44 +13,46 @@ import DashTask from '../../components/dashboard/dashTask'
 import //getTasks,
 //getTask
 '../../lib/api'
-const tasks = [
-	{
-		id: '0001',
-		name: 'AdChain',
-		subTitle: 'Sub Title',
-		date: 'Today',
-		amount: '$6 (1000 ADT)',
-		badge: 'Educational Badge',
-		summary: 'Watch a short video about adChain and take a quiz!',
-	},
-	{
-		id: '0002',
-		name: 'AdChain',
-		subTitle: 'Sub Title',
-		date: 'Today',
-		amount: '$6 (1000 ADT)',
-		badge: 'Educational Badge',
-		summary: 'Watch a short video about adChain and take a quiz!',
-	},
-	{
-		id: '0003',
-		name: 'AdChain',
-		subTitle: 'Sub Title',
-		date: 'Today',
-		amount: '$6 (1000 ADT)',
-		badge: 'Educational Badge',
-		summary: 'Watch a short video about adChain and take a quiz!',
-	},
-	{
-		id: '0004',
-		name: 'AdChain',
-		subTitle: 'Sub Title',
-		date: 'Today',
-		amount: '$6 (1000 ADT)',
-		badge: 'Educational Badge',
-		summary: 'Watch a short video about adChain and take a quiz!',
-	},
-]
+
+// const tasks = [
+// 	{
+// 		id: '0001',
+// 		name: 'AdChain',
+// 		subTitle: 'Sub Title',
+// 		date: 'Today',
+// 		amount: '$6 (1000 ADT)',
+// 		badge: 'Educational Badge',
+// 		summary: 'Watch a short video about adChain and take a quiz!',
+// 	},
+// 	{
+// 		id: '0002',
+// 		name: 'AdChain',
+// 		subTitle: 'Sub Title',
+// 		date: 'Today',
+// 		amount: '$6 (1000 ADT)',
+// 		badge: 'Educational Badge',
+// 		summary: 'Watch a short video about adChain and take a quiz!',
+// 	},
+// 	{
+// 		id: '0003',
+// 		name: 'AdChain',
+// 		subTitle: 'Sub Title',
+// 		date: 'Today',
+// 		amount: '$6 (1000 ADT)',
+// 		badge: 'Educational Badge',
+// 		summary: 'Watch a short video about adChain and take a quiz!',
+// 	},
+// 	{
+// 		id: '0004',
+// 		name: 'AdChain',
+// 		subTitle: 'Sub Title',
+// 		date: 'Today',
+// 		amount: '$6 (1000 ADT)',
+// 		badge: 'Educational Badge',
+// 		summary: 'Watch a short video about adChain and take a quiz!',
+// 	},
+// ]
+
 const styles = () => ({
 	boxTitle: {
 		...theme.boxTitle,
@@ -66,15 +68,31 @@ const styles = () => ({
 class Tasks extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			globalData: {}
+		}
 	}
 
-	async componentWillMount() {
+	// async componentWillMount() {
+	// 	try {
+	// 		//const tasks = await getTasks()
+	// 		//console.log(tasks)
+	// 		//const taskId = '6bc25651-c46d-448b-a88e-ff2e2ed3b54c'
+	// 		//const task = await getTask(taskId)
+	// 		//console.log(task)
+	// 	} catch (err) {
+	// 		console.error(err)
+	// 	}
+	// }
+
+	async componentDidMount() {
 		try {
-			//const tasks = await getTasks()
-			//console.log(tasks)
-			//const taskId = '6bc25651-c46d-448b-a88e-ff2e2ed3b54c'
-			//const task = await getTask(taskId)
-			//console.log(task)
+			const { location } = this.props;
+			if (location.state) {
+				this.setState({
+					globalData: location.state
+				})
+			}
 		} catch (err) {
 			console.error(err)
 		}
@@ -82,8 +100,11 @@ class Tasks extends React.Component {
 
 	render() {
 		const { classes } = this.props
+		const { globalData } = this.state
+		const tasks = globalData.tasks || []
+		
 		return (
-			<Layout>
+			<Layout globalData={globalData}>
 				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
 				<Hidden mdUp>
 					<Typography variant="h2" component="h2" className={classes.boxTitle}>

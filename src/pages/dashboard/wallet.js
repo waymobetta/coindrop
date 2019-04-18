@@ -14,7 +14,6 @@ import { ReactComponent as Edit } from '../../components/assets/edit.svg'
 import theme from '../../components/theme'
 import Button from '@material-ui/core/Button'
 import {
-	getWallet,
 	updateWallet
 } from '../../lib/api'
 
@@ -74,14 +73,19 @@ class Wallet extends React.Component {
 		this.state = {
 			walletAddress: '',
 			// test value
-			newWalletAddress: '0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0'
+			newWalletAddress: '0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0',
+			globalData: {},
 		}
 	}
 
 	async componentDidMount() {
 		try {
-			const wallet = await getWallet()
-			console.log(wallet.address)
+			const { location } = this.props;
+			if (location.state) {
+				this.setState({
+					globalData: location.state
+				})
+			}
 		} catch(err) {
 			console.error(err)
 		}
@@ -91,18 +95,19 @@ class Wallet extends React.Component {
 		event.preventDefault()
 
 		try {
-			await updateWallet(this.state.newWalletAddress)
+			await updateWallet()
 		} catch(err) {
 			console.error(err)
 		}
-
-		console.log('updated')
 	}
 
 	render() {
 		const { classes } = this.props
+		const { globalData } = this.state
+		const wallet = globalData.wallet || "Looks like you don't have an Ethereum wallet address.";
+
 		return (
-			<Layout>
+			<Layout globalData={globalData}>
 				<SEO
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
@@ -128,7 +133,7 @@ class Wallet extends React.Component {
 					</Hidden>
 					<Paper className={classes.walletBoxPaper}>
 						<Typography gutterBottom className={classes.ethAddress}>
-							0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0
+							{ wallet }
 						</Typography>
 						<Hidden smUp>
 							<Button
@@ -169,6 +174,7 @@ class Wallet extends React.Component {
 Wallet.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
+	location: PropTypes.object,
 }
 
 export default compose(

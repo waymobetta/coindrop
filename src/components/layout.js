@@ -12,9 +12,6 @@ import { ReactComponent as DrawerIcon } from './assets/drawerIcon.svg'
 import Hidden from '@material-ui/core/Hidden'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import theme from './theme'
-import {
-	getProfile
-} from '../lib/api'
 
 const styles = theme => ({
 	root: {
@@ -87,16 +84,6 @@ class Layout extends React.Component {
 		super(props)
 		this.state = {
 			mobileOpen: false,
-			email: '',
-		}
-	}
-
-	async componentDidMount() {
-		try {
-			const {email} = await getProfile()
-			this.setState({email})
-		} catch(err) {
-			console.error(err)
 		}
 	}
 
@@ -105,9 +92,9 @@ class Layout extends React.Component {
 	}
 
 	render() {
-		const { classes, width, children } = this.props
+		const { classes, width, children, globalData } = this.props
+		const { email } = globalData
 		const matches = width == 'xs' || width == 'sm'
-		const { email } = this.state
 
 		return (
 			<MuiThemeProvider theme={theme}>
@@ -123,7 +110,7 @@ class Layout extends React.Component {
 							variant={matches ? 'temporary' : 'permanent'}
 							anchor={matches ? 'right' : 'left'}
 						>
-							<DashDrawer />
+							<DashDrawer globalData={globalData} />
 						</Drawer>
 					</nav>
 					<main className={classes.content}>
@@ -149,6 +136,7 @@ Layout.propTypes = {
 	children: PropTypes.node.isRequired,
 	width: PropTypes.string,
 	classes: PropTypes.object.isRequired,
+	globalData: PropTypes.object
 }
 export default compose(
 	withStyles(styles, { withTheme: true }),

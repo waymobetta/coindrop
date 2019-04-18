@@ -24,21 +24,21 @@ class SignUp extends React.Component {
 		this.props.onClose()
 	}
 	render() {
-		const { classes } = this.props
+		const { classes, open, onClose, signUpMode, switchToSignIn } = this.props
 
 		return (
 			<Modal
 				aria-labelledby="simple-modal-title"
 				aria-describedby="simple-modal-description"
 				disableBackdropClick={true}
-				open={this.props.open}
-				onClose={this.props.onClose}
+				open={open}
+				onClose={onClose}
 			>
 				<div style={getModalStyle()} className={classes.modalPaper}>
 					<SignUpForm
 						closeSignUp={this.closeButton}
-						signUpMode={this.props.signUpMode}
-						switchToSignIn={this.props.switchToSignIn}
+						signUpMode={signUpMode}
+						switchToSignIn={switchToSignIn}
 					/>
 					<IconButton
 						className={classes.modalCloseButton}

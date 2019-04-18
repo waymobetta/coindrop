@@ -9,7 +9,9 @@ import { navigate } from "gatsby"
 import ProfilePage from '../../components/dashboard/profilePage'
 import {
 	getProfile,
-	isLoggedIn
+	isLoggedIn,
+	getTasks,
+	getWallet
 } from '../../lib/api'
 
 const styles = theme => ({
@@ -33,34 +35,79 @@ class Dashboard extends React.Component {
 		super(props)
 
 		this.state = {
-			name: '',
-			email: ''
+			globalData: {}
 		}
 	}
 
 	async componentDidMount() {
 		try {
-			if (! (await isLoggedIn())) {
+			if (!(await isLoggedIn())) {
 				navigate('/')
 				return
 			}
-			const {name, email} = await getProfile()
-			this.setState({name, email})
-		} catch(err) {
+
+			await this.setGlobalData();
+
+		} catch (err) {
 			console.error(err)
 		}
 	}
 
+	setGlobalData = async () => {
+		const globalData = {}
+		const { name, email } = await getProfile()
+		const { wallets } = await getWallet()
+		let tasks = await getTasks()		
+
+		if (!Array.isArray(tasks)) {
+			tasks = []
+		}
+
+		globalData.name = name
+		globalData.email = email
+		globalData.tasks = tasks
+		globalData.wallet = wallets[0] ? wallets[0].address : 'n/a'
+		
+		this.setState({	globalData })
+		
+		// this.setState(prevState => ({
+		// 	globalData: {
+		// 		...prevState.globalData,
+		// 		name,
+		// 		email,
+		// 		tasks,
+		// 		wallets
+		// 	}
+		// }))
+
+	}
+
+	parseWallets = (wallets) => {
+		try {
+			if (!Array.isArray(wallets) || wallets.length === 0) {
+				return null
+			}
+
+			/**
+			 * once more wallet types are added, build out this function to parse the different types of wallets
+			 */
+			
+		} catch (error) {
+			console.error('Error parsing wallets: ', error)
+		}
+
+	}
+
 	render() {
-		const {name, email} = this.state
+		const { globalData } = this.state
 
 		return (
-			<Layout>
+			<Layout globalData={globalData} >
 				<SEO
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
 				/>
-				<ProfilePage name={name} email={email} />
+				<ProfilePage globalData={globalData} />
 			</Layout>
 		)
 	}

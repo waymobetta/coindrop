@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid'
 import DashContributions from './dashContributions'
 import DashProfileBox from './dashProfileBox'
 import DashBadges from './dashBadges'
-import DashBalances from './dashBalances'
+// import DashBalances from './dashBalances'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Hidden from '@material-ui/core/Hidden'
@@ -47,7 +47,7 @@ class ProfilePage extends React.Component {
 	}
 
 	render() {
-		const { classes, name, email } = this.props
+		const { classes, globalData: { name, email } } = this.props
 		const { value } = this.state
 
 		return (
@@ -60,13 +60,15 @@ class ProfilePage extends React.Component {
 						justify="flex-start"
 					>
 						<DashProfileBox name={name} email={email} />
-						<DashBalances />
+						{
+							// <DashBalances />
+						}
 						<DashBadges />
 						<DashContributions />
 					</Grid>
 				</Hidden>
 				<Hidden smUp>
-					<DashProfileBox />
+					<DashProfileBox name={name} email={email} />
 
 					<Tabs
 						centered
@@ -77,10 +79,13 @@ class ProfilePage extends React.Component {
 							indicator: classes.indicator,
 						}}
 					>
-						<Tab
-							label="Balances"
-							classes={{ root: classes.mobileTabsLabel }}
-						/>
+					{
+
+						// <Tab
+						// label="Balances"
+						// classes={{ root: classes.mobileTabsLabel }}
+						// />
+					}
 						<Tab
 							label="Contributions"
 							classes={{ root: classes.mobileTabsLabel }}
@@ -90,7 +95,9 @@ class ProfilePage extends React.Component {
 							classes={{ root: classes.mobileTabsLabel }}
 						/>
 					</Tabs>
-					{value === 0 && <DashBalances />}
+					{
+						// value === 0 && <DashBalances />
+					}
 					{value === 1 && <DashContributions />}
 					{value === 2 && <DashBadges />}
 				</Hidden>
@@ -104,6 +111,7 @@ ProfilePage.propTypes = {
 	width: PropTypes.string,
 	email: PropTypes.string,
 	name: PropTypes.string,
+	globalData: PropTypes.object,
 }
 
 export default compose(

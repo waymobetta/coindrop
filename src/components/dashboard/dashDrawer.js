@@ -120,7 +120,7 @@ const styles = theme => ({
 			theme.palette.type === 'light'
 				? theme.palette.grey[200]
 				: theme.palette.grey[900]
-		}`,
+			}`,
 	},
 	logout: {
 		marginRight: 40,
@@ -140,8 +140,21 @@ class DashDrawer extends React.Component {
 		}
 	}
 
+	determineTaskCount = () => {
+		try {
+			const { globalData: { tasks } } = this.props;
+
+			return tasks ? tasks.length : 0
+		} catch (error) {
+			console.error('Error determining task count: ', error)
+		}
+
+	}
+
 	render() {
-		const { classes } = this.props
+		const { classes, globalData } = this.props
+		const taskCount = this.determineTaskCount();
+
 		return (
 			<div className={classes.drawerWrapper}>
 				<Hidden xsDown>
@@ -194,6 +207,7 @@ class DashDrawer extends React.Component {
 							activeClassName="active"
 							key={index}
 							to={page.url}
+							state={globalData}
 						>
 							<ListItem
 								key={index}
@@ -214,7 +228,7 @@ class DashDrawer extends React.Component {
 								/>
 								{page.name === 'Tasks' && (
 									<Badge
-										badgeContent={2}
+										badgeContent={taskCount}
 										color="primary"
 										classes={{ badge: classes.badge }}
 									>{` `}</Badge>
@@ -253,6 +267,7 @@ class DashDrawer extends React.Component {
 
 DashDrawer.propTypes = {
 	classes: PropTypes.object.isRequired,
+	globalData: PropTypes.object,
 }
 
 export default withStyles(styles)(DashDrawer)

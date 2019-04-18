@@ -45,17 +45,17 @@ class SignUpForm extends React.Component {
 		}
 	}
 
-	switchToSignIn() {
+	switchToSignIn = () => {
 		this.props.switchToSignIn()
 	}
 
-	forgotPassword() {
+	forgotPassword = () => {
 		this.setState({
 			forgotPasswordMode: true
 		})
 	}
 
-	async handleForgotPassword(event) {
+	handleForgotPassword = async (event) => {
 		event.preventDefault()
 		this.clearErrors()
 		const { email } = this.state
@@ -72,7 +72,7 @@ class SignUpForm extends React.Component {
 		}
 	}
 
-	async handleResetPassword(event) {
+	handleResetPassword = async (event) => {
 		event.preventDefault()
 		this.clearErrors()
 
@@ -93,7 +93,7 @@ class SignUpForm extends React.Component {
 		}
 	}
 
-	async handleLogin(event) {
+	handleLogin = async (event) => {
 		event.preventDefault()
 		this.clearErrors()
 
@@ -120,7 +120,7 @@ class SignUpForm extends React.Component {
 		}
 	}
 
-	async handleSignup(event) {
+	handleSignup = async (event) => {
 		event.preventDefault()
 		this.clearErrors()
 
@@ -165,7 +165,7 @@ class SignUpForm extends React.Component {
 		this.setState({ acceptTerms: event.target.checked })
 	}
 
-	clearErrors() {
+	clearErrors = () => {
 		this.setState({
 			errorMessage: '',
 			successMessage: '',
