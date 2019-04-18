@@ -45,7 +45,7 @@ export const resetPassword = async (email, confirmationCode, newPassword) => {
 export const signup = async (email, password) => {
 	const newUser = await Auth.signUp(email, password)
 
-	const { body: result, ok } = await client.apis.user.user_create({
+	const { body: result, ok } = await client.apis.users.users_create({
 		payload: {
 			cognitoAuthUserId: newUser.userSub
 		}
@@ -180,7 +180,9 @@ async function initClient () {
 			}
 		}
 	})
-  window.client = client
+	window.client = client
+	
+	console.log('client: ', client)
 }
 
 initClient()

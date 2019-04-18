@@ -21,6 +21,7 @@ import { ReactComponent as Unchecked } from '../assets/unchecked.svg'
 import { Link as GatsbyLink } from 'gatsby'
 import Link from '@material-ui/core/Link'
 import { navigate } from "gatsby"
+import ConfirmationModal from '../ConfirmationModal'
 
 import { login, signup, sendResetPasswordLink, resetPassword } from '../../lib/api'
 
@@ -40,12 +41,14 @@ class SignUpForm extends React.Component {
 			acceptTerms: false,
 			forgotPasswordMode: false,
 			resetPasswordCode: null,
+			showConfirmationModal: false,
 		}
-
 	}
+
 	switchToSignIn() {
 		this.props.switchToSignIn()
 	}
+
 	forgotPassword() {
 		this.setState({
 			forgotPasswordMode: true
@@ -138,16 +141,22 @@ class SignUpForm extends React.Component {
 		}
 
 		try {
-			await signup(email, password)
-
 			this.setState({
 				successMessage: 'Signing up...'
 			})
 
-			navigate('/dashboard/home/')
+			const result = await signup(email, password)
+
+			if (result.cognitoAuthUserId) {
+				this.toggleConfirmationModal(true)
+				this.setState({
+					successMessage: ''
+				})
+			}
 		} catch(err) {
 			this.setState({
-				errorMessage: err.message
+				errorMessage: err.message,
+				successMessage: ''
 			})
 		}
 	}
@@ -165,9 +174,17 @@ class SignUpForm extends React.Component {
 		})
 	}
 
+	toggleConfirmationModal = (open) => {
+		this.setState({ showConfirmationModal: open })
+
+		if (!open) {
+			navigate('/dashboard/home')
+		}
+	}
+
 	render() {
 		const { classes, signUpMode } = this.props
-		const { forgotPasswordMode, resetPasswordMode } = this.state
+		const { forgotPasswordMode, resetPasswordMode, showConfirmationModal } = this.state
 		const showPassword = true
 		let modalTitle = 'Sign In'
 		if (signUpMode) {
@@ -511,6 +528,7 @@ class SignUpForm extends React.Component {
 						</form>
 					))}
 				</Paper>
+				<ConfirmationModal toggle={this.toggleConfirmationModal} open={showConfirmationModal} />
 			</main>
 		)
 	}

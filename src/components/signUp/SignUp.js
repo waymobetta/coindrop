@@ -19,15 +19,11 @@ function getModalStyle() {
 }
 
 class SignUp extends React.Component {
-	constructor(props) {
-		super(props)
-		this.closeButton = this.closeButton.bind(this)
-	}
-	closeButton() {
+
+	closeButton = () => {
 		this.props.onClose()
 	}
 	render() {
-		console.log('rendered')
 		const { classes } = this.props
 
 		return (

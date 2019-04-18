@@ -57,8 +57,7 @@ class AppBarHeader extends React.Component {
 		}
 		this.handleOpen = this.handleOpen.bind(this)
 		this.handleClose = this.handleClose.bind(this)
-		// this.handleSignUpOpen = this.handleSignUpOpen.bind(this)
-		this.handleSignUpClose = this.handleSignUpClose.bind(this)
+		// this.handleSignUpClose = this.handleSignUpClose.bind(this)
 	}
 
 	handleOpen = () => {
