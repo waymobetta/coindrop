@@ -94,11 +94,9 @@ DashHeader.propTypes = {
 	profile: PropTypes.object,
 }
 
-function mapStateToProps(state) {
-	return {
-		profile: state.profile,
-	};
-}
+const mapStateToProps = (state) => ({
+	profile: state.profile,
+})
 
 export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(DashHeader))
 

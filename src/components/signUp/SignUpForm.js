@@ -553,14 +553,11 @@ SignUpForm.propTypes = {
 	closeSignUp: PropTypes.func,
 	switchToSignIn: PropTypes.func,
 	signUpMode: PropTypes.bool,
+	user: PropTypes.object,
 }
 
-
-/* istanbul ignore next */
-function mapStateToProps(state) {
-	return {
-		user: state.user,
-	};
-}
+const mapStateToProps = (state) => ({
+	user: state.user,
+})
 
 export default connect(mapStateToProps)(withStyles(styles)(SignUpForm));

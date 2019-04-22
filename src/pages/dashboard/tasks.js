@@ -97,13 +97,12 @@ class Tasks extends React.Component {
 Tasks.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
+	tasks: PropTypes.object,
 }
 
-function mapStateToProps(state) {
-	return {
-		tasks: state.tasks
-	}
-}
+const mapStateToProps = (state) => ({
+	tasks: state.tasks,
+})
 
 export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),

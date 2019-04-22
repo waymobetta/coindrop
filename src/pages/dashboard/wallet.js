@@ -161,13 +161,12 @@ Wallet.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
 	location: PropTypes.object,
+	wallets: PropTypes.object,
 }
 
-function mapStateToProps(state) {
-	return {
-		wallets: state.wallets,
-	}
-}
+const mapStateToProps = (state) => ({
+	wallets: state.wallets,
+})
 
 export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),

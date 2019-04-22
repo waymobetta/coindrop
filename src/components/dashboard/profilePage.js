@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
@@ -48,7 +47,7 @@ class ProfilePage extends React.Component {
 	}
 
 	render() {
-		const { classes, profile: { name, email } } = this.props
+		const { classes } = this.props
 		const { value } = this.state
 
 		return (
@@ -60,7 +59,7 @@ class ProfilePage extends React.Component {
 						className={classes.root}
 						justify="flex-start"
 					>
-						<DashProfileBox name={name} email={email} />
+						<DashProfileBox />
 						{
 							// <DashBalances />
 						}
@@ -69,7 +68,7 @@ class ProfilePage extends React.Component {
 					</Grid>
 				</Hidden>
 				<Hidden smUp>
-					<DashProfileBox name={name} email={email} />
+					<DashProfileBox />
 
 					<Tabs
 						centered
@@ -80,13 +79,13 @@ class ProfilePage extends React.Component {
 							indicator: classes.indicator,
 						}}
 					>
-					{
+						{
 
-						// <Tab
-						// label="Balances"
-						// classes={{ root: classes.mobileTabsLabel }}
-						// />
-					}
+							// <Tab
+							// label="Balances"
+							// classes={{ root: classes.mobileTabsLabel }}
+							// />
+						}
 						<Tab
 							label="Contributions"
 							classes={{ root: classes.mobileTabsLabel }}
@@ -110,20 +109,10 @@ class ProfilePage extends React.Component {
 ProfilePage.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
-	email: PropTypes.string,
-	name: PropTypes.string,
-	globalData: PropTypes.object,
 }
 
-function mapStateToProps(state) {
-	return {
-		user: state.user,
-		profile: state.profile,
-	};
-}
-
-export default connect(mapStateToProps)(compose(
+export default compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(ProfilePage))
+)(ProfilePage)
 

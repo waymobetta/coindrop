@@ -270,10 +270,8 @@ DashDrawer.propTypes = {
 	tasks: PropTypes.object,
 }
 
-function mapStateToProps(state) {
-	return {
-		tasks: state.tasks,
-	};
-}
+const mapStateToProps = (state) => ({
+	tasks: state.tasks,
+})
 
 export default connect(mapStateToProps)(withStyles(styles)(DashDrawer))
