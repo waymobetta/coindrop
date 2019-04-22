@@ -9,6 +9,7 @@ import withWidth from '@material-ui/core/withWidth'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Hidden from '@material-ui/core/Hidden'
 import Fab from '@material-ui/core/Fab'
 import { ReactComponent as Edit } from '../../components/assets/edit.svg'
@@ -55,6 +56,9 @@ const styles = () => ({
 			alignSelf: 'center',
 		},
 	},
+	progress: {
+		margin: theme.spacing.unit * 2,
+	},
 	createWalletText: {
 		margin: '15px',
 	},
@@ -83,14 +87,29 @@ class Wallet extends React.Component {
 
 		try {
 			await updateWallet()
-		} catch(err) {
+		} catch (err) {
 			console.error(err)
 		}
 	}
 
+	displayWallet = () => {
+		const { wallets, classes } = this.props;
+
+		if (wallets.eth) {
+			return (
+				<Typography gutterBottom className={classes.ethAddress}>
+					{wallets.eth}
+				</Typography>
+			)
+		}
+
+		return <CircularProgress className={classes.progress} />
+	}
+
+
 	render() {
-		const { classes, wallets } = this.props
-		const ethWallet = wallets.eth || "Looks like you don't have an Ethereum wallet address.";
+		const { classes } = this.props
+		const wallet = this.displayWallet()
 
 		return (
 			<Layout>
@@ -118,9 +137,7 @@ class Wallet extends React.Component {
 						</Typography>
 					</Hidden>
 					<Paper className={classes.walletBoxPaper}>
-						<Typography gutterBottom className={classes.ethAddress}>
-							{ ethWallet }
-						</Typography>
+						{ wallet }
 						<Hidden smUp>
 							<Button
 								size="small"

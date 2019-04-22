@@ -11,12 +11,12 @@ export default function user(state = initialState, payload) {
     case ActionTypes.FETCH_TASKS:
       return {
         ...state,
-        status: type,
+        status: 'running',
       };
     case ActionTypes.FETCH_TASKS_SUCCESS:
       return {
         ...state,
-        status: type,
+        status: 'success',
         tasks: data,
       };
     case ActionTypes.FETCH_TASKS_ERROR:

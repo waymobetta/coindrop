@@ -11,12 +11,12 @@ export default function user(state = initialState, payload) {
     case ActionTypes.FETCH_WALLETS:
       return {
         ...state,
-        status: type,
+        status: 'running',
       };
     case ActionTypes.FETCH_WALLETS_SUCCESS:
       return {
         ...state,
-        status: type,
+        status: 'success',
         eth: data.eth,
       };
     case ActionTypes.FETCH_WALLETS_ERROR:

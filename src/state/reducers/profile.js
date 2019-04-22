@@ -12,12 +12,12 @@ export default function user(state = initialState, payload) {
     case ActionTypes.FETCH_PROFILE:
       return {
         ...state,
-        status: type,
+        status: 'running',
       };
     case ActionTypes.FETCH_PROFILE_SUCCESS:
       return {
         ...state,
-        status: type,
+        status: 'success',
         email: data.email,
       };
     case ActionTypes.FETCH_PROFILE_ERROR:
