@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Drawer from '@material-ui/core/Drawer'
@@ -12,9 +13,11 @@ import { ReactComponent as DrawerIcon } from './assets/drawerIcon.svg'
 import Hidden from '@material-ui/core/Hidden'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import theme from './theme'
-import {
-	getProfile
-} from '../lib/api'
+import { isLoggedIn } from '../lib/api'
+import { navigate } from "gatsby"
+import { fetchProfile } from '../state/actions/profile'
+import { fetchWallets } from '../state/actions/wallets'
+import { fetchTasks } from '../state/actions/tasks'
 
 const styles = theme => ({
 	root: {
@@ -87,16 +90,43 @@ class Layout extends React.Component {
 		super(props)
 		this.state = {
 			mobileOpen: false,
-			email: '',
 		}
 	}
 
 	async componentDidMount() {
 		try {
-			const {email} = await getProfile()
-			this.setState({email})
-		} catch(err) {
+			if (!(await isLoggedIn())) {
+				navigate('/')
+				return
+			}
+
+			await this.fetchUserData();
+
+		} catch (err) {
 			console.error(err)
+		}
+	}
+
+	fetchUserData = async () => {
+		const { dispatch, tasks, profile, wallets } = this.props;
+
+		try {
+			const dataToFetch = {
+				profile: [profile.status, fetchProfile],
+				wallets: [wallets.status, fetchWallets],
+				tasks: [tasks.status, fetchTasks]
+			}
+
+			for (const key in dataToFetch) {
+				const status = dataToFetch[key][0];
+				const action = dataToFetch[key][1];
+				
+				if (status !== 'success') {
+					dispatch(action())
+				}
+			}
+		} catch (error) {
+			console.error('Error fetching user data in layout: ', error)
 		}
 	}
 
@@ -107,7 +137,6 @@ class Layout extends React.Component {
 	render() {
 		const { classes, width, children } = this.props
 		const matches = width == 'xs' || width == 'sm'
-		const { email } = this.state
 
 		return (
 			<MuiThemeProvider theme={theme}>
@@ -136,7 +165,7 @@ class Layout extends React.Component {
 								<DrawerIcon color="gray" />
 							</IconButton>
 						</Hidden>
-						<DashHeader email={email} />
+						<DashHeader />
 						{children}
 					</main>
 				</div>
@@ -150,7 +179,14 @@ Layout.propTypes = {
 	width: PropTypes.string,
 	classes: PropTypes.object.isRequired,
 }
-export default compose(
+
+const mapStateToProps = (state) => ({
+	tasks: state.tasks,
+	profile: state.profile,
+	wallets: state.wallets,
+})
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(Layout)
+)(Layout))

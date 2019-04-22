@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
@@ -8,13 +9,13 @@ import withWidth from '@material-ui/core/withWidth'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Hidden from '@material-ui/core/Hidden'
 import Fab from '@material-ui/core/Fab'
 import { ReactComponent as Edit } from '../../components/assets/edit.svg'
 import theme from '../../components/theme'
 import Button from '@material-ui/core/Button'
 import {
-	getWallet,
 	updateWallet
 } from '../../lib/api'
 
@@ -55,6 +56,9 @@ const styles = () => ({
 			alignSelf: 'center',
 		},
 	},
+	progress: {
+		margin: theme.spacing.unit * 2,
+	},
 	createWalletText: {
 		margin: '15px',
 	},
@@ -74,16 +78,7 @@ class Wallet extends React.Component {
 		this.state = {
 			walletAddress: '',
 			// test value
-			newWalletAddress: '0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0'
-		}
-	}
-
-	async componentDidMount() {
-		try {
-			const wallet = await getWallet()
-			console.log(wallet.address)
-		} catch(err) {
-			console.error(err)
+			newWalletAddress: '0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0',
 		}
 	}
 
@@ -91,16 +86,31 @@ class Wallet extends React.Component {
 		event.preventDefault()
 
 		try {
-			await updateWallet(this.state.newWalletAddress)
-		} catch(err) {
+			await updateWallet()
+		} catch (err) {
 			console.error(err)
 		}
-
-		console.log('updated')
 	}
+
+	displayWallet = () => {
+		const { wallets, classes } = this.props;
+
+		if (wallets.eth) {
+			return (
+				<Typography gutterBottom className={classes.ethAddress}>
+					{wallets.eth}
+				</Typography>
+			)
+		}
+
+		return <CircularProgress className={classes.progress} />
+	}
+
 
 	render() {
 		const { classes } = this.props
+		const wallet = this.displayWallet()
+
 		return (
 			<Layout>
 				<SEO
@@ -127,9 +137,7 @@ class Wallet extends React.Component {
 						</Typography>
 					</Hidden>
 					<Paper className={classes.walletBoxPaper}>
-						<Typography gutterBottom className={classes.ethAddress}>
-							0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0
-						</Typography>
+						{ wallet }
 						<Hidden smUp>
 							<Button
 								size="small"
@@ -169,9 +177,15 @@ class Wallet extends React.Component {
 Wallet.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
+	location: PropTypes.object,
+	wallets: PropTypes.object,
 }
 
-export default compose(
+const mapStateToProps = (state) => ({
+	wallets: state.wallets,
+})
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(Wallet)
+)(Wallet))

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -126,9 +127,9 @@ class DashProfileBox extends Component {
 		this.setState({ editProfile: false })
 	}
 	render() {
-		const { classes, name, email } = this.props
+		const { classes, profile: { name, email } } = this.props
 		const { editProfile, memberSinceYear } = this.state
-		const gravatarUrl = gravatar.url(email, {s: 150})
+		const gravatarUrl = gravatar.url(email, { s: 150 })
 
 		return (
 			<React.Fragment>
@@ -203,21 +204,21 @@ class DashProfileBox extends Component {
 											}}
 										/>
 									) : (
-										<div
-											className={classes.pictureControls}
-										>
-											<Camera
-												color="#CA34FF"
-												width="24"
-												height="24"
-											/>
-											<Upload
-												color="#CA34FF"
-												width="24"
-												height="24"
-											/>
-										</div>
-									)}
+											<div
+												className={classes.pictureControls}
+											>
+												<Camera
+													color="#CA34FF"
+													width="24"
+													height="24"
+												/>
+												<Upload
+													color="#CA34FF"
+													width="24"
+													height="24"
+												/>
+											</div>
+										)}
 								</ListItem>
 							</List>
 						</Hidden>
@@ -250,86 +251,86 @@ class DashProfileBox extends Component {
 								</Hidden>
 							</>
 						) : (
-							<>
-								<Grid
-									container
-									alignContent="space-between"
-									justify="space-between"
-									direction="column"
-									alignItems="center"
-									spacing={0}
-								>
-									<form className={classes.form}>
-										<FormControl
-											margin="normal"
-											required
-											fullWidth
-										>
-											<Input
-												placeholder="Full Name"
-												id="fullName"
-												name="fullName"
-												autoFocus
-												classes={{
-													underline:
-														classes.cssUnderline,
-												}}
-											/>
-										</FormControl>
-										<FormControl
-											margin="normal"
-											required
-											fullWidth
-										>
-											<Input
-												placeholder="Email Address"
-												id="email"
-												name="email"
-												autoFocus
-												classes={{
-													underline:
-														classes.cssUnderline,
-												}}
-											/>
-										</FormControl>
-										<FormControl
-											margin="normal"
-											required
-											fullWidth
-										>
-											<Input
-												name="password"
-												type="password"
-												id="password"
-												placeholder="Password"
-												classes={{
-													underline:
-														classes.cssUnderline,
-												}}
-											/>
-										</FormControl>
-									</form>
-									<Button
-										size="small"
-										color="secondary"
-										variant="text"
-										align="right"
-										className={classes.alignRight}
-										onClick={this.handleSaveProfile}
+								<>
+									<Grid
+										container
+										alignContent="space-between"
+										justify="space-between"
+										direction="column"
+										alignItems="center"
+										spacing={0}
 									>
-										Change Password
+										<form className={classes.form}>
+											<FormControl
+												margin="normal"
+												required
+												fullWidth
+											>
+												<Input
+													placeholder="Full Name"
+													id="fullName"
+													name="fullName"
+													autoFocus
+													classes={{
+														underline:
+															classes.cssUnderline,
+													}}
+												/>
+											</FormControl>
+											<FormControl
+												margin="normal"
+												required
+												fullWidth
+											>
+												<Input
+													placeholder="Email Address"
+													id="email"
+													name="email"
+													autoFocus
+													classes={{
+														underline:
+															classes.cssUnderline,
+													}}
+												/>
+											</FormControl>
+											<FormControl
+												margin="normal"
+												required
+												fullWidth
+											>
+												<Input
+													name="password"
+													type="password"
+													id="password"
+													placeholder="Password"
+													classes={{
+														underline:
+															classes.cssUnderline,
+													}}
+												/>
+											</FormControl>
+										</form>
+										<Button
+											size="small"
+											color="secondary"
+											variant="text"
+											align="right"
+											className={classes.alignRight}
+											onClick={this.handleSaveProfile}
+										>
+											Change Password
 									</Button>
-									<Button
-										type="submit"
-										variant="contained"
-										color="secondary"
-										onClick={this.handleSaveProfile}
-									>
-										Save
+										<Button
+											type="submit"
+											variant="contained"
+											color="secondary"
+											onClick={this.handleSaveProfile}
+										>
+											Save
 									</Button>
-								</Grid>
-							</>
-						)}
+									</Grid>
+								</>
+							)}
 					</Paper>
 				</Grid>
 			</React.Fragment>
@@ -339,6 +340,11 @@ class DashProfileBox extends Component {
 
 DashProfileBox.propTypes = {
 	classes: PropTypes.object.isRequired,
+	profile: PropTypes.object,
 }
 
-export default withStyles(styles, { withTheme: true })(DashProfileBox)
+const mapStateToProps = (state) => ({
+	profile: state.profile
+})
+
+export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(DashProfileBox))

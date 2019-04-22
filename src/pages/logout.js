@@ -1,11 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
 import { navigate } from "gatsby"
-import {
-	logout
-} from '../lib/api'
+import { userLogout } from '../state/actions/user'
 
 const styles = () => ({
 })
@@ -14,7 +13,7 @@ class Component extends React.Component {
 	constructor(props) {
 		super(props)
 
-		logout()
+		this.props.dispatch(userLogout())
 		navigate('/')
 	}
 
@@ -29,7 +28,7 @@ Component.propTypes = {
 
 }
 
-export default compose(
+export default connect()(compose(
 	withStyles(styles, { withTheme: false }),
 	withWidth()
-)(Component)
+)(Component))

@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
@@ -13,44 +14,46 @@ import DashTask from '../../components/dashboard/dashTask'
 import //getTasks,
 //getTask
 '../../lib/api'
-const tasks = [
-	{
-		id: '0001',
-		name: 'AdChain',
-		subTitle: 'Sub Title',
-		date: 'Today',
-		amount: '$6 (1000 ADT)',
-		badge: 'Educational Badge',
-		summary: 'Watch a short video about adChain and take a quiz!',
-	},
-	{
-		id: '0002',
-		name: 'AdChain',
-		subTitle: 'Sub Title',
-		date: 'Today',
-		amount: '$6 (1000 ADT)',
-		badge: 'Educational Badge',
-		summary: 'Watch a short video about adChain and take a quiz!',
-	},
-	{
-		id: '0003',
-		name: 'AdChain',
-		subTitle: 'Sub Title',
-		date: 'Today',
-		amount: '$6 (1000 ADT)',
-		badge: 'Educational Badge',
-		summary: 'Watch a short video about adChain and take a quiz!',
-	},
-	{
-		id: '0004',
-		name: 'AdChain',
-		subTitle: 'Sub Title',
-		date: 'Today',
-		amount: '$6 (1000 ADT)',
-		badge: 'Educational Badge',
-		summary: 'Watch a short video about adChain and take a quiz!',
-	},
-]
+
+// const tasks = [
+// 	{
+// 		id: '0001',
+// 		name: 'AdChain',
+// 		subTitle: 'Sub Title',
+// 		date: 'Today',
+// 		amount: '$6 (1000 ADT)',
+// 		badge: 'Educational Badge',
+// 		summary: 'Watch a short video about adChain and take a quiz!',
+// 	},
+// 	{
+// 		id: '0002',
+// 		name: 'AdChain',
+// 		subTitle: 'Sub Title',
+// 		date: 'Today',
+// 		amount: '$6 (1000 ADT)',
+// 		badge: 'Educational Badge',
+// 		summary: 'Watch a short video about adChain and take a quiz!',
+// 	},
+// 	{
+// 		id: '0003',
+// 		name: 'AdChain',
+// 		subTitle: 'Sub Title',
+// 		date: 'Today',
+// 		amount: '$6 (1000 ADT)',
+// 		badge: 'Educational Badge',
+// 		summary: 'Watch a short video about adChain and take a quiz!',
+// 	},
+// 	{
+// 		id: '0004',
+// 		name: 'AdChain',
+// 		subTitle: 'Sub Title',
+// 		date: 'Today',
+// 		amount: '$6 (1000 ADT)',
+// 		badge: 'Educational Badge',
+// 		summary: 'Watch a short video about adChain and take a quiz!',
+// 	},
+// ]
+
 const styles = () => ({
 	boxTitle: {
 		...theme.boxTitle,
@@ -64,24 +67,10 @@ const styles = () => ({
 })
 
 class Tasks extends React.Component {
-	constructor(props) {
-		super(props)
-	}
-
-	async componentWillMount() {
-		try {
-			//const tasks = await getTasks()
-			//console.log(tasks)
-			//const taskId = '6bc25651-c46d-448b-a88e-ff2e2ed3b54c'
-			//const task = await getTask(taskId)
-			//console.log(task)
-		} catch (err) {
-			console.error(err)
-		}
-	}
 
 	render() {
-		const { classes } = this.props
+		const { classes, tasks: { tasks } } = this.props
+		
 		return (
 			<Layout>
 				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
@@ -108,9 +97,14 @@ class Tasks extends React.Component {
 Tasks.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
+	tasks: PropTypes.object,
 }
 
-export default compose(
+const mapStateToProps = (state) => ({
+	tasks: state.tasks,
+})
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(Tasks)
+)(Tasks))

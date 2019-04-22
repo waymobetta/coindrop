@@ -55,10 +55,9 @@ class AppBarHeader extends React.Component {
 			signUpOpen: false,
 			signUpMode: true,
 		}
-		this.handleOpen = this.handleOpen.bind(this)
-		this.handleClose = this.handleClose.bind(this)
-		this.handleSignUpOpen = this.handleSignUpOpen.bind(this)
-		this.handleSignUpClose = this.handleSignUpClose.bind(this)
+		// this.handleOpen = this.handleOpen.bind(this)
+		// this.handleClose = this.handleClose.bind(this)
+		// this.handleSignUpClose = this.handleSignUpClose.bind(this)
 	}
 
 	handleOpen = () => {
@@ -123,12 +122,12 @@ class AppBarHeader extends React.Component {
 								<Grid item>
 									<ButtonHeader
 										className={classes.noBg}
-										onClick={() => this.handleSignUpOpen('signIn', this)}
+										onClick={() => this.handleSignUpOpen('signIn')}
 									>
 										Login
 									</ButtonHeader>
 									<ButtonHeader
-										onClick={() => this.handleSignUpOpen('signUp', this)}
+										onClick={() => this.handleSignUpOpen('signUp')}
 									>
 										Sign Up
 									</ButtonHeader>

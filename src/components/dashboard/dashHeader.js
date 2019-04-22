@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -49,7 +50,7 @@ const styles = theme => ({
 
 class DashHeader extends Component {
 	render() {
-		const { classes, email } = this.props
+		const { classes, profile: { email } } = this.props
 		const gravatarUrl = gravatar.url(email, {s: 100})
 
 		return (
@@ -90,6 +91,12 @@ class DashHeader extends Component {
 
 DashHeader.propTypes = {
 	classes: PropTypes.object.isRequired,
+	profile: PropTypes.object,
 }
 
-export default withStyles(styles, { withTheme: true })(DashHeader)
+const mapStateToProps = (state) => ({
+	profile: state.profile,
+})
+
+export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(DashHeader))
+

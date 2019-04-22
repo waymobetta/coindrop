@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
@@ -120,7 +121,7 @@ const styles = theme => ({
 			theme.palette.type === 'light'
 				? theme.palette.grey[200]
 				: theme.palette.grey[900]
-		}`,
+			}`,
 	},
 	logout: {
 		marginRight: 40,
@@ -140,8 +141,21 @@ class DashDrawer extends React.Component {
 		}
 	}
 
+	determineTaskCount = () => {
+		try {
+			const { tasks: { tasks } } = this.props;
+
+			return tasks ? tasks.length : 0
+		} catch (error) {
+			console.error('Error determining task count: ', error)
+		}
+
+	}
+
 	render() {
 		const { classes } = this.props
+		const taskCount = this.determineTaskCount();
+
 		return (
 			<div className={classes.drawerWrapper}>
 				<Hidden xsDown>
@@ -214,7 +228,7 @@ class DashDrawer extends React.Component {
 								/>
 								{page.name === 'Tasks' && (
 									<Badge
-										badgeContent={2}
+										badgeContent={taskCount}
 										color="primary"
 										classes={{ badge: classes.badge }}
 									>{` `}</Badge>
@@ -253,6 +267,11 @@ class DashDrawer extends React.Component {
 
 DashDrawer.propTypes = {
 	classes: PropTypes.object.isRequired,
+	tasks: PropTypes.object,
 }
 
-export default withStyles(styles)(DashDrawer)
+const mapStateToProps = (state) => ({
+	tasks: state.tasks,
+})
+
+export default connect(mapStateToProps)(withStyles(styles)(DashDrawer))

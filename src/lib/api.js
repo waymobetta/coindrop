@@ -4,9 +4,10 @@ import Amplify, { Auth } from 'aws-amplify'
 //import dotenv from 'dotenv'
 //dotenv.config()
 
-export const baseURL = process.env.API_BASE_URL || 'http://localhost:5000/v1'
+const baseURL = 'http://api.coindrop.io/v1/'
+// export const baseURL = process.env.API_BASE_URL || 'http://localhost:5000/v1'
 
-spec.host = baseURL.replace(/.*\/\/([\w+:]+)\/.*/, '$1')
+spec.host = baseURL.replace(/.*\/\/([\w.:]+)\/.*/, '$1')
 
 let client
 
@@ -22,15 +23,14 @@ Amplify.configure({
   }
 })
 
-export const login = async (email, password) => {
+export const login = async ({email, password}) => {
 	const { signInUserSession: { accessToken: { jwtToken } } } = await Auth.signIn(email, password)
+  const userId = await getUserId(await getCognitoUserId())
 
 	localStorage.setItem('accessToken', jwtToken)
-
-  const userId = await getUserId(await getCognitoUserId())
 	localStorage.setItem('userId', userId)
 
-	return jwtToken
+	return {jwtToken, userId}
 }
 
 export const sendResetPasswordLink = async (email) => {
@@ -41,10 +41,10 @@ export const resetPassword = async (email, confirmationCode, newPassword) => {
 	return Auth.forgotPasswordSubmit(email, confirmationCode, newPassword)
 }
 
-export const signup = async (email, password) => {
+export const signup = async ({email, password}) => {
 	const newUser = await Auth.signUp(email, password)
 
-	const { body: result, ok } = await client.apis.user.user_create({
+	const { body: result, ok } = await client.apis.users.users_create({
 		payload: {
 			cognitoAuthUserId: newUser.userSub
 		}
@@ -168,18 +168,20 @@ export const getTask = async (taskId) => {
 	return result
 }
 
-async function initClient () {
-	client = await Swagger({
-		spec,
-		requestInterceptor(req) {
-			const token = accessToken()
-			if (token) {
-				req.headers['Authorization'] = `Bearer ${token}`;
-				return req
+export const initClient = async () => {
+	try {
+		client = await Swagger({
+			spec,
+			requestInterceptor(req) {
+				const token = accessToken()
+				if (token) {
+					req.headers['Authorization'] = `Bearer ${token}`;
+					return req
+				}
 			}
-		}
-	})
-  window.client = client
+		})
+		window.client = client
+	} catch (error) {
+		console.error('Init API Client error: ', error)
+	}
 }
-
-initClient()
