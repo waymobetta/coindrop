@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import FormControl from '@material-ui/core/FormControl'
@@ -23,7 +24,8 @@ import Link from '@material-ui/core/Link'
 import { navigate } from "gatsby"
 import ConfirmationModal from '../ConfirmationModal'
 
-import { login, signup, sendResetPasswordLink, resetPassword } from '../../lib/api'
+import { signup, sendResetPasswordLink, resetPassword } from '../../lib/api'
+import { userLogin } from '../../state/actions/user'
 
 const TOSLink = props => <GatsbyLink {...props} />
 
@@ -42,6 +44,14 @@ class SignUpForm extends React.Component {
 			forgotPasswordMode: false,
 			resetPasswordCode: null,
 			showConfirmationModal: false,
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		const { user } = this.props
+
+		if (prevProps.user.status !== user.status && user.status === 'success') {
+			navigate('/dashboard/home/')
 		}
 	}
 
@@ -98,14 +108,14 @@ class SignUpForm extends React.Component {
 		this.clearErrors()
 
 		const { email, password } = this.state
+		const { dispatch } = this.props;
 		try {
-			await login(email, password)
+			const user = { email, password }
+			dispatch(userLogin(user))
 
 			this.setState({
 				successMessage: 'Logging in...'
 			})
-
-			navigate('/dashboard/home/')
 		} catch(err) {
 			if (err.code == 'UserNotFoundException') {
 				this.setState({
@@ -541,4 +551,12 @@ SignUpForm.propTypes = {
 	signUpMode: PropTypes.bool,
 }
 
-export default withStyles(styles)(SignUpForm)
+
+/* istanbul ignore next */
+function mapStateToProps(state) {
+	return {
+		user: state.user,
+	};
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(SignUpForm));

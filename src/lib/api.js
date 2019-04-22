@@ -23,15 +23,14 @@ Amplify.configure({
   }
 })
 
-export const login = async (email, password) => {
+export const login = async ({email, password}) => {
 	const { signInUserSession: { accessToken: { jwtToken } } } = await Auth.signIn(email, password)
+  const userId = await getUserId(await getCognitoUserId())
 
 	localStorage.setItem('accessToken', jwtToken)
-
-  const userId = await getUserId(await getCognitoUserId())
 	localStorage.setItem('userId', userId)
 
-	return jwtToken
+	return {jwtToken, userId}
 }
 
 export const sendResetPasswordLink = async (email) => {

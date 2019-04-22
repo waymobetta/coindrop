@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
@@ -69,7 +70,7 @@ class Dashboard extends React.Component {
 		globalData.wallet = wallets[0] ? wallets[0].address : 'n/a'
 		
 		this.setState({	globalData })
-		
+
 		// this.setState(prevState => ({
 		// 	globalData: {
 		// 		...prevState.globalData,
@@ -118,7 +119,19 @@ Dashboard.propTypes = {
 	width: PropTypes.string,
 }
 
-export default compose(
+// export default compose(
+// 	withStyles(styles, { withTheme: true }),
+// 	withWidth()
+// )(Dashboard)
+
+
+function mapStateToProps(state) {
+	return {
+		user: state.user,
+	};
+}
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(Dashboard)
+)(Dashboard));
