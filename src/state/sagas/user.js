@@ -5,7 +5,7 @@
 
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { ActionTypes } from '../constants'
-import { login, signup } from '../../lib/api'
+import { login, signup, logout } from '../../lib/api'
 
 /**
  * Login
@@ -49,12 +49,26 @@ export function* userSignup({ user }) {
   }
 }
 
+export function* userLogout() {
+  try {
+    yield call(logout)
+    yield put({
+      type: ActionTypes.USER_LOGOUT_SUCCESS
+    })
+  } catch (error) {
+    yield put({
+      type: ActionTypes.USER_LOGOUT_ERROR
+    })
+  }
+}
+
 /**
  * User Sagas
  */
 export default function* root() {
   yield all([
-    takeLatest(ActionTypes.USER_LOGIN, userLogin),
     takeLatest(ActionTypes.USER_SIGNUP, userSignup),
+    takeLatest(ActionTypes.USER_LOGIN, userLogin),
+    takeLatest(ActionTypes.USER_LOGOUT, userLogout),
   ]);
 }

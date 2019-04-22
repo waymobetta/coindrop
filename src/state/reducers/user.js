@@ -10,6 +10,23 @@ const initialState = {
 export default function user (state = initialState, payload) {
   const { payload: data, type } = payload;
   switch (type) {
+    case ActionTypes.USER_SIGNUP:
+    return {
+      ...state,
+      status: type,
+    };
+    case ActionTypes.USER_SIGNUP_SUCCESS:
+    return {
+      ...state,
+      status: type,
+      cognitoAuthUserId: data.cognitoAuthUserId,
+      email: data.email,
+    };
+    case ActionTypes.USER_SIGNUP_ERROR:
+    return {
+      ...state,
+      status: 'error',
+    };
     case ActionTypes.USER_LOGIN:
       return { 
         ...state, 
@@ -27,19 +44,17 @@ export default function user (state = initialState, payload) {
         ...state,
         status: 'error',
       };
-    case ActionTypes.USER_SIGNUP:
+    case ActionTypes.USER_LOGOUT:
       return {
         ...state,
         status: type,
       };
-    case ActionTypes.USER_SIGNUP_SUCCESS:
+    case ActionTypes.USER_LOGOUT_SUCCESS:
       return {
         ...state,
         status: type,
-        cognitoAuthUserId: data.cognitoAuthUserId,
-        email: data.email,
       };
-    case ActionTypes.USER_SIGNUP_ERROR:
+    case ActionTypes.USER_LOGOUT_ERROR:
       return {
         ...state,
         status: 'error',
