@@ -9,11 +9,13 @@ import withWidth from '@material-ui/core/withWidth'
 import { navigate } from "gatsby"
 import ProfilePage from '../../components/dashboard/profilePage'
 import {
-	getProfile,
 	isLoggedIn,
-	getTasks,
-	getWallet
+	// getTasks,
+	// getWallet
 } from '../../lib/api'
+import { fetchProfile } from '../../state/actions/profile'
+import { fetchWallets } from '../../state/actions/wallets'
+import { fetchTasks } from '../../state/actions/tasks'
 
 const styles = theme => ({
 	root: {
@@ -32,13 +34,6 @@ const styles = theme => ({
 })
 
 class Dashboard extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			globalData: {}
-		}
-	}
 
 	async componentDidMount() {
 		try {
@@ -47,40 +42,22 @@ class Dashboard extends React.Component {
 				return
 			}
 
-			await this.setGlobalData();
+			await this.fetchUserData();
 
 		} catch (err) {
 			console.error(err)
 		}
 	}
 
-	setGlobalData = async () => {
-		const globalData = {}
-		const { name, email } = await getProfile()
-		const { wallets } = await getWallet()
-		let tasks = await getTasks()		
+	fetchUserData = async () => {
+		const { dispatch } = this.props;
+		const dataToFetch = [
+			fetchProfile,
+			fetchWallets,
+			fetchTasks,
+		]
 
-		if (!Array.isArray(tasks)) {
-			tasks = []
-		}
-
-		globalData.name = name
-		globalData.email = email
-		globalData.tasks = tasks
-		globalData.wallet = wallets[0] ? wallets[0].address : 'n/a'
-		
-		this.setState({	globalData })
-
-		// this.setState(prevState => ({
-		// 	globalData: {
-		// 		...prevState.globalData,
-		// 		name,
-		// 		email,
-		// 		tasks,
-		// 		wallets
-		// 	}
-		// }))
-
+		dataToFetch.forEach((action) => dispatch(action()))
 	}
 
 	parseWallets = (wallets) => {
@@ -100,15 +77,13 @@ class Dashboard extends React.Component {
 	}
 
 	render() {
-		const { globalData } = this.state
-
 		return (
-			<Layout globalData={globalData} >
+			<Layout>
 				<SEO
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
 				/>
-				<ProfilePage globalData={globalData} />
+				<ProfilePage />
 			</Layout>
 		)
 	}
@@ -119,19 +94,7 @@ Dashboard.propTypes = {
 	width: PropTypes.string,
 }
 
-// export default compose(
-// 	withStyles(styles, { withTheme: true }),
-// 	withWidth()
-// )(Dashboard)
-
-
-function mapStateToProps(state) {
-	return {
-		user: state.user,
-	};
-}
-
-export default connect(mapStateToProps)(compose(
+export default connect()(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
 )(Dashboard));

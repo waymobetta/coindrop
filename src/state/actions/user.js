@@ -6,3 +6,10 @@ export const userLogin = user => {
     user
   }
 }
+
+export const userSignup = user => {
+  return {
+    type: ActionTypes.USER_SIGNUP,
+    user
+  }
+}

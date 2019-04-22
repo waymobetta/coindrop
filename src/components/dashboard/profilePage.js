@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
@@ -47,8 +48,10 @@ class ProfilePage extends React.Component {
 	}
 
 	render() {
-		const { classes, globalData: { name, email } } = this.props
+		const { classes, profile: { name, email } } = this.props
 		const { value } = this.state
+
+		console.log('profile page this props: ', this.props)
 
 		return (
 			<>
@@ -114,7 +117,15 @@ ProfilePage.propTypes = {
 	globalData: PropTypes.object,
 }
 
-export default compose(
+function mapStateToProps(state) {
+	return {
+		user: state.user,
+		profile: state.profile,
+	};
+}
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(ProfilePage)
+)(ProfilePage))
+

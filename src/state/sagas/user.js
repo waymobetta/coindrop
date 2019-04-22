@@ -5,7 +5,7 @@
 
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { ActionTypes } from '../constants'
-import { login } from '../../lib/api'
+import { login, signup } from '../../lib/api'
 
 /**
  * Login
@@ -29,11 +29,32 @@ export function* userLogin({ user }) {
     });
   }
 }
+
+export function* userSignup({ user }) {
+  try {
+    const response = yield call(signup, user)
+    response.email = user.email
+
+    yield put({
+      type: ActionTypes.USER_SIGNUP_SUCCESS,
+      payload: response,
+    });
+  }
+  catch (error) {
+    /* istanbul ignore next */
+    yield put({
+      type: ActionTypes.USER_SIGNUP_ERROR,
+      payload: error,
+    });
+  }
+}
+
 /**
  * User Sagas
  */
 export default function* root() {
   yield all([
     takeLatest(ActionTypes.USER_LOGIN, userLogin),
+    takeLatest(ActionTypes.USER_SIGNUP, userSignup),
   ]);
 }

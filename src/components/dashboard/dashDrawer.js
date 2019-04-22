@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
@@ -142,7 +143,7 @@ class DashDrawer extends React.Component {
 
 	determineTaskCount = () => {
 		try {
-			const { globalData: { tasks } } = this.props;
+			const { tasks } = this.props;
 
 			return tasks ? tasks.length : 0
 		} catch (error) {
@@ -152,7 +153,7 @@ class DashDrawer extends React.Component {
 	}
 
 	render() {
-		const { classes, globalData } = this.props
+		const { classes } = this.props
 		const taskCount = this.determineTaskCount();
 
 		return (
@@ -207,7 +208,6 @@ class DashDrawer extends React.Component {
 							activeClassName="active"
 							key={index}
 							to={page.url}
-							state={globalData}
 						>
 							<ListItem
 								key={index}
@@ -267,7 +267,13 @@ class DashDrawer extends React.Component {
 
 DashDrawer.propTypes = {
 	classes: PropTypes.object.isRequired,
-	globalData: PropTypes.object,
+	tasks: PropTypes.object,
 }
 
-export default withStyles(styles)(DashDrawer)
+function mapStateToProps(state) {
+	return {
+		tasks: state.tasks,
+	};
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(DashDrawer))

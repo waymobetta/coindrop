@@ -24,8 +24,8 @@ import Link from '@material-ui/core/Link'
 import { navigate } from "gatsby"
 import ConfirmationModal from '../ConfirmationModal'
 
-import { signup, sendResetPasswordLink, resetPassword } from '../../lib/api'
-import { userLogin } from '../../state/actions/user'
+import { sendResetPasswordLink, resetPassword } from '../../lib/api'
+import { userLogin, userSignup } from '../../state/actions/user'
 
 const TOSLink = props => <GatsbyLink {...props} />
 
@@ -50,8 +50,12 @@ class SignUpForm extends React.Component {
 	componentDidUpdate(prevProps) {
 		const { user } = this.props
 
-		if (prevProps.user.status !== user.status && user.status === 'success') {
+		if (prevProps.user.status !== user.status && user.status === 'USER_LOGIN_SUCCESS') {
 			navigate('/dashboard/home/')
+		}
+
+		if (prevProps.user.cognitoAuthUserId !== user.cognitoAuthUserId && user.cognitoAuthUserId) {
+			this.toggleConfirmationModal(true);
 		}
 	}
 
@@ -75,7 +79,7 @@ class SignUpForm extends React.Component {
 			this.setState({
 				resetPasswordMode: true
 			})
-		} catch(err) {
+		} catch (err) {
 			this.setState({
 				errorMessage: err.message
 			})
@@ -86,7 +90,7 @@ class SignUpForm extends React.Component {
 		event.preventDefault()
 		this.clearErrors()
 
-		const { email, resetPasswordCode, password:newPassword} = this.state
+		const { email, resetPasswordCode, password: newPassword } = this.state
 
 		try {
 			await resetPassword(email, resetPasswordCode, newPassword)
@@ -96,7 +100,7 @@ class SignUpForm extends React.Component {
 				forgotPasswordMode: false,
 				signUpMode: false,
 			})
-		} catch(err) {
+		} catch (err) {
 			this.setState({
 				errorMessage: err.message
 			})
@@ -116,7 +120,7 @@ class SignUpForm extends React.Component {
 			this.setState({
 				successMessage: 'Logging in...'
 			})
-		} catch(err) {
+		} catch (err) {
 			if (err.code == 'UserNotFoundException') {
 				this.setState({
 					emailError: err.message
@@ -135,6 +139,7 @@ class SignUpForm extends React.Component {
 		this.clearErrors()
 
 		const { email, password, passwordConfirm, acceptTerms } = this.state
+		const { dispatch } = this.props
 
 		if (password !== passwordConfirm) {
 			this.setState({
@@ -155,15 +160,9 @@ class SignUpForm extends React.Component {
 				successMessage: 'Signing up...'
 			})
 
-			const result = await signup(email, password)
-
-			if (result.cognitoAuthUserId) {
-				this.toggleConfirmationModal(true)
-				this.setState({
-					successMessage: ''
-				})
-			}
-		} catch(err) {
+			const user = { email, password }
+			dispatch(userSignup(user))
+		} catch (err) {
 			this.setState({
 				errorMessage: err.message,
 				successMessage: ''
@@ -184,8 +183,13 @@ class SignUpForm extends React.Component {
 		})
 	}
 
+
+
 	toggleConfirmationModal = (open) => {
-		this.setState({ showConfirmationModal: open })
+		this.setState({
+			showConfirmationModal: open,
+			successMessage: ''
+		})
 
 		if (!open) {
 			navigate('/dashboard/home')
@@ -275,8 +279,8 @@ class SignUpForm extends React.Component {
 													{showPassword ? (
 														<Visibility />
 													) : (
-														<VisibilityOff />
-													)}
+															<VisibilityOff />
+														)}
 												</IconButton>
 											</InputAdornment>
 										}
@@ -305,8 +309,8 @@ class SignUpForm extends React.Component {
 													{showPassword ? (
 														<Visibility />
 													) : (
-														<VisibilityOff />
-													)}
+															<VisibilityOff />
+														)}
 												</IconButton>
 											</InputAdornment>
 										}
@@ -369,174 +373,174 @@ class SignUpForm extends React.Component {
 						</form>
 					) : (
 
-						resetPasswordMode ? (
-							<form className={classes.form} onSubmit={event => this.handleResetPassword(event)}>
-							<Grid
-								container
-								alignContent="space-between"
-								justify="space-between"
-								direction="column"
-								alignItems="center"
-								spacing={0}
-							>
-								<FormControl margin="normal" required fullWidth>
-									<Input
-										placeholder="Verification Code"
-										id="code"
-										name="code"
-										onChange={event => this.setState({
-											resetPasswordCode: event.target.value
-										})}
-										classes={{
-											underline: classes.cssUnderline,
-										}}
-									/>
-								</FormControl>
-								<FormControl margin="normal" required fullWidth>
-									<Input
-										placeholder="New Password"
-										id="newPassword"
-										name="newPassword"
-										autoComplete="newPassword"
-										type="password"
-										autoFocus
-										onChange={event => this.setState({
-											password: event.target.value
-										})}
-										classes={{
-											underline: classes.cssUnderline,
-										}}
-									/>
-								</FormControl>
-								<Button
-									type="submit"
-									fullWidth
-									className={classes.submit}
-									variant="contained"
-									color="secondary"
-								>
-									Reset Password
+							resetPasswordMode ? (
+								<form className={classes.form} onSubmit={event => this.handleResetPassword(event)}>
+									<Grid
+										container
+										alignContent="space-between"
+										justify="space-between"
+										direction="column"
+										alignItems="center"
+										spacing={0}
+									>
+										<FormControl margin="normal" required fullWidth>
+											<Input
+												placeholder="Verification Code"
+												id="code"
+												name="code"
+												onChange={event => this.setState({
+													resetPasswordCode: event.target.value
+												})}
+												classes={{
+													underline: classes.cssUnderline,
+												}}
+											/>
+										</FormControl>
+										<FormControl margin="normal" required fullWidth>
+											<Input
+												placeholder="New Password"
+												id="newPassword"
+												name="newPassword"
+												autoComplete="newPassword"
+												type="password"
+												autoFocus
+												onChange={event => this.setState({
+													password: event.target.value
+												})}
+												classes={{
+													underline: classes.cssUnderline,
+												}}
+											/>
+										</FormControl>
+										<Button
+											type="submit"
+											fullWidth
+											className={classes.submit}
+											variant="contained"
+											color="secondary"
+										>
+											Reset Password
 								</Button>
-							</Grid>
-							</form>
-						) :
+									</Grid>
+								</form>
+							) :
 
-						forgotPasswordMode ? (
-							<form className={classes.form} onSubmit={event => this.handleForgotPassword(event)}>
-							<Grid
-								container
-								alignContent="space-between"
-								justify="space-between"
-								direction="column"
-								alignItems="center"
-								spacing={0}
-							>
-								<FormControl margin="normal" required fullWidth>
-									<Input
-										placeholder="Email Address"
-										id="email"
-										name="email"
-										autoComplete="email"
-										autoFocus
-										onChange={event => this.setState({
-											email: event.target.value
-										})}
-										classes={{
-											underline: classes.cssUnderline,
-										}}
-									/>
-									{this.state.emailError &&
-										<FormHelperText id="component-error-text">
-											{this.state.emailError}
-										</FormHelperText>
-									}
-								</FormControl>
-								<Button
-									type="submit"
-									fullWidth
-									className={classes.submit}
-									variant="contained"
-									color="secondary"
-								>
-									Send reset password link
+								forgotPasswordMode ? (
+									<form className={classes.form} onSubmit={event => this.handleForgotPassword(event)}>
+										<Grid
+											container
+											alignContent="space-between"
+											justify="space-between"
+											direction="column"
+											alignItems="center"
+											spacing={0}
+										>
+											<FormControl margin="normal" required fullWidth>
+												<Input
+													placeholder="Email Address"
+													id="email"
+													name="email"
+													autoComplete="email"
+													autoFocus
+													onChange={event => this.setState({
+														email: event.target.value
+													})}
+													classes={{
+														underline: classes.cssUnderline,
+													}}
+												/>
+												{this.state.emailError &&
+													<FormHelperText id="component-error-text">
+														{this.state.emailError}
+													</FormHelperText>
+												}
+											</FormControl>
+											<Button
+												type="submit"
+												fullWidth
+												className={classes.submit}
+												variant="contained"
+												color="secondary"
+											>
+												Send reset password link
 								</Button>
-							</Grid>
-							</form>
-						) : (
-						<form className={classes.form} onSubmit={event => this.handleLogin(event)}>
-							<Grid
-								container
-								alignContent="space-between"
-								justify="space-between"
-								direction="column"
-								alignItems="center"
-								spacing={0}
-							>
-								<FormControl margin="normal" required fullWidth>
-									<Input
-										placeholder="Email Address"
-										id="email"
-										name="email"
-										autoComplete="email"
-										autoFocus
-										onChange={event => this.setState({
-											email: event.target.value
-										})}
-										classes={{
-											underline: classes.cssUnderline,
-										}}
-									/>
-									{this.state.emailError &&
-										<FormHelperText id="component-error-text">
-											{this.state.emailError}
-										</FormHelperText>
-									}
-								</FormControl>
-								<FormControl margin="normal" required fullWidth>
-									<Input
-										name="password"
-										type="password"
-										id="password"
-										placeholder="Password"
-										onChange={event => this.setState({
-											password: event.target.value
-										})}
-										classes={{
-											underline: classes.cssUnderline,
-										}}
-										endAdornment={
-											<InputAdornment position="end">
-												<IconButton aria-label="Toggle password visibility">
-													{showPassword ? (
-														<Visibility />
-													) : (
-														<VisibilityOff />
-													)}
-												</IconButton>
-											</InputAdornment>
-										}
-									/>
-								</FormControl>
+										</Grid>
+									</form>
+								) : (
+										<form className={classes.form} onSubmit={event => this.handleLogin(event)}>
+											<Grid
+												container
+												alignContent="space-between"
+												justify="space-between"
+												direction="column"
+												alignItems="center"
+												spacing={0}
+											>
+												<FormControl margin="normal" required fullWidth>
+													<Input
+														placeholder="Email Address"
+														id="email"
+														name="email"
+														autoComplete="email"
+														autoFocus
+														onChange={event => this.setState({
+															email: event.target.value
+														})}
+														classes={{
+															underline: classes.cssUnderline,
+														}}
+													/>
+													{this.state.emailError &&
+														<FormHelperText id="component-error-text">
+															{this.state.emailError}
+														</FormHelperText>
+													}
+												</FormControl>
+												<FormControl margin="normal" required fullWidth>
+													<Input
+														name="password"
+														type="password"
+														id="password"
+														placeholder="Password"
+														onChange={event => this.setState({
+															password: event.target.value
+														})}
+														classes={{
+															underline: classes.cssUnderline,
+														}}
+														endAdornment={
+															<InputAdornment position="end">
+																<IconButton aria-label="Toggle password visibility">
+																	{showPassword ? (
+																		<Visibility />
+																	) : (
+																			<VisibilityOff />
+																		)}
+																</IconButton>
+															</InputAdornment>
+														}
+													/>
+												</FormControl>
 
-								<Button
-									type="submit"
-									fullWidth
-									className={classes.submit}
-									variant="contained"
-									color="secondary"
-								>
-									Sign In
+												<Button
+													type="submit"
+													fullWidth
+													className={classes.submit}
+													variant="contained"
+													color="secondary"
+												>
+													Sign In
 								</Button>
-								<Button
-									size="medium"
-									variant="text"
-									onClick={() => this.forgotPassword()}
-								>
-									Forgot Password?
+												<Button
+													size="medium"
+													variant="text"
+													onClick={() => this.forgotPassword()}
+												>
+													Forgot Password?
 								</Button>
-							</Grid>
-						</form>
-					))}
+											</Grid>
+										</form>
+									))}
 				</Paper>
 				<ConfirmationModal toggle={this.toggleConfirmationModal} open={showConfirmationModal} />
 			</main>

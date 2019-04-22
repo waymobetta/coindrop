@@ -41,7 +41,7 @@ export const resetPassword = async (email, confirmationCode, newPassword) => {
 	return Auth.forgotPasswordSubmit(email, confirmationCode, newPassword)
 }
 
-export const signup = async (email, password) => {
+export const signup = async ({email, password}) => {
 	const newUser = await Auth.signUp(email, password)
 
 	const { body: result, ok } = await client.apis.users.users_create({
@@ -168,20 +168,20 @@ export const getTask = async (taskId) => {
 	return result
 }
 
-async function initClient () {
-	client = await Swagger({
-		spec,
-		requestInterceptor(req) {
-			const token = accessToken()
-			if (token) {
-				req.headers['Authorization'] = `Bearer ${token}`;
-				return req
+export const initClient = async () => {
+	try {
+		client = await Swagger({
+			spec,
+			requestInterceptor(req) {
+				const token = accessToken()
+				if (token) {
+					req.headers['Authorization'] = `Bearer ${token}`;
+					return req
+				}
 			}
-		}
-	})
-	window.client = client
-	
-	console.log('client: ', client)
+		})
+		window.client = client
+	} catch (error) {
+		console.error('Init API Client error: ', error)
+	}
 }
-
-initClient()

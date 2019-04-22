@@ -92,8 +92,7 @@ class Layout extends React.Component {
 	}
 
 	render() {
-		const { classes, width, children, globalData } = this.props
-		const { email } = globalData
+		const { classes, width, children } = this.props
 		const matches = width == 'xs' || width == 'sm'
 
 		return (
@@ -110,7 +109,7 @@ class Layout extends React.Component {
 							variant={matches ? 'temporary' : 'permanent'}
 							anchor={matches ? 'right' : 'left'}
 						>
-							<DashDrawer globalData={globalData} />
+							<DashDrawer />
 						</Drawer>
 					</nav>
 					<main className={classes.content}>
@@ -123,7 +122,7 @@ class Layout extends React.Component {
 								<DrawerIcon color="gray" />
 							</IconButton>
 						</Hidden>
-						<DashHeader email={email} />
+						<DashHeader />
 						{children}
 					</main>
 				</div>
@@ -136,8 +135,8 @@ Layout.propTypes = {
 	children: PropTypes.node.isRequired,
 	width: PropTypes.string,
 	classes: PropTypes.object.isRequired,
-	globalData: PropTypes.object
 }
+
 export default compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
