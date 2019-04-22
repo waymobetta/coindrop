@@ -143,7 +143,7 @@ class DashDrawer extends React.Component {
 
 	determineTaskCount = () => {
 		try {
-			const { tasks } = this.props;
+			const { tasks: { tasks } } = this.props;
 
 			return tasks ? tasks.length : 0
 		} catch (error) {

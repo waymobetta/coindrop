@@ -51,8 +51,6 @@ class ProfilePage extends React.Component {
 		const { classes, profile: { name, email } } = this.props
 		const { value } = this.state
 
-		console.log('profile page this props: ', this.props)
-
 		return (
 			<>
 				<Hidden xsDown>

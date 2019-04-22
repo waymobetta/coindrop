@@ -68,20 +68,8 @@ const styles = () => ({
 
 class Tasks extends React.Component {
 
-	// async componentWillMount() {
-	// 	try {
-	// 		//const tasks = await getTasks()
-	// 		//console.log(tasks)
-	// 		//const taskId = '6bc25651-c46d-448b-a88e-ff2e2ed3b54c'
-	// 		//const task = await getTask(taskId)
-	// 		//console.log(task)
-	// 	} catch (err) {
-	// 		console.error(err)
-	// 	}
-	// }
-
 	render() {
-		const { classes, tasks } = this.props
+		const { classes, tasks: { tasks } } = this.props
 		
 		return (
 			<Layout>
