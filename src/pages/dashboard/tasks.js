@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
@@ -66,12 +67,6 @@ const styles = () => ({
 })
 
 class Tasks extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			globalData: {}
-		}
-	}
 
 	// async componentWillMount() {
 	// 	try {
@@ -85,26 +80,11 @@ class Tasks extends React.Component {
 	// 	}
 	// }
 
-	async componentDidMount() {
-		try {
-			const { location } = this.props;
-			if (location.state) {
-				this.setState({
-					globalData: location.state
-				})
-			}
-		} catch (err) {
-			console.error(err)
-		}
-	}
-
 	render() {
-		const { classes } = this.props
-		const { globalData } = this.state
-		const tasks = globalData.tasks || []
+		const { classes, tasks } = this.props
 		
 		return (
-			<Layout globalData={globalData}>
+			<Layout>
 				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
 				<Hidden mdUp>
 					<Typography variant="h2" component="h2" className={classes.boxTitle}>
@@ -131,7 +111,13 @@ Tasks.propTypes = {
 	width: PropTypes.string,
 }
 
-export default compose(
+function mapStateToProps(state) {
+	return {
+		tasks: state.tasks
+	}
+}
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(Tasks)
+)(Tasks))

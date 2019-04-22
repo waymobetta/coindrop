@@ -14,11 +14,16 @@ import { getWallet } from '../../lib/api'
 export function* fetchWallets() {
   try {
     const response = yield call(getWallet)
-    console.log('wallet response: ', response)
+    const { wallets } = response;
+    const data = {}
+
+    wallets.forEach((wallet) => {
+      data[wallet.walletType] = wallet.address
+    })
 
     yield put({
       type: ActionTypes.FETCH_WALLETS_SUCCESS,
-      payload: response,
+      payload: data,
     });
   }
   catch (error) {

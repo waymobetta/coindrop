@@ -17,7 +17,7 @@ export default function user(state = initialState, payload) {
       return {
         ...state,
         status: type,
-        tasks: data.tasks,
+        tasks: data,
       };
     case ActionTypes.FETCH_TASKS_ERROR:
       return {

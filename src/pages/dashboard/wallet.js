@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
@@ -74,20 +75,6 @@ class Wallet extends React.Component {
 			walletAddress: '',
 			// test value
 			newWalletAddress: '0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0',
-			globalData: {},
-		}
-	}
-
-	async componentDidMount() {
-		try {
-			const { location } = this.props;
-			if (location.state) {
-				this.setState({
-					globalData: location.state
-				})
-			}
-		} catch(err) {
-			console.error(err)
 		}
 	}
 
@@ -102,12 +89,11 @@ class Wallet extends React.Component {
 	}
 
 	render() {
-		const { classes } = this.props
-		const { globalData } = this.state
-		const wallet = globalData.wallet || "Looks like you don't have an Ethereum wallet address.";
+		const { classes, wallets } = this.props
+		const ethWallet = wallets.eth || "Looks like you don't have an Ethereum wallet address.";
 
 		return (
-			<Layout globalData={globalData}>
+			<Layout>
 				<SEO
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
@@ -133,7 +119,7 @@ class Wallet extends React.Component {
 					</Hidden>
 					<Paper className={classes.walletBoxPaper}>
 						<Typography gutterBottom className={classes.ethAddress}>
-							{ wallet }
+							{ ethWallet }
 						</Typography>
 						<Hidden smUp>
 							<Button
@@ -177,7 +163,13 @@ Wallet.propTypes = {
 	location: PropTypes.object,
 }
 
-export default compose(
+function mapStateToProps(state) {
+	return {
+		wallets: state.wallets,
+	}
+}
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(Wallet)
+)(Wallet))
