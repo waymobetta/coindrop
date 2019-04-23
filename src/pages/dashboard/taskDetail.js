@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
@@ -11,10 +12,6 @@ import theme from '../../components/theme'
 import Hidden from '@material-ui/core/Hidden'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
-
-import //getTasks,
-//getTask
-'../../lib/api'
 
 const styles = () => ({
 	taskDetailsBoxPaper: {
@@ -115,22 +112,49 @@ const styles = () => ({
 class TaskDetail extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			task: {}
+		}
 	}
 
-	async componentWillMount() {
+	componentDidMount() {
+		this.setTask();
+	}
+
+	getTask = (id) => {
 		try {
-			//const tasks = await getTasks()
-			//console.log(tasks)
-			//const taskId = '6bc25651-c46d-448b-a88e-ff2e2ed3b54c'
-			//const task = await getTask(taskId)
-			//console.log(task)
-		} catch (err) {
-			console.error(err)
+			const { tasks: { tasks } } = this.props;
+			const task = tasks.find((task) => task.id === id)
+
+			return task
+		} catch (error) {
+			console.error('Error getting task: ', error)
+		}
+	}
+
+	setTask = () => {
+		try {
+			const { location: { state } } = this.props;
+			const urlParams = new URLSearchParams(window.location.search);
+			const taskId = urlParams.get('id');
+			let task;
+
+			if (!state || !state.task) {
+				task = this.getTask(taskId);
+			} else {
+				task = state.task
+			}
+
+			this.setState({ task })
+		} catch (error) {
+			console.error('Error setting task: ', error)
 		}
 	}
 
 	render() {
 		const { classes } = this.props
+		const { task } = this.state
+
 		return (
 			<Layout>
 				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
@@ -145,8 +169,8 @@ class TaskDetail extends React.Component {
 							<div className={classes.taskDetailTop}>
 								<span className={classes.taskRound} />
 								<div className={classes.taskHeader}>
-									<span className={classes.taskName}>adChain</span>
-									<span className={classes.taskDesc}>Video Quiz</span>
+									<span className={classes.taskName}>{task.author}</span>
+									<span className={classes.taskDesc}>{task.title}</span>
 								</div>
 								<div className={classes.taskPayout}>
 									<span className={classes.possible}>Possible Payout:</span>
@@ -182,7 +206,7 @@ class TaskDetail extends React.Component {
 									className={classes.taskMain}
 								>
 									<h4 className={classes.header}>
-										Watch a short video about adChain and take a quiz!
+										{task.description}
 									</h4>
 									<p className={classes.details}>
 										Instructions Watch the informational video below to learn
@@ -215,9 +239,14 @@ class TaskDetail extends React.Component {
 TaskDetail.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
+	tasks: PropTypes.object,
 }
 
-export default compose(
+const mapStateToProps = (state) => ({
+	tasks: state.tasks
+})
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(TaskDetail)
+)(TaskDetail))

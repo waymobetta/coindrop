@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Fab from '@material-ui/core/Fab'
 import ArrowForward from '@material-ui/icons/ArrowForward'
@@ -140,7 +139,7 @@ class DashTask extends Component {
 							{task.description}
 						</span>
 						<span>
-							<Link className={classes.itemLink} to="/dashboard/taskDetail">
+							<Link className={classes.itemLink} to={`/dashboard/taskDetail?id=${task.id}`} state={{task}}>
 								<Fab
 									color="primary"
 									aria-label="Add"
