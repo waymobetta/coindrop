@@ -45,6 +45,7 @@ class SignUpForm extends React.Component {
 			resetPasswordCode: null,
 			showConfirmationModal: false,
 			loading: false,
+			pwHidden: true,
 		}
 	}
 
@@ -188,8 +189,6 @@ class SignUpForm extends React.Component {
 		})
 	}
 
-
-
 	toggleConfirmationModal = (open) => {
 		this.setState({
 			showConfirmationModal: open,
@@ -201,10 +200,13 @@ class SignUpForm extends React.Component {
 		}
 	}
 
+	togglePasswordVisibility = () => {
+		this.setState({ pwHidden: !this.state.pwHidden })
+	}
+
 	render() {
 		const { classes, signUpMode } = this.props
-		const { forgotPasswordMode, resetPasswordMode, showConfirmationModal, loading } = this.state
-		const showPassword = true
+		const { forgotPasswordMode, resetPasswordMode, showConfirmationModal, loading, pwHidden } = this.state
 		let modalTitle = 'Sign In'
 		if (signUpMode) {
 			modalTitle = 'Sign Up'
@@ -269,7 +271,7 @@ class SignUpForm extends React.Component {
 								<FormControl margin="normal" required fullWidth>
 									<Input
 										name="password"
-										type="password"
+										type={pwHidden ? 'password' : 'text'}
 										id="password"
 										placeholder="Password"
 										onChange={event => this.setState({
@@ -280,12 +282,14 @@ class SignUpForm extends React.Component {
 										}}
 										endAdornment={
 											<InputAdornment position="end">
-												<IconButton aria-label="Toggle password visibility">
-													{showPassword ? (
+												<IconButton aria-label="Toggle password visibility" onClick={this.togglePasswordVisibility}>
+													{
+														pwHidden ? (
 														<Visibility />
 													) : (
 															<VisibilityOff />
-														)}
+														)
+													}
 												</IconButton>
 											</InputAdornment>
 										}
@@ -300,7 +304,7 @@ class SignUpForm extends React.Component {
 									<Input
 										placeholder="Repeat Password"
 										name="repeatPassword"
-										type="password"
+										type={pwHidden ? 'password' : 'text'}
 										id="repeatPassword"
 										onChange={event => this.setState({
 											passwordConfirm: event.target.value
@@ -310,12 +314,14 @@ class SignUpForm extends React.Component {
 										}}
 										endAdornment={
 											<InputAdornment position="end">
-												<IconButton aria-label="Toggle password visibility">
-													{showPassword ? (
+												<IconButton aria-label="Toggle password visibility" onClick={this.togglePasswordVisibility}>
+													{
+														pwHidden ? (
 														<Visibility />
 													) : (
 															<VisibilityOff />
-														)}
+														)
+													}
 												</IconButton>
 											</InputAdornment>
 										}
@@ -407,7 +413,7 @@ class SignUpForm extends React.Component {
 												id="newPassword"
 												name="newPassword"
 												autoComplete="newPassword"
-												type="password"
+												type={pwHidden ? 'password' : 'text'}
 												autoFocus
 												onChange={event => this.setState({
 													password: event.target.value
@@ -504,7 +510,7 @@ class SignUpForm extends React.Component {
 												<FormControl margin="normal" required fullWidth>
 													<Input
 														name="password"
-														type="password"
+														type={pwHidden ? 'password' : 'text'}
 														id="password"
 														placeholder="Password"
 														onChange={event => this.setState({
@@ -515,12 +521,14 @@ class SignUpForm extends React.Component {
 														}}
 														endAdornment={
 															<InputAdornment position="end">
-																<IconButton aria-label="Toggle password visibility">
-																	{showPassword ? (
+																<IconButton aria-label="Toggle password visibility" onClick={this.togglePasswordVisibility}>
+																	{
+																		pwHidden ? (
 																		<Visibility />
 																	) : (
 																			<VisibilityOff />
-																		)}
+																		)
+																	}
 																</IconButton>
 															</InputAdornment>
 														}
