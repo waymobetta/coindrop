@@ -5,6 +5,7 @@ const initialState = {
   name: '',
   email: '',
   cognitoAuthUserId: null,
+  authorized: false,
 };
 
 export default function user (state = initialState, payload) {
@@ -38,11 +39,13 @@ export default function user (state = initialState, payload) {
         status: type,
         email: data.email,
         userId: data.userId,
+        authorized: true,
       };
     case ActionTypes.USER_LOGIN_ERROR:
       return {
         ...state,
         status: 'error',
+        authorized: false,
       };
     case ActionTypes.USER_LOGOUT:
       return {
@@ -53,6 +56,7 @@ export default function user (state = initialState, payload) {
       return {
         ...state,
         status: type,
+        authorized: false,
       };
     case ActionTypes.USER_LOGOUT_ERROR:
       return {

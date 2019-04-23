@@ -95,6 +95,9 @@ class Layout extends React.Component {
 
 	async componentDidMount() {
 		try {
+			/**
+			 * need to update so this doesnt get called every single time
+			 */
 			if (!(await isLoggedIn())) {
 				navigate('/')
 				return
@@ -177,9 +180,14 @@ Layout.propTypes = {
 	children: PropTypes.node.isRequired,
 	width: PropTypes.string,
 	classes: PropTypes.object.isRequired,
+	user: PropTypes.object,
+	tasks: PropTypes.object,
+	profile: PropTypes.object,
+	wallets: PropTypes.object,
 }
 
 const mapStateToProps = (state) => ({
+	user: state.user,
 	tasks: state.tasks,
 	profile: state.profile,
 	wallets: state.wallets,

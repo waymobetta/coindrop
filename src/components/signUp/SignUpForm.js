@@ -117,7 +117,6 @@ class SignUpForm extends React.Component {
 		const { dispatch } = this.props;
 		try {
 			this.setState({
-				successMessage: 'Logging in...',
 				loading: true
 			})
 			const user = { email, password }
