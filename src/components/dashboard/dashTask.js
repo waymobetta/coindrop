@@ -96,25 +96,48 @@ class DashTask extends Component {
 	// eslint-disable-next-line no-console
 
 	render() {
-		const { classes } = this.props
+		const { classes, task } = this.props
+
+		// Task Properties
+		// author: "MyCrypto"
+		// badge:
+		//// description: "Awarded to those who've downloaded and signed a message using the MyCrypto wallet"
+		//// id: "fb3ed1d2-f59c-4dad-a9b3-5135769da144"
+		//// logoURL: "https://user-images.githubusercontent.com/17755587/55265986-e9297d00-5237-11e9-8a1f-4e938c075e86.png"
+		//// name: "Crypto-conscious"
+		//// __proto__: Object
+		// completed: true
+		// description: "Download the MyCrypto wallet and sign a message proving ownership of your Ethereum address!"
+		// id: "dd35027c-1695-414d-8d0e-7588f907c590"
+		// logoURL: "https://user-images.githubusercontent.com/17755587/55265986-e9297d00-5237-11e9-8a1f-4e938c075e86.png"
+		// resourceId: "d0c22746-5272-4eaf-847f-ac1d76841c44"
+		// resourceURL: "https://download.mycrypto.com/"
+		// title: "Crypto-conscious"
+		// token: ""
+		// tokenAllocation: 0
+		// type: "Action"
+
+		// need DATE
+
+
 		return (
 			<Grid item xs={12} sm={5}>
 				<Paper className={classes.tasksBoxPaper}>
 					<div className={classes.taskTop}>
 						<span className={classes.taskRound} />
 						<div className={classes.taskInfo}>
-							<span className={classes.taskName}>adChain</span>
-							<span className={classes.taskDesc}>Video Quiz</span>
+							<span className={classes.taskName}>{task.author}</span>
+							<span className={classes.taskDesc}>{task.title}</span>
 						</div>
 						<span className={classes.date}>Today</span>
 					</div>
 					<div className={classes.taskMiddle}>
 						<span className={classes.badges}>$6 (1000 ADT)</span>
-						<span className={classes.badges}>Educational Badge</span>
+						<span className={classes.badges}>{task.badge.name}</span>
 					</div>
 					<div className={classes.taskBottom}>
 						<span className={classes.taskSummary}>
-							Watch a short video about adChain and take a quiz!
+							{task.description}
 						</span>
 						<span>
 							<Link className={classes.itemLink} to="/dashboard/taskDetail">
@@ -138,6 +161,7 @@ class DashTask extends Component {
 DashTask.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
+	task: PropTypes.object,
 }
 
 export default withStyles(styles, { withTheme: true })(DashTask)

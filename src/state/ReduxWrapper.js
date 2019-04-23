@@ -15,7 +15,7 @@ let composeEnhancer = compose
 
 if (typeof window !== 'undefined' && window) {
   initClient()
-  composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+  composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -25,7 +25,6 @@ const store = createStore(
     applyMiddleware(sagaMiddleware),
   )
 )
-
 
 sagaMiddleware.run(rootSaga);
 

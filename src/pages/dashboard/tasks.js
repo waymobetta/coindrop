@@ -11,48 +11,6 @@ import Grid from '@material-ui/core/Grid'
 import theme from '../../components/theme'
 import Hidden from '@material-ui/core/Hidden'
 import DashTask from '../../components/dashboard/dashTask'
-import //getTasks,
-//getTask
-'../../lib/api'
-
-// const tasks = [
-// 	{
-// 		id: '0001',
-// 		name: 'AdChain',
-// 		subTitle: 'Sub Title',
-// 		date: 'Today',
-// 		amount: '$6 (1000 ADT)',
-// 		badge: 'Educational Badge',
-// 		summary: 'Watch a short video about adChain and take a quiz!',
-// 	},
-// 	{
-// 		id: '0002',
-// 		name: 'AdChain',
-// 		subTitle: 'Sub Title',
-// 		date: 'Today',
-// 		amount: '$6 (1000 ADT)',
-// 		badge: 'Educational Badge',
-// 		summary: 'Watch a short video about adChain and take a quiz!',
-// 	},
-// 	{
-// 		id: '0003',
-// 		name: 'AdChain',
-// 		subTitle: 'Sub Title',
-// 		date: 'Today',
-// 		amount: '$6 (1000 ADT)',
-// 		badge: 'Educational Badge',
-// 		summary: 'Watch a short video about adChain and take a quiz!',
-// 	},
-// 	{
-// 		id: '0004',
-// 		name: 'AdChain',
-// 		subTitle: 'Sub Title',
-// 		date: 'Today',
-// 		amount: '$6 (1000 ADT)',
-// 		badge: 'Educational Badge',
-// 		summary: 'Watch a short video about adChain and take a quiz!',
-// 	},
-// ]
 
 const styles = () => ({
 	boxTitle: {
@@ -86,7 +44,7 @@ class Tasks extends React.Component {
 					justify="flex-start"
 				>
 					{tasks.map(task => (
-						<DashTask key={task.id} data={task} />
+						<DashTask key={task.id} task={task} />
 					))}
 				</Grid>
 			</Layout>

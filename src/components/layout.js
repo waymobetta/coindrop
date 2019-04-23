@@ -101,7 +101,6 @@ class Layout extends React.Component {
 			}
 
 			await this.fetchUserData();
-
 		} catch (err) {
 			console.error(err)
 		}
@@ -120,7 +119,7 @@ class Layout extends React.Component {
 			for (const key in dataToFetch) {
 				const status = dataToFetch[key][0];
 				const action = dataToFetch[key][1];
-				
+
 				if (status !== 'success') {
 					dispatch(action())
 				}
