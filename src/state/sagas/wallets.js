@@ -18,7 +18,8 @@ export function* fetchWallets() {
     const data = {}
 
     wallets.forEach((wallet) => {
-      data[wallet.walletType] = wallet.address
+      data[wallet.walletType] = wallet.address;
+      data.verified = wallet.verified;
     })
 
     yield put({

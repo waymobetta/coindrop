@@ -18,6 +18,7 @@ export default function user(state = initialState, payload) {
         ...state,
         status: 'success',
         eth: data.eth,
+        verified: data.verified,
       };
     case ActionTypes.FETCH_WALLETS_ERROR:
       return {
