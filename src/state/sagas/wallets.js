@@ -36,9 +36,14 @@ export function* fetchWallets() {
   }
 }
 
-export function* verifyWalletGenerator() {
+export function* verifyWalletGenerator({payload}) {
   try {
-    const response = yield call(verifyWallet)
+    const data = {
+      userID: payload.userId,
+      taskID: payload.taskId,
+      verifyObj: payload.verifyObj,
+    }
+    const response = yield call(verifyWallet, data)
 
     yield put({
       type: ActionTypes.VERIFY_WALLET_SUCCESS,

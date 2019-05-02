@@ -153,7 +153,7 @@ class TaskDetail extends React.Component {
 	}
 
 	render() {
-		const { classes, wallets } = this.props
+		const { classes, wallets, user, dispatch } = this.props
 		const { task } = this.state
 
 		return (
@@ -181,7 +181,7 @@ class TaskDetail extends React.Component {
 							<Grid container className={classes.taskDetailMain}>
 								{
 									task.author === 'MyCrypto'
-										? <MyCryptoTask task={task} wallets={wallets} />
+										? <MyCryptoTask task={task} wallets={wallets} dispatch={dispatch} user={user} />
 										: (
 											<React.Fragment>
 												<Grid
@@ -250,11 +250,14 @@ TaskDetail.propTypes = {
 	width: PropTypes.string,
 	tasks: PropTypes.object,
 	wallets: PropTypes.object,
+	dispatch: PropTypes.func,
+	user: PropTypes.object,
 }
 
 const mapStateToProps = (state) => ({
 	tasks: state.tasks,
-	wallets: state.wallets
+	wallets: state.wallets,
+	user: state.user,
 })
 
 export default connect(mapStateToProps)(compose(

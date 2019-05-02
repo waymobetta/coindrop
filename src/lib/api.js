@@ -142,7 +142,7 @@ export const updateWallet = async (newWalletAddress) => {
 	return result
 }
 
-export const verifyWallet = async (userID, verifyObj, taskID, JwtToken) => {
+export const verifyWallet = async ({ userID, verifyObj, taskID }) => {
 	try {
 		const payload = {
 			'userID': userID,
@@ -152,11 +152,13 @@ export const verifyWallet = async (userID, verifyObj, taskID, JwtToken) => {
 			'signature': verifyObj.sig,
 			'version': verifyObj.version
 		}
+		const jwtToken = accessToken();
+
 		return fetch(`${baseURL}wallets/verify`, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
-				'Authorization': 'Bearer ' + JwtToken
+				'Authorization': 'Bearer ' + jwtToken
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {

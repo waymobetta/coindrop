@@ -35,7 +35,7 @@ export default function user(state = initialState, payload) {
       return {
         ...state,
         status: 'success',
-        verified: true
+        verified: data.verified,
       };
     case ActionTypes.VERIFY_WALLET_ERROR:
       return {
