@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
@@ -26,15 +27,21 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
 
+	determineContent = () => {
+		const { wallets } = this.props;
+		return !wallets.eth ? <Connect /> : <ProfilePage />
+	}
+
 	render() {
+		const content = this.determineContent();
+
 		return (
 			<Layout>
 				<SEO
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
 				/>
-				<Connect />
-				<ProfilePage />
+				{ content }
 			</Layout>
 		)
 	}
@@ -43,9 +50,14 @@ class Dashboard extends React.Component {
 Dashboard.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
+	wallets: PropTypes.object,
 }
 
-export default compose(
+const mapStateToProps = (state) => ({
+	wallets: state.wallets,
+})
+
+export default connect(mapStateToProps)(compose(
 	withStyles(styles, { withTheme: true }),
 	withWidth()
-)(Dashboard)
+)(Dashboard))

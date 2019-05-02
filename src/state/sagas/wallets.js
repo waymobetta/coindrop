@@ -1,14 +1,14 @@
 /**
- * @module Sagas/User
- * @desc User
+ * @module Sagas/Wallets
+ * @desc wallets
  */
 
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { ActionTypes } from '../constants'
-import { getWallet, verifyWallet } from '../../lib/api'
+import { getWallet, verifyWallet, updateWallet } from '../../lib/api'
 
 /**
- * Login
+ * wallets
  */
 
 export function* fetchWallets() {
@@ -59,6 +59,29 @@ export function* verifyWalletGenerator({payload}) {
   }
 }
 
+export function* updateWalletGenerator({ payload }) {
+  try {
+    const data = {
+      walletAddress: payload.walletAddress,
+      walletType: payload.walletType,
+      userId: payload.userId,
+    }
+    const response = yield call(updateWallet, data)
+
+    yield put({
+      type: ActionTypes.UPDATE_WALLET_SUCCESS,
+      payload: response,
+    });
+  }
+  catch (error) {
+    /* istanbul ignore next */
+    yield put({
+      type: ActionTypes.UPDATE_WALLET_ERROR,
+      payload: error,
+    });
+  }
+}
+
 /**
  * Profile Sagas
  */
@@ -66,5 +89,6 @@ export default function* root() {
   yield all([
     takeLatest(ActionTypes.FETCH_WALLETS, fetchWallets),
     takeLatest(ActionTypes.VERIFY_WALLET, verifyWalletGenerator),
+    takeLatest(ActionTypes.UPDATE_WALLET, updateWalletGenerator),
   ]);
 }

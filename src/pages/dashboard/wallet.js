@@ -9,15 +9,15 @@ import withWidth from '@material-ui/core/withWidth'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 import Hidden from '@material-ui/core/Hidden'
-import Fab from '@material-ui/core/Fab'
-import { ReactComponent as Edit } from '../../components/assets/edit.svg'
+// import Fab from '@material-ui/core/Fab'
+// import { ReactComponent as Edit } from '../../components/assets/edit.svg'
 import theme from '../../components/theme'
-import Button from '@material-ui/core/Button'
-import {
-	updateWallet
-} from '../../lib/api'
+// import Button from '@material-ui/core/Button'
+// import {
+// 	updateWallet
+// } from '../../lib/api'
 
 const styles = () => ({
 	walletBoxPaper: {
@@ -78,19 +78,19 @@ class Wallet extends React.Component {
 		this.state = {
 			walletAddress: '',
 			// test value
-			newWalletAddress: '0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0',
+			// newWalletAddress: '0xDfeDf14d5a2359549AbccC227B446f8DAe8bD2B0',
 		}
 	}
 
-	async handleWalletEdit(event) {
-		event.preventDefault()
+	// async handleWalletEdit(event) {
+	// 	event.preventDefault()
 
-		try {
-			await updateWallet()
-		} catch (err) {
-			console.error(err)
-		}
-	}
+	// 	try {
+	// 		await updateWallet()
+	// 	} catch (err) {
+	// 		console.error(err)
+	// 	}
+	// }
 
 	displayWallet = () => {
 		const { wallets, classes } = this.props;
@@ -103,7 +103,8 @@ class Wallet extends React.Component {
 			)
 		}
 
-		return <CircularProgress className={classes.progress} />
+		// return <CircularProgress className={classes.progress} />
+		return null
 	}
 
 
@@ -138,28 +139,31 @@ class Wallet extends React.Component {
 					</Hidden>
 					<Paper className={classes.walletBoxPaper}>
 						{ wallet }
-						<Hidden smUp>
-							<Button
-								size="small"
-								color="secondary"
-								variant="text"
-								align="right"
-								className={classes.alignRight}
-							>
-								Change Password
-							</Button>
-						</Hidden>
+						{
+							// <Hidden smUp>
+							// 	<Button
+							// 		size="small"
+							// 		color="secondary"
+							// 		variant="text"
+							// 		align="right"
+							// 		className={classes.alignRight}
+							// 	>
+							// 		Change Password
+							// 	</Button>
+							// </Hidden>
+	
+							// <Hidden xsDown>
+							// 	<Fab
+							// 		color="primary"
+							// 		aria-label="Edit"
+							// 		className={classes.editWalletFab}
+							// 		onClick={event => this.handleWalletEdit(event)}
+							// 	>
+							// 		<Edit color="white" width="24" height="24" />
+							// 	</Fab>
+							// </Hidden>
 
-						<Hidden xsDown>
-							<Fab
-								color="primary"
-								aria-label="Edit"
-								className={classes.editWalletFab}
-								onClick={event => this.handleWalletEdit(event)}
-							>
-								<Edit color="white" width="24" height="24" />
-							</Fab>
-						</Hidden>
+						}
 					</Paper>
 					<Typography
 						ariant="subtitle1"

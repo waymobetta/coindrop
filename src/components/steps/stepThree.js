@@ -1,5 +1,6 @@
 /* eslint-disable */
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -40,7 +41,7 @@ const styles = theme => ({
 	},
 })
 
-class StepThree extends React.Component {
+class StepThree extends Component {
 
 	onClick = () => {
 		this.props.onClick()
@@ -48,6 +49,7 @@ class StepThree extends React.Component {
 
 	render() {
 		const { classes } = this.props
+
 		return (
 			<React.Fragment>
 				<Typography variant="h6" gutterBottom>
@@ -69,6 +71,11 @@ class StepThree extends React.Component {
 StepThree.propTypes = {
 	classes: PropTypes.object.isRequired,
 	onClick: PropTypes.func,
+	wallets: PropTypes.object,
 }
 
-export default withStyles(styles)(StepThree)
+const mapStateToProps = (state) => ({
+	wallets: state.wallets,
+})
+
+export default connect(mapStateToProps)(withStyles(styles)(StepThree))

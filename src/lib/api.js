@@ -128,10 +128,12 @@ export const getWallet = async () => {
 	return result
 }
 
-export const updateWallet = async (newWalletAddress) => {
+export const updateWallet = async ({ userId, walletAddress, walletType }) => {
 	const { body: result, ok } = await client.apis.wallets.wallets_update({
 		payload: {
-			walletAddress: newWalletAddress
+			userId,
+			walletAddress,
+			walletType
 		}
 	})
 

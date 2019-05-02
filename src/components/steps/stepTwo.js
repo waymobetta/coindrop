@@ -1,19 +1,15 @@
 /* eslint-disable */
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
-import IconButton from '@material-ui/core/IconButton'
 import Fab from '@material-ui/core/Fab'
 import ArrowForward from '@material-ui/icons/ArrowForward'
-import ArrowBack from '@material-ui/icons/ArrowBack'
 import Typography from '@material-ui/core/Typography'
-import classNames from 'classnames'
-import stackHelp1 from '../assets/stackHelp1.png'
-import stackHelp2 from '../assets/stackHelp2.png'
+import { updateWallet } from '../../state/actions/wallets'
 
 const styles = theme => ({
 	paper2: {
@@ -51,7 +47,7 @@ const styles = theme => ({
 	},
 })
 
-class StepTwo extends React.Component {
+class StepTwo extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -60,17 +56,23 @@ class StepTwo extends React.Component {
 	}
 
 	onClick = () => {
+		const { walletAddress } = this.state;
+		const { dispatch, user } = this.props;
+		const data = {
+			walletAddress,
+			walletType: 'eth',
+			userId: user.userId,
+		}
+
+		dispatch(updateWallet(data))
 		this.props.onClick()
 	}
 
-	submitFormInput() {
-		const { walletAddress } = this.state;
-		this.props.onSelectClick(walletAddress)
-	}
+	handleChange = (event) => this.setState({ walletAddress: event.target.value })
 
 	render() {
 		const { classes } = this.props
-
+		const { walletAddress } = this.state;
 		return (
 			<React.Fragment>
 				<Typography variant="h6" gutterBottom>
@@ -80,10 +82,11 @@ class StepTwo extends React.Component {
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="walletAddress">
 							Wallet Address
-								</InputLabel>
+						</InputLabel>
 						<Input
 							id="walletAddress"
 							name="walletAddress"
+							onChange={this.handleChange}
 							autoFocus
 						/>
 					</FormControl>
@@ -93,6 +96,7 @@ class StepTwo extends React.Component {
 					aria-label="Add"
 					className={classes.fabNext}
 					onClick={this.onClick}
+					disabled={!walletAddress}
 				>
 					<ArrowForward />
 				</Fab>
@@ -105,6 +109,12 @@ StepTwo.propTypes = {
 	classes: PropTypes.object.isRequired,
 	selectedPlatform: PropTypes.string,
 	onClick: PropTypes.func,
+	dispatch: PropTypes.func,
+	user: PropTypes.object,
 }
 
-export default withStyles(styles)(StepTwo)
+const mapStateToProps = (state) => ({
+	user: state.user
+})
+
+export default connect(mapStateToProps)(withStyles(styles)(StepTwo))

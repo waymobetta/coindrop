@@ -12,3 +12,10 @@ export const verifyWallet = (payload) => {
     payload
   }
 }
+
+export const updateWallet = (payload) => {
+  return {
+    type: ActionTypes.UPDATE_WALLET,
+    payload
+  }
+}

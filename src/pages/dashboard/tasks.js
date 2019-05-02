@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
@@ -24,10 +24,19 @@ const styles = () => ({
 	},
 })
 
-class Tasks extends React.Component {
+class Tasks extends Component {
+
+	generateTasks = () => {
+		const { tasks: { tasks } } = this.props;
+
+		return tasks && tasks.map(task => (
+			<DashTask key={task.id} task={task} />
+		))
+	}
 
 	render() {
-		const { classes, tasks: { tasks } } = this.props
+		const { classes } = this.props
+		const taskList = this.generateTasks()
 		
 		return (
 			<Layout>
@@ -43,9 +52,7 @@ class Tasks extends React.Component {
 					className={classes.root}
 					justify="flex-start"
 				>
-					{tasks.map(task => (
-						<DashTask key={task.id} task={task} />
-					))}
+					{ taskList }
 				</Grid>
 			</Layout>
 		)

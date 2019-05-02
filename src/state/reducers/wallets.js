@@ -42,6 +42,22 @@ export default function user(state = initialState, payload) {
         ...state,
         status: 'error',
       };
+    case ActionTypes.UPDATE_WALLET:
+      return {
+        ...state,
+        status: 'running',
+      };
+    case ActionTypes.UPDATE_WALLET_SUCCESS:
+      return {
+        ...state,
+        status: 'success',
+        eth: data.eth,
+      };
+    case ActionTypes.UPDATE_WALLET_ERROR:
+      return {
+        ...state,
+        status: 'error',
+      };
     default:
       return state;
   }
