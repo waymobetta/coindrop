@@ -5,3 +5,10 @@ export const fetchWallets = () => {
     type: ActionTypes.FETCH_WALLETS
   }
 }
+
+export const verifyWallet = (payload) => {
+  return {
+    type: ActionTypes.VERIFY_WALLET,
+    payload
+  }
+}

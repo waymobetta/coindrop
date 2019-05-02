@@ -5,7 +5,7 @@
 
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { ActionTypes } from '../constants'
-import { getWallet } from '../../lib/api'
+import { getWallet, verifyWallet } from '../../lib/api'
 
 /**
  * Login
@@ -36,11 +36,30 @@ export function* fetchWallets() {
   }
 }
 
+export function* verifyWalletGenerator() {
+  try {
+    const response = yield call(verifyWallet)
+
+    yield put({
+      type: ActionTypes.VERIFY_WALLET_SUCCESS,
+      payload: response,
+    });
+  }
+  catch (error) {
+    /* istanbul ignore next */
+    yield put({
+      type: ActionTypes.VERIFY_WALLET_ERROR,
+      payload: error,
+    });
+  }
+}
+
 /**
  * Profile Sagas
  */
 export default function* root() {
   yield all([
     takeLatest(ActionTypes.FETCH_WALLETS, fetchWallets),
+    takeLatest(ActionTypes.VERIFY_WALLET, verifyWalletGenerator),
   ]);
 }

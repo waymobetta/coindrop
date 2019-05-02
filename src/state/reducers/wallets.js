@@ -3,6 +3,7 @@ import { ActionTypes } from '../constants';
 const initialState = {
   status: 'ready',
   eth: '',
+  verified: ''
 };
 
 export default function user(state = initialState, payload) {
@@ -21,6 +22,22 @@ export default function user(state = initialState, payload) {
         verified: data.verified,
       };
     case ActionTypes.FETCH_WALLETS_ERROR:
+      return {
+        ...state,
+        status: 'error',
+      };
+    case ActionTypes.VERIFY_WALLET:
+      return {
+        ...state,
+        status: 'running',
+      };
+      case ActionTypes.VERIFY_WALLET_SUCCESS:
+      return {
+        ...state,
+        status: 'success',
+        verified: true
+      };
+    case ActionTypes.VERIFY_WALLET_ERROR:
       return {
         ...state,
         status: 'error',

@@ -1,76 +1,101 @@
+/* eslint-disable */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import AccountButton from '../AccountButton'
+import Button from '@material-ui/core/Button'
+import FormControl from '@material-ui/core/FormControl'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import IconButton from '@material-ui/core/IconButton'
+import Fab from '@material-ui/core/Fab'
+import ArrowForward from '@material-ui/icons/ArrowForward'
+import ArrowBack from '@material-ui/icons/ArrowBack'
 import Typography from '@material-ui/core/Typography'
-import { ReactComponent as Reddit } from '../assets/reddit.svg'
-import { ReactComponent as StackOverflow } from '../assets/stackOverflow.svg'
 import classNames from 'classnames'
+import stackHelp1 from '../assets/stackHelp1.png'
+import stackHelp2 from '../assets/stackHelp2.png'
 
-const styles = () => ({
-	leftIcon: {
-		width: 32,
-		height: 32,
-		float: 'left',
-		marginRight: 15,
+const styles = theme => ({
+	paper2: {
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		padding: '20px',
+		borderRadius: '67px',
+		height: 400,
 	},
-	redditIcon: {
-		backgroundColor: '#8C8C8C',
-		borderRadius: '40px',
+	fabNext: {
+		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
+		backgroundColor: '#572FFF',
+		right: -27,
+		bottom: 80,
+		position: 'absolute',
+		[theme.breakpoints.down('xs')]: {
+			bottom: 0,
+			right: 0,
+		},
+	},
+	form: {
+		position: 'relative',
+		width: '80%',
+	},
+	fabBackTopLeft: {
+		top: -20,
+		left: -20,
+		position: 'absolute',
+		background: 'transparent',
+		boxShadow: 'none',
+		color: '#fff',
+	},
+	inputLabel: {
+		color: '#FFF',
 	},
 })
 
 class StepTwo extends React.Component {
 	constructor(props) {
 		super(props)
-		this.onSelectOption = this.onSelectOption.bind(this)
+		this.state = {
+			walletAddress: '',
+		}
 	}
 
-	onSelectOption(selection) {
-		this.props.onSelectClick(selection)
+	onClick = () => {
+		this.props.onClick()
+	}
+
+	submitFormInput() {
+		const { walletAddress } = this.state;
+		this.props.onSelectClick(walletAddress)
 	}
 
 	render() {
 		const { classes } = this.props
+
 		return (
 			<React.Fragment>
-				<Typography variant="h3" gutterBottom>
-					Choose one to start
+				<Typography variant="h6" gutterBottom>
+					Please enter your Ethereum wallet address. We need this because it is just waymobetta if you do.
 				</Typography>
-				<Typography variant="subtitle2" gutterBottom>
-					You can connect more accounts later
-				</Typography>
-				<AccountButton
-					variant="outlined"
-					size="large"
-					color="primary"
-					onClick={this.onSelectOption.bind(this, 'reddit')}
-					render={
-						<Reddit
-							className={classNames(
-								classes.leftIcon,
-								classes.redditIcon
-							)}
-							color="#FFF"
+				<form className={classes.form}>
+					<FormControl margin="normal" required fullWidth>
+						<InputLabel htmlFor="walletAddress">
+							Wallet Address
+								</InputLabel>
+						<Input
+							id="walletAddress"
+							name="walletAddress"
+							autoFocus
 						/>
-					}
-				>
-					Reddit
-				</AccountButton>
-				<AccountButton
-					variant="outlined"
-					size="large"
+					</FormControl>
+				</form>
+				<Fab
 					color="primary"
-					onClick={this.onSelectOption.bind(this, 'stackoverflow')}
-					render={
-						<StackOverflow
-							className={classes.leftIcon}
-							color="#8C8C8C"
-						/>
-					}
+					aria-label="Add"
+					className={classes.fabNext}
+					onClick={this.onClick}
 				>
-					StackOverflow
-				</AccountButton>
+					<ArrowForward />
+				</Fab>
 			</React.Fragment>
 		)
 	}
@@ -78,7 +103,8 @@ class StepTwo extends React.Component {
 
 StepTwo.propTypes = {
 	classes: PropTypes.object.isRequired,
-	onSelectClick: PropTypes.func,
+	selectedPlatform: PropTypes.string,
+	onClick: PropTypes.func,
 }
 
 export default withStyles(styles)(StepTwo)

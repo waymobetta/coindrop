@@ -6,6 +6,7 @@ import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
 import ProfilePage from '../../components/dashboard/profilePage'
+import Connect from '../connect';
 
 const styles = theme => ({
 	root: {
@@ -32,6 +33,7 @@ class Dashboard extends React.Component {
 					title="Home"
 					keywords={['coinDrop', 'application', 'react']}
 				/>
+				<Connect />
 				<ProfilePage />
 			</Layout>
 		)

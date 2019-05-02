@@ -12,6 +12,7 @@ import theme from '../../components/theme'
 import Hidden from '@material-ui/core/Hidden'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
+import MyCryptoTask from '../../components/tasks/myCrypto'
 
 const styles = () => ({
 	taskDetailsBoxPaper: {
@@ -152,7 +153,7 @@ class TaskDetail extends React.Component {
 	}
 
 	render() {
-		const { classes } = this.props
+		const { classes, wallets } = this.props
 		const { task } = this.state
 
 		return (
@@ -178,55 +179,63 @@ class TaskDetail extends React.Component {
 								</div>
 							</div>
 							<Grid container className={classes.taskDetailMain}>
-								<Grid
-									item
-									xs={12}
-									sm={12}
-									md={12}
-									lg={7}
-									className={classes.taskPreview}
-								>
-									<div className={classes.videoBox}>
-										<iframe
-											width="100%"
-											height="315"
-											src="https://www.youtube.com/embed/cOeqNSN8_Uw?controls=0"
-											frameBorder="0"
-											allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-											allowFullScreen
-										/>
-									</div>
-								</Grid>
-								<Grid
-									item
-									xs={12}
-									sm={12}
-									md={12}
-									lg={5}
-									className={classes.taskMain}
-								>
-									<h4 className={classes.header}>
-										{task.description}
-									</h4>
-									<p className={classes.details}>
-										Instructions Watch the informational video below to learn
-										about adChain. Then, take the quiz to test your knowledge
-										and to try and collect some adToken (ADT).
-										<br />
-										<br />
-										The amount of tokens you receive from adChain will depend on
-										the number of questions you get right. So choose carefully
-										as you only get one chance to complete the quiz once you
-										begin!
-									</p>
-									<Button
-										variant="contained"
-										color="secondary"
-										className={classes.secondary}
-									>
-										Take Quiz
-									</Button>
-								</Grid>
+								{
+									task.author === 'MyCrypto'
+										? <MyCryptoTask task={task} wallets={wallets} />
+										: (
+											<React.Fragment>
+												<Grid
+													item
+													xs={12}
+													sm={12}
+													md={12}
+													lg={7}
+													className={classes.taskPreview}
+												>
+													<div className={classes.videoBox}>
+														<iframe
+															width="100%"
+															height="315"
+															src="https://www.youtube.com/embed/cOeqNSN8_Uw?controls=0"
+															frameBorder="0"
+															allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+															allowFullScreen
+														/>
+													</div>
+												</Grid>
+												<Grid
+													item
+													xs={12}
+													sm={12}
+													md={12}
+													lg={5}
+													className={classes.taskMain}
+												>
+													<h4 className={classes.header}>
+														{task.description}
+													</h4>
+													<p className={classes.details}>
+														Instructions Watch the informational video below to learn
+														about adChain. Then, take the quiz to test your knowledge
+														and to try and collect some adToken (ADT).
+											<br />
+														<br />
+														The amount of tokens you receive from adChain will depend on
+														the number of questions you get right. So choose carefully
+														as you only get one chance to complete the quiz once you
+														begin!
+											</p>
+													<Button
+														variant="contained"
+														color="secondary"
+														className={classes.secondary}
+													>
+														Take Quiz
+											</Button>
+												</Grid>
+											</React.Fragment>
+										)
+								}
 							</Grid>
 						</div>
 					</Paper>
@@ -240,10 +249,12 @@ TaskDetail.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
 	tasks: PropTypes.object,
+	wallets: PropTypes.object,
 }
 
 const mapStateToProps = (state) => ({
-	tasks: state.tasks
+	tasks: state.tasks,
+	wallets: state.wallets
 })
 
 export default connect(mapStateToProps)(compose(
