@@ -7,7 +7,7 @@ import {
   compose,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from './reducers';
+import appReducer from './reducers';
 import rootSaga from './sagas';
 import { initClient } from '../lib/api';
 
@@ -19,6 +19,14 @@ if (typeof window !== 'undefined' && window) {
 }
 
 const sagaMiddleware = createSagaMiddleware();
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined;
+  }
+
+  return appReducer(state, action)
+}
+
 const store = createStore(
   rootReducer,
   composeEnhancer(
