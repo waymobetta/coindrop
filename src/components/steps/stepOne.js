@@ -30,15 +30,14 @@ class StepOne extends React.Component {
 					Welcome to Coindrop!
 				</Typography>
 				<Typography variant="subtitle2" gutterBottom>
-					Connect your accounts to Coindrop and receive your first
-					Ether payment
+					Let&#39;s get you set up so that you can start earning your badges.
 				</Typography>
 				<Button
 					variant="outlined"
 					color="primary"
 					onClick={this.onClick}
 				>
-					Get Paid
+					Start
 				</Button>
 			</React.Fragment>
 		)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Layout from '../../components/layout'
@@ -11,48 +11,6 @@ import Grid from '@material-ui/core/Grid'
 import theme from '../../components/theme'
 import Hidden from '@material-ui/core/Hidden'
 import DashTask from '../../components/dashboard/dashTask'
-import //getTasks,
-//getTask
-'../../lib/api'
-
-// const tasks = [
-// 	{
-// 		id: '0001',
-// 		name: 'AdChain',
-// 		subTitle: 'Sub Title',
-// 		date: 'Today',
-// 		amount: '$6 (1000 ADT)',
-// 		badge: 'Educational Badge',
-// 		summary: 'Watch a short video about adChain and take a quiz!',
-// 	},
-// 	{
-// 		id: '0002',
-// 		name: 'AdChain',
-// 		subTitle: 'Sub Title',
-// 		date: 'Today',
-// 		amount: '$6 (1000 ADT)',
-// 		badge: 'Educational Badge',
-// 		summary: 'Watch a short video about adChain and take a quiz!',
-// 	},
-// 	{
-// 		id: '0003',
-// 		name: 'AdChain',
-// 		subTitle: 'Sub Title',
-// 		date: 'Today',
-// 		amount: '$6 (1000 ADT)',
-// 		badge: 'Educational Badge',
-// 		summary: 'Watch a short video about adChain and take a quiz!',
-// 	},
-// 	{
-// 		id: '0004',
-// 		name: 'AdChain',
-// 		subTitle: 'Sub Title',
-// 		date: 'Today',
-// 		amount: '$6 (1000 ADT)',
-// 		badge: 'Educational Badge',
-// 		summary: 'Watch a short video about adChain and take a quiz!',
-// 	},
-// ]
 
 const styles = () => ({
 	boxTitle: {
@@ -66,10 +24,19 @@ const styles = () => ({
 	},
 })
 
-class Tasks extends React.Component {
+class Tasks extends Component {
+
+	generateTasks = () => {
+		const { tasks: { tasks } } = this.props;
+
+		return tasks && tasks.map(task => (
+			<DashTask key={task.id} task={task} />
+		))
+	}
 
 	render() {
-		const { classes, tasks: { tasks } } = this.props
+		const { classes } = this.props
+		const taskList = this.generateTasks()
 		
 		return (
 			<Layout>
@@ -85,9 +52,7 @@ class Tasks extends React.Component {
 					className={classes.root}
 					justify="flex-start"
 				>
-					{tasks.map(task => (
-						<DashTask key={task.id} data={task} />
-					))}
+					{ taskList }
 				</Grid>
 			</Layout>
 		)

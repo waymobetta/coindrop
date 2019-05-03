@@ -12,11 +12,12 @@ import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import StepOne from '../components/steps/StepOne'
 import StepTwo from '../components/steps/StepTwo'
+// import StepFive from '../components/steps/stepFive'
 import StepThree from '../components/steps/StepThree'
-import StepFour from '../components/steps/StepFour'
+// import StepFour from '../components/steps/StepFour'
 import StepFinal from '../components/steps/StepFinal'
 import theme from '../components/theme'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import classNames from 'classnames'
 
 const styles = () => ({
@@ -128,22 +129,26 @@ class Connect extends React.Component {
 			case 0:
 				return <StepOne onClick={this.handleNext} />
 			case 1:
-				return <StepTwo onSelectClick={this.handleSelection} />
+				return <StepTwo onClick={this.handleNext} />
 			case 2:
 				return (
-					<StepThree
-						selectedPlatform={this.state.selectedPlatform}
-						onClick={this.handleNext}
-					/>
+					<StepThree onClick={this.handleNext} />
 				)
 			case 3:
-				return (
-					<StepFour
-						onClick={this.handleVerify}
-						selectedPlatform={this.state.selectedPlatform}
-						canClaimEther={this.state.canClaimEther}
-					/>
+				navigate(
+					"dashboard/tasks/",
+					{
+						state: { ftu: true },
+					}
 				)
+			return
+				// return (
+				// 	<StepFour
+				// 		onClick={this.handleVerify}
+				// 		selectedPlatform={this.state.selectedPlatform}
+				// 		canClaimEther={this.state.canClaimEther}
+				// 	/>
+				// )
 			default:
 				return 'Unknown step'
 		}
@@ -181,10 +186,7 @@ class Connect extends React.Component {
 	handleNext = () => {
 		const { activeStep } = this.state
 		let { skipped } = this.state
-		// if (this.isStepSkipped(activeStep)) {
-		// 	skipped = new Set(skipped.values())
-		// 	skipped.delete(activeStep)
-		// }
+
 		this.setState({
 			activeStep: activeStep + 1,
 			skipped,
@@ -384,7 +386,7 @@ class Connect extends React.Component {
 										to="dashboard/home/"
 									>
 										<Button variant="text" color="primary">
-											Connect Later
+											Not Now
 										</Button>
 									</Link>
 								)}

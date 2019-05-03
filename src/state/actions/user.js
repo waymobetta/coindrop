@@ -5,7 +5,6 @@ export const userSignup = user => ({
   user
 })
 
-
 export const userLogin = user => ({
   type: ActionTypes.USER_LOGIN,
   user

@@ -7,7 +7,7 @@ import {
   compose,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from './reducers';
+import appReducer from './reducers';
 import rootSaga from './sagas';
 import { initClient } from '../lib/api';
 
@@ -15,17 +15,24 @@ let composeEnhancer = compose
 
 if (typeof window !== 'undefined' && window) {
   initClient()
-  composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+  composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 }
 
 const sagaMiddleware = createSagaMiddleware();
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined;
+  }
+
+  return appReducer(state, action)
+}
+
 const store = createStore(
   rootReducer,
   composeEnhancer(
     applyMiddleware(sagaMiddleware),
   )
 )
-
 
 sagaMiddleware.run(rootSaga);
 

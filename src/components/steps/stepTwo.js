@@ -1,76 +1,105 @@
-import React from 'react'
+/* eslint-disable */
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import AccountButton from '../AccountButton'
+import FormControl from '@material-ui/core/FormControl'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import Fab from '@material-ui/core/Fab'
+import ArrowForward from '@material-ui/icons/ArrowForward'
 import Typography from '@material-ui/core/Typography'
-import { ReactComponent as Reddit } from '../assets/reddit.svg'
-import { ReactComponent as StackOverflow } from '../assets/stackOverflow.svg'
-import classNames from 'classnames'
+import { updateWallet } from '../../state/actions/wallets'
 
-const styles = () => ({
-	leftIcon: {
-		width: 32,
-		height: 32,
-		float: 'left',
-		marginRight: 15,
+const styles = theme => ({
+	paper2: {
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		padding: '20px',
+		borderRadius: '67px',
+		height: 400,
 	},
-	redditIcon: {
-		backgroundColor: '#8C8C8C',
-		borderRadius: '40px',
+	fabNext: {
+		background: 'linear-gradient(45deg, #BF41FF 30%, #572FFF 90%)',
+		backgroundColor: '#572FFF',
+		right: -27,
+		bottom: 80,
+		position: 'absolute',
+		[theme.breakpoints.down('xs')]: {
+			bottom: 0,
+			right: 0,
+		},
+	},
+	form: {
+		position: 'relative',
+		width: '80%',
+	},
+	fabBackTopLeft: {
+		top: -20,
+		left: -20,
+		position: 'absolute',
+		background: 'transparent',
+		boxShadow: 'none',
+		color: '#fff',
+	},
+	inputLabel: {
+		color: '#FFF',
 	},
 })
 
-class StepTwo extends React.Component {
+class StepTwo extends Component {
 	constructor(props) {
 		super(props)
-		this.onSelectOption = this.onSelectOption.bind(this)
+		this.state = {
+			walletAddress: '',
+		}
 	}
 
-	onSelectOption(selection) {
-		this.props.onSelectClick(selection)
+	onClick = () => {
+		const { walletAddress } = this.state;
+		const { dispatch, user } = this.props;
+		const data = {
+			walletAddress,
+			walletType: 'eth',
+			userId: user.userId,
+		}
+
+		dispatch(updateWallet(data))
+		this.props.onClick()
 	}
+
+	handleChange = (event) => this.setState({ walletAddress: event.target.value })
 
 	render() {
 		const { classes } = this.props
+		const { walletAddress } = this.state;
 		return (
 			<React.Fragment>
-				<Typography variant="h3" gutterBottom>
-					Choose one to start
+				<Typography variant="h6" gutterBottom>
+					Please enter your Ethereum wallet address. We need this because it is just waymobetta if you do.
 				</Typography>
-				<Typography variant="subtitle2" gutterBottom>
-					You can connect more accounts later
-				</Typography>
-				<AccountButton
-					variant="outlined"
-					size="large"
-					color="primary"
-					onClick={this.onSelectOption.bind(this, 'reddit')}
-					render={
-						<Reddit
-							className={classNames(
-								classes.leftIcon,
-								classes.redditIcon
-							)}
-							color="#FFF"
+				<form className={classes.form}>
+					<FormControl margin="normal" required fullWidth>
+						<InputLabel htmlFor="walletAddress">
+							Wallet Address
+						</InputLabel>
+						<Input
+							id="walletAddress"
+							name="walletAddress"
+							onChange={this.handleChange}
+							autoFocus
 						/>
-					}
-				>
-					Reddit
-				</AccountButton>
-				<AccountButton
-					variant="outlined"
-					size="large"
+					</FormControl>
+				</form>
+				<Fab
 					color="primary"
-					onClick={this.onSelectOption.bind(this, 'stackoverflow')}
-					render={
-						<StackOverflow
-							className={classes.leftIcon}
-							color="#8C8C8C"
-						/>
-					}
+					aria-label="Add"
+					className={classes.fabNext}
+					onClick={this.onClick}
+					disabled={!walletAddress}
 				>
-					StackOverflow
-				</AccountButton>
+					<ArrowForward />
+				</Fab>
 			</React.Fragment>
 		)
 	}
@@ -78,7 +107,14 @@ class StepTwo extends React.Component {
 
 StepTwo.propTypes = {
 	classes: PropTypes.object.isRequired,
-	onSelectClick: PropTypes.func,
+	selectedPlatform: PropTypes.string,
+	onClick: PropTypes.func,
+	dispatch: PropTypes.func,
+	user: PropTypes.object,
 }
 
-export default withStyles(styles)(StepTwo)
+const mapStateToProps = (state) => ({
+	user: state.user
+})
+
+export default connect(mapStateToProps)(withStyles(styles)(StepTwo))

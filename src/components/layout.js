@@ -95,13 +95,15 @@ class Layout extends React.Component {
 
 	async componentDidMount() {
 		try {
+			/**
+			 * need to update so this doesnt get called every single time
+			 */
 			if (!(await isLoggedIn())) {
 				navigate('/')
 				return
 			}
 
 			await this.fetchUserData();
-
 		} catch (err) {
 			console.error(err)
 		}
@@ -120,7 +122,7 @@ class Layout extends React.Component {
 			for (const key in dataToFetch) {
 				const status = dataToFetch[key][0];
 				const action = dataToFetch[key][1];
-				
+
 				if (status !== 'success') {
 					dispatch(action())
 				}
@@ -178,9 +180,14 @@ Layout.propTypes = {
 	children: PropTypes.node.isRequired,
 	width: PropTypes.string,
 	classes: PropTypes.object.isRequired,
+	user: PropTypes.object,
+	tasks: PropTypes.object,
+	profile: PropTypes.object,
+	wallets: PropTypes.object,
 }
 
 const mapStateToProps = (state) => ({
+	user: state.user,
 	tasks: state.tasks,
 	profile: state.profile,
 	wallets: state.wallets,

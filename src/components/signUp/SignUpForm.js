@@ -44,6 +44,8 @@ class SignUpForm extends React.Component {
 			forgotPasswordMode: false,
 			resetPasswordCode: null,
 			showConfirmationModal: false,
+			loading: false,
+			pwHidden: true,
 		}
 	}
 
@@ -114,22 +116,24 @@ class SignUpForm extends React.Component {
 		const { email, password } = this.state
 		const { dispatch } = this.props;
 		try {
+			this.setState({
+				loading: true
+			})
 			const user = { email, password }
 			dispatch(userLogin(user))
 
-			this.setState({
-				successMessage: 'Logging in...'
-			})
 		} catch (err) {
 			if (err.code == 'UserNotFoundException') {
 				this.setState({
-					emailError: err.message
+					emailError: err.message,
+					loading: false,
 				})
 				return
 			}
 
 			this.setState({
-				errorMessage: err.message
+				errorMessage: err.message,
+				loading: false
 			})
 		}
 	}
@@ -157,7 +161,7 @@ class SignUpForm extends React.Component {
 
 		try {
 			this.setState({
-				successMessage: 'Signing up...'
+				loading: true
 			})
 
 			const user = { email, password }
@@ -165,7 +169,8 @@ class SignUpForm extends React.Component {
 		} catch (err) {
 			this.setState({
 				errorMessage: err.message,
-				successMessage: ''
+				successMessage: '',
+				loading: false
 			})
 		}
 	}
@@ -183,12 +188,10 @@ class SignUpForm extends React.Component {
 		})
 	}
 
-
-
 	toggleConfirmationModal = (open) => {
 		this.setState({
 			showConfirmationModal: open,
-			successMessage: ''
+			successMessage: '',
 		})
 
 		if (!open) {
@@ -196,10 +199,13 @@ class SignUpForm extends React.Component {
 		}
 	}
 
+	togglePasswordVisibility = () => {
+		this.setState({ pwHidden: !this.state.pwHidden })
+	}
+
 	render() {
 		const { classes, signUpMode } = this.props
-		const { forgotPasswordMode, resetPasswordMode, showConfirmationModal } = this.state
-		const showPassword = true
+		const { forgotPasswordMode, resetPasswordMode, showConfirmationModal, loading, pwHidden } = this.state
 		let modalTitle = 'Sign In'
 		if (signUpMode) {
 			modalTitle = 'Sign Up'
@@ -264,7 +270,7 @@ class SignUpForm extends React.Component {
 								<FormControl margin="normal" required fullWidth>
 									<Input
 										name="password"
-										type="password"
+										type={pwHidden ? 'password' : 'text'}
 										id="password"
 										placeholder="Password"
 										onChange={event => this.setState({
@@ -275,12 +281,14 @@ class SignUpForm extends React.Component {
 										}}
 										endAdornment={
 											<InputAdornment position="end">
-												<IconButton aria-label="Toggle password visibility">
-													{showPassword ? (
+												<IconButton aria-label="Toggle password visibility" onClick={this.togglePasswordVisibility}>
+													{
+														pwHidden ? (
 														<Visibility />
 													) : (
 															<VisibilityOff />
-														)}
+														)
+													}
 												</IconButton>
 											</InputAdornment>
 										}
@@ -295,7 +303,7 @@ class SignUpForm extends React.Component {
 									<Input
 										placeholder="Repeat Password"
 										name="repeatPassword"
-										type="password"
+										type={pwHidden ? 'password' : 'text'}
 										id="repeatPassword"
 										onChange={event => this.setState({
 											passwordConfirm: event.target.value
@@ -305,12 +313,14 @@ class SignUpForm extends React.Component {
 										}}
 										endAdornment={
 											<InputAdornment position="end">
-												<IconButton aria-label="Toggle password visibility">
-													{showPassword ? (
+												<IconButton aria-label="Toggle password visibility" onClick={this.togglePasswordVisibility}>
+													{
+														pwHidden ? (
 														<Visibility />
 													) : (
 															<VisibilityOff />
-														)}
+														)
+													}
 												</IconButton>
 											</InputAdornment>
 										}
@@ -359,7 +369,7 @@ class SignUpForm extends React.Component {
 									color="secondary"
 									className={classes.submit}
 								>
-									Sign Up
+									{loading ? 'Signing up...' : 'Sign Up'}
 								</Button>
 								<Button
 									size="medium"
@@ -402,7 +412,7 @@ class SignUpForm extends React.Component {
 												id="newPassword"
 												name="newPassword"
 												autoComplete="newPassword"
-												type="password"
+												type={pwHidden ? 'password' : 'text'}
 												autoFocus
 												onChange={event => this.setState({
 													password: event.target.value
@@ -499,7 +509,7 @@ class SignUpForm extends React.Component {
 												<FormControl margin="normal" required fullWidth>
 													<Input
 														name="password"
-														type="password"
+														type={pwHidden ? 'password' : 'text'}
 														id="password"
 														placeholder="Password"
 														onChange={event => this.setState({
@@ -510,12 +520,14 @@ class SignUpForm extends React.Component {
 														}}
 														endAdornment={
 															<InputAdornment position="end">
-																<IconButton aria-label="Toggle password visibility">
-																	{showPassword ? (
+																<IconButton aria-label="Toggle password visibility" onClick={this.togglePasswordVisibility}>
+																	{
+																		pwHidden ? (
 																		<Visibility />
 																	) : (
 																			<VisibilityOff />
-																		)}
+																		)
+																	}
 																</IconButton>
 															</InputAdornment>
 														}
@@ -529,8 +541,8 @@ class SignUpForm extends React.Component {
 													variant="contained"
 													color="secondary"
 												>
-													Sign In
-								</Button>
+													{loading ? 'Logging in...' : 'Sign In'}
+												</Button>
 												<Button
 													size="medium"
 													variant="text"
