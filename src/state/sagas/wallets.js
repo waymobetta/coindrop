@@ -36,7 +36,7 @@ export function* fetchWallets() {
   }
 }
 
-export function* verifyWalletGenerator({payload}) {
+export function* verifyWalletGenerator({ payload }) {
   try {
     const data = {
       userID: payload.userId,
@@ -68,10 +68,15 @@ export function* updateWalletGenerator({ payload }) {
     }
     const response = yield call(updateWallet, data)
 
-    yield put({
-      type: ActionTypes.UPDATE_WALLET_SUCCESS,
-      payload: response,
-    });
+    yield all([
+      put({
+        type: ActionTypes.UPDATE_WALLET_SUCCESS,
+        payload: response,
+      }),
+      put({
+        type: ActionTypes.FETCH_WALLETS,
+      })
+    ])
   }
   catch (error) {
     /* istanbul ignore next */

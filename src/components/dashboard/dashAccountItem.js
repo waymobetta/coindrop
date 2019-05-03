@@ -2,8 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
-import { ReactComponent as PlusCircle } from '../../components/assets/plusCircle.svg'
-import { ReactComponent as CheckLine } from '../../components/assets/checkLine.svg'
+// import { ReactComponent as PlusCircle } from '../../components/assets/plusCircle.svg'
+// import { ReactComponent as CheckLine } from '../../components/assets/checkLine.svg'
+import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
+import classNames from 'classnames'
+// import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
 	root: {
@@ -43,11 +47,35 @@ const styles = theme => ({
 	rightIcon: {
 		marginLeft: theme.spacing.unit,
 		float: 'right',
-		color: '#CA34FF',
-		width: 24,
-		height: 24,
+		color: 'inherit',
+		width: 16,
+		height: 16,
 	},
+	iconSmall: {
+		fontSize: 20,
+	},
+	button: {
+		margin: theme.spacing.unit
+	},
+	status: {
+		fontWeight: 600,
+		fontSize: 14,
+		textTransform: 'uppercase',
+		display: 'flex',
+		alignItems: 'center',
+		border: '1px solid',
+		borderRadius: '10px',
+		padding: '0px 10px',
+		lineHeight: '26px'
+	},
+	verified: {
+		color: 'green'
+	},
+	unverified: {
+		color: 'red'
+	}
 })
+
 
 class DashAccountItem extends React.Component {
 	constructor(props) {
@@ -67,10 +95,17 @@ class DashAccountItem extends React.Component {
 				{render}
 				{children}
 				{set ? (
-					<CheckLine className={classes.rightIcon} />
+					// <CheckLine className={classes.rightIcon} />
+					<div className={classNames(classes.verified, classes.status)}>
+						Verified
+					<DoneIcon className={classes.rightIcon} />
+					</div>
 				) : (
-					<PlusCircle className={classes.rightIcon} />
-				)}
+						<div className={classNames(classes.unverified, classes.status)}>
+							Unverified
+					<ClearIcon className={classes.rightIcon} />
+						</div>
+					)}
 			</Button>
 		)
 	}
@@ -79,7 +114,9 @@ class DashAccountItem extends React.Component {
 DashAccountItem.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
-	set: PropTypes.bool,
+	set: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.bool
+	]),
 }
-
 export default withStyles(styles)(DashAccountItem)

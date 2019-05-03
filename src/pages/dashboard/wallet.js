@@ -13,8 +13,8 @@ import Hidden from '@material-ui/core/Hidden'
 import DashAccountItem from '../../components/dashboard/dashAccountItem'
 import theme from '../../components/theme'
 import { ReactComponent as Reddit } from '../../components/assets/reddit.svg'
-import { ReactComponent as StackOverflow } from '../../components/assets/stackOverflow.svg'
 import classNames from 'classnames'
+import { navigate } from 'gatsby'
 
 const styles = () => ({
 	accountBoxPaper: {
@@ -65,6 +65,12 @@ const styles = () => ({
 		width: 36,
 		height: 36,
 	},
+	unverifiedAddress: {
+		color: 'red',
+	},
+	verifiedAddress: {
+		color: 'green',
+	}
 })
 
 class Wallet extends Component {
@@ -75,9 +81,32 @@ class Wallet extends Component {
 		// }
 	}
 
+	// generateWallets = () => {
+	// 	const { wallets } = this.props;
+	//  const wallet = wallets.map((wallet) => (
+	// <DashAccountItem .... etc></DashAccountItem>
+	// ))
+	// 	/**
+	// 	 * once we add more functionality and allow more types of wallets, will need to add a mapping function for the different wallets.
+	// 	 */
+	// }
+
+	navigateToVerificationTask = () => {
+		try {
+			const { tasks: { tasks } } = this.props;
+			const task = tasks.find((task) => task.author === 'MyCrypto')
+			const taskId = task.id
+	
+			navigate(`dashboard/taskDetail?id=${taskId}`)
+		} catch (error) {
+			console.error('error navigating to task: ', error)
+		}
+	}
+
+
+
 	render() {
 		const { classes, wallets } = this.props
-		// const wallet = this.displayWallet();
 
 		return (
 			<Layout>
@@ -110,6 +139,7 @@ class Wallet extends Component {
 							size="large"
 							color="primary"
 							set={wallets.verified}
+							onClick={this.navigateToVerificationTask}
 							render={
 								<Reddit
 									className={classNames(
@@ -121,28 +151,8 @@ class Wallet extends Component {
 							}
 						>
 							<span className={classes.accountType}>Ethereum</span>
-
-							<span className={classes.currentValue}>
+							<span className={classNames(wallets.verified ? classes.verifiedAddress : classes.unverifiedAddress, classes.currentValue)}>
 								{wallets ? wallets.eth : 'n/a'}
-							</span>
-						</DashAccountItem>
-						<DashAccountItem
-							variant="outlined"
-							size="large"
-							color="primary"
-							set={wallets.verified}
-							render={
-								<StackOverflow
-									className={classes.leftIcon}
-									color="#8C8C8C"
-								/>
-							}
-						>
-							<span className={classes.accountType}>
-								Bitcoin
-							</span>
-							<span className={classes.currentValue}>
-								{wallets ? wallets.btc : 'n/a'}
 							</span>
 						</DashAccountItem>
 					</Paper>
@@ -162,6 +172,7 @@ Wallet.propTypes = {
 
 const mapStateToProps = (state) => ({
 	wallets: state.wallets,
+	tasks: state.tasks,
 })
 
 export default connect(mapStateToProps)(compose(
