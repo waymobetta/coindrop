@@ -37,6 +37,8 @@ class Tasks extends Component {
 	render() {
 		const { classes } = this.props
 		const taskList = this.generateTasks()
+
+		console.log('tasks; ', this.props.tasks)
 		
 		return (
 			<Layout>

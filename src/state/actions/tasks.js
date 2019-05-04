@@ -5,3 +5,10 @@ export const fetchTasks = () => {
     type: ActionTypes.FETCH_TASKS
   }
 }
+
+export const completeTask = (taskId) => {
+  return {
+    type: ActionTypes.COMPLETE_TASK,
+    taskId
+  }
+}

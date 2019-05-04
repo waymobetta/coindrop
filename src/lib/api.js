@@ -199,6 +199,28 @@ export const getTask = async (taskId) => {
 	return result
 }
 
+export const completeTask = async (taskId) => {
+	try {
+		const payload = { 'completed': true }
+		const jwtToken = accessToken();
+
+		return fetch(`${baseURL}tasks/${taskId}`, {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': 'Bearer ' + jwtToken
+			},
+			body: JSON.stringify(payload)
+		}).then(res => {
+			return res.json()
+		}).then(jsonResponse => {
+			return jsonResponse
+		})
+	} catch (error) {
+		console.error('Error completing task')
+	}
+}
+
 export const initClient = async () => {
 	try {
 		client = await Swagger({

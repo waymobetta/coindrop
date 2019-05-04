@@ -13,7 +13,7 @@ const styles = theme => ({
 	root: {
 		backgroundColor: '#FFF',
 		borderRadius: theme.borderRadius,
-		width: '90%',
+		width: '100%',
 		color: '#3C4249',
 		padding: '16px 36px',
 		textTransform: 'capitalize',

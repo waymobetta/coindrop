@@ -24,6 +24,21 @@ export default function user(state = initialState, payload) {
         ...state,
         status: 'error',
       };
+    case ActionTypes.COMPLETE_TASK:
+      return {
+        ...state,
+        status: 'running',
+      };
+    case ActionTypes.COMPLETE_TASK_SUCCESS:
+      return {
+        ...state,
+        status: 'success',
+      };
+    case ActionTypes.COMPLETE_TASK_ERROR:
+      return {
+        ...state,
+        status: 'error',
+      };
     default:
       return state;
   }

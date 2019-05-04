@@ -14,6 +14,7 @@ import { getWallet, verifyWallet, updateWallet } from '../../lib/api'
 export function* fetchWallets() {
   try {
     const response = yield call(getWallet)
+    console.log('response: ', response)
     const { wallets } = response;
     const data = {}
 

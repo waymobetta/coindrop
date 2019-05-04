@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
 
 	determineContent = () => {
 		const { wallets } = this.props;
-		return !wallets.eth ? <Connect /> : <ProfilePage />
+		return wallets.eth ? <ProfilePage /> : <Connect />
 	}
 
 	render() {

@@ -34,6 +34,9 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
   },
+  verificationMessage: {
+    // border: '.5px solid'
+  }
 });
 
 class MyCryptoTask extends Component {
@@ -126,27 +129,30 @@ class MyCryptoTask extends Component {
   }
 
   getStepTwo = () => {
+    const { classes } = this.props;
     const message = 'I <3 coindrop';
 
     return (
-      <span>Sign the below message within the MyCrypto app
-          <p>{message}</p>
-        <CopyToClipboard
-          text={this.state.message}
-          onCopy={() => this.setState({ codeCopied: true })}>
-          <span
-            role='img'
-            description='aria-label'>
-            <FileCopy />
-          </span>
-        </CopyToClipboard>
+      <div>Sign the below message within the MyCrypto app
+          <div className={classes.verificationMessage}>
+          <span>{message}</span>
+          <CopyToClipboard
+            text={this.state.message}
+            onCopy={() => this.setState({ codeCopied: true })}>
+            <span
+              role='img'
+              description='aria-label'>
+              <FileCopy />
+            </span>
+          </CopyToClipboard>
+        </div>
         {
           this.state.codeCopied
             ? <span style={{ color: 'green' }}>copied</span>
             : null
         }
         <i>Already signed a message in the app? Paste your signed message code-block in the space below and verify it!</i>
-      </span>);
+      </div>);
   }
 
   getStepThree = () => {

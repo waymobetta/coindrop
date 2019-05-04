@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import DashAccountItem from '../../components/dashboard/dashAccountItem'
 import theme from '../../components/theme'
-import { ReactComponent as Reddit } from '../../components/assets/reddit.svg'
+import { ReactComponent as Ethereum } from '../../components/assets/ethereum.svg'
 import classNames from 'classnames'
 import { navigate } from 'gatsby'
 
@@ -42,8 +42,9 @@ const styles = () => ({
 	},
 	accountType: {
 		flexGrow: 2,
-		maxWidth: '300px',
+		maxWidth: '250px',
 		fontSize: '14px',
+		textTransform: 'uppercase'
 	},
 	boxTitle: {
 		...theme.boxTitle,
@@ -54,8 +55,8 @@ const styles = () => ({
 			marginBottom: 30,
 		},
 	},
-	redditIcon: {
-		backgroundColor: '#8C8C8C',
+	ethIcon: {
+		backgroundColor: '#FFF',
 		borderRadius: '40px',
 	},
 	leftIcon: {
@@ -107,6 +108,7 @@ class Wallet extends Component {
 
 	render() {
 		const { classes, wallets } = this.props
+		console.log('wallets verified: ', wallets.verified)
 
 		return (
 			<Layout>
@@ -141,10 +143,10 @@ class Wallet extends Component {
 							set={wallets.verified}
 							onClick={this.navigateToVerificationTask}
 							render={
-								<Reddit
+								<Ethereum
 									className={classNames(
 										classes.leftIcon,
-										classes.redditIcon
+										classes.ethIcon
 									)}
 									color="#FFF"
 								/>
