@@ -99,6 +99,7 @@ class Layout extends React.Component {
 			 * need to update so this doesnt get called every single time
 			 */
 			if (!(await isLoggedIn())) {
+				console.log("Logged in")
 				navigate('/')
 				return
 			}
@@ -110,6 +111,7 @@ class Layout extends React.Component {
 	}
 
 	fetchUserData = async () => {
+		console.log("Fetch user data")
 		const { dispatch, tasks, profile, wallets } = this.props;
 
 		try {

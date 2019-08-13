@@ -29,15 +29,15 @@ class Tasks extends Component {
 	generateTasks = () => {
 		const { tasks: { tasks } } = this.props;
 
-		return tasks && tasks.map(task => (
-			<DashTask key={task.id} task={task} />
+		return tasks && tasks.map((task, i) => (
+			<DashTask key={i} task={task} />
 		))
 	}
 
 	render() {
 		const { classes } = this.props
 		const taskList = this.generateTasks()
-		
+
 		return (
 			<Layout>
 				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
@@ -52,7 +52,7 @@ class Tasks extends Component {
 					className={classes.root}
 					justify="flex-start"
 				>
-					{ taskList }
+					{taskList}
 				</Grid>
 			</Layout>
 		)

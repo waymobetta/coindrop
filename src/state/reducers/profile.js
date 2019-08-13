@@ -1,10 +1,18 @@
 import { ActionTypes } from '../constants';
 
+// const initialState = {
+//   status: 'ready',
+//   name: '',
+//   email: '',
+// };
+
+// HARDCODE
+
 const initialState = {
   status: 'ready',
-  name: '',
-  email: '',
-};
+  name: 'huobi',
+  email: "huobi@huobi.com",
+}
 
 export default function user(state = initialState, payload) {
   const { payload: data, type } = payload;

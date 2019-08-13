@@ -69,8 +69,8 @@ class DashAccountItem extends React.Component {
 				{set ? (
 					<CheckLine className={classes.rightIcon} />
 				) : (
-					<PlusCircle className={classes.rightIcon} />
-				)}
+						<PlusCircle className={classes.rightIcon} />
+					)}
 			</Button>
 		)
 	}
@@ -79,7 +79,7 @@ class DashAccountItem extends React.Component {
 DashAccountItem.propTypes = {
 	classes: PropTypes.object.isRequired,
 	width: PropTypes.string,
-	set: PropTypes.bool,
+	set: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 }
 
 export default withStyles(styles)(DashAccountItem)

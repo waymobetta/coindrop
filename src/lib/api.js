@@ -23,14 +23,20 @@ Amplify.configure({
 	}
 })
 
-export const login = async ({ email, password }) => {
-	const { signInUserSession: { accessToken: { jwtToken } } } = await Auth.signIn(email, password)
-	const userId = await getUserId(await getCognitoUserId())
+// HARDCODE // uncomment for full server login integration
+// export const login = async ({ email,s password }) => {
+	export const login = async () => {
 
-	localStorage.setItem('accessToken', jwtToken)
-	localStorage.setItem('userId', userId)
+	// const { signInUserSession: { accessToken: { jwtToken } } } = await Auth.signIn(email, password)
+	// const userId = await getUserId(await getCognitoUserId())
 
-	return { jwtToken, userId }
+	// localStorage.setItem('accessToken', jwtToken)
+	// localStorage.setItem('userId', userId)
+	const promise = new Promise ((resolve)=> resolve());
+	await promise;
+	// HARDCODE
+	return { jwtToken: 'afj23kjv0i23nlkal-2nkj20mnlasdf', userId: 6 }
+	// return { jwtToken, userId }
 }
 
 export const sendResetPasswordLink = async (email) => {
@@ -68,12 +74,15 @@ export const isLoggedIn = async () => {
 		await currentUser()
 		return true
 	} catch (err) {
-		return false
+		// HARDCODE
+		return true
 	}
 }
 
 export const currentUser = async () => {
-	return await Auth.currentAuthenticatedUser()
+	// HARDCODE
+	return await new Promise((resolve) => resolve())
+	// return await Auth.currentAuthenticatedUser()
 }
 
 export const getCognitoUserId = async () => {

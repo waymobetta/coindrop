@@ -68,7 +68,7 @@ const styles = () => ({
 	},
 	subGrid: {},
 	firstStepGrid: {
-		marginTop: 140,
+		marginTop: 80,
 		[theme.breakpoints.down('xs')]: {
 			marginTop: 60,
 		},
@@ -97,7 +97,8 @@ const styles = () => ({
 	},
 	stepTitle: {
 		fontSize: 40,
-		color: '#FFFFFF',
+		// color: '#FFFFFF',
+		color: "#000",
 		fontWeight: 500,
 	},
 })
@@ -383,7 +384,7 @@ class Connect extends React.Component {
 									<Link
 										className={classes.itemLink}
 										activeClassName="active"
-										to="dashboard/home/"
+										to="/dashboard/home/"
 									>
 										<Button variant="text" color="primary">
 											Not Now
