@@ -40,12 +40,32 @@ class Tasks extends Component {
 
 		return (
 			<Layout>
-				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
+				<SEO title="Home" keywords={['learn.exchange', 'application', 'react']} />
 				<Hidden mdUp>
 					<Typography variant="h2" component="h2" className={classes.boxTitle}>
 						Tasks
 					</Typography>
 				</Hidden>
+				<Hidden mdUp>
+					<Typography
+						variant="h2"
+						component="h2"
+						className={classes.boxTitle}
+					>
+						Tasks
+					</Typography>
+				</Hidden>
+				<Grid item xs={12} sm={10}>
+					<Hidden smDown>
+						<Typography
+							variant="h6"
+							component="h6"
+							className={classes.boxTitle}
+						>
+							Tasks
+						</Typography>
+					</Hidden>
+				</Grid>
 				<Grid
 					container
 					spacing={40}

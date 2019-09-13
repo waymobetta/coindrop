@@ -9,8 +9,8 @@ import { ActionTypes } from '../constants';
 // HARDCODE
 const initialState = {
   status: 'ready',
-  eth: '2.5',
-  verified: false,
+  eth: '37.57 Ether',
+  verified: true,
 }
 
 export default function user(state = initialState, payload) {

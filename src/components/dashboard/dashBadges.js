@@ -27,7 +27,6 @@ const styles = theme => ({
 
 class DashBadges extends Component {
 	// eslint-disable-next-line no-console
-
 	render() {
 		const { classes } = this.props
 		return (
@@ -43,7 +42,7 @@ class DashBadges extends Component {
 
 				<Paper className={classes.badgeBoxPaper}>
 					<Typography ariant="body1" align="right" gutterBottom>
-						You don´t have badges yet.
+					You have no badges yet!
 					</Typography>
 				</Paper>
 			</Grid>

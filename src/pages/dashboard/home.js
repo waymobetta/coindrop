@@ -39,7 +39,7 @@ class Dashboard extends React.Component {
 			<Layout>
 				<SEO
 					title="Home"
-					keywords={['coinDrop', 'application', 'react']}
+					keywords={['learn.exchange', 'application', 'react']}
 				/>
 				{ content }
 			</Layout>

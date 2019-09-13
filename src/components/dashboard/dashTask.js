@@ -29,7 +29,6 @@ const styles = theme => ({
 		height: 36,
 		display: 'block',
 		borderRadius: 30,
-		backgroundColor: '#ccc',
 		marginRight: 10,
 	},
 	taskInfo: {
@@ -123,15 +122,21 @@ class DashTask extends Component {
 			<Grid item xs={12} sm={5}>
 				<Paper className={classes.tasksBoxPaper}>
 					<div className={classes.taskTop}>
-						<span className={classes.taskRound} />
+						<div className={classes.taskRound}>
+							<img
+								src={task.logo}
+								height='35px'
+								width='35px'
+							/>
+						</div>
 						<div className={classes.taskInfo}>
 							<span className={classes.taskName}>{task.author}</span>
 							<span className={classes.taskDesc}>{task.title}</span>
 						</div>
-						<span className={classes.date}>Today</span>
+						<span className={classes.date}>{task.assignedDate}</span>
 					</div>
 					<div className={classes.taskMiddle}>
-						<span className={classes.badges}>$6 (1000 ADT)</span>
+						<span className={classes.badges}>{task.tokenAllocation} {task.token}</span>
 						<span className={classes.badges}>{task.badge.name}</span>
 					</div>
 					<div className={classes.taskBottom}>

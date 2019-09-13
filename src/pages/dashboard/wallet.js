@@ -12,8 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import DashAccountItem from '../../components/dashboard/dashAccountItem'
 import theme from '../../components/theme'
-import { ReactComponent as Reddit } from '../../components/assets/reddit.svg'
-import { ReactComponent as StackOverflow } from '../../components/assets/stackOverflow.svg'
+import { ReactComponent as Ethereum } from '../../components/assets/ethereum.svg'
 import classNames from 'classnames'
 
 const styles = () => ({
@@ -55,7 +54,7 @@ const styles = () => ({
 		},
 	},
 	redditIcon: {
-		backgroundColor: '#8C8C8C',
+		// backgroundColor: '#8C8C8C',
 		borderRadius: '40px',
 	},
 	leftIcon: {
@@ -83,7 +82,7 @@ class Wallet extends Component {
 			<Layout>
 				<SEO
 					title="Home"
-					keywords={['coinDrop', 'application', 'react']}
+					keywords={['learn.exchange', 'application', 'react']}
 				/>
 				<Hidden mdUp>
 					<Typography
@@ -111,12 +110,11 @@ class Wallet extends Component {
 							color="primary"
 							set={wallets.verified}
 							render={
-								<Reddit
+								<Ethereum
 									className={classNames(
 										classes.leftIcon,
 										classes.redditIcon
 									)}
-									color="#FFF"
 								/>
 							}
 						>
@@ -124,25 +122,6 @@ class Wallet extends Component {
 
 							<span className={classes.currentValue}>
 								{wallets ? wallets.eth : 'n/a'}
-							</span>
-						</DashAccountItem>
-						<DashAccountItem
-							variant="outlined"
-							size="large"
-							color="primary"
-							set={wallets.verified}
-							render={
-								<StackOverflow
-									className={classes.leftIcon}
-									color="#8C8C8C"
-								/>
-							}
-						>
-							<span className={classes.accountType}>
-								Bitcoin
-							</span>
-							<span className={classes.currentValue}>
-								{wallets ? wallets.btc : 'n/a'}
 							</span>
 						</DashAccountItem>
 					</Paper>

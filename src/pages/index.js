@@ -316,7 +316,7 @@ class Index extends React.Component {
 								className={classes.hero1Title}
 								gutterBottom
 							>
-								Free your reputation
+								Learn Crypto With Huobi!
 							</Typography>
 							<Typography
 								variant="body1"
@@ -324,9 +324,7 @@ class Index extends React.Component {
 								gutterBottom
 								className={classes.reputationSubTitle}
 							>
-								Free your reputation on Reddit and Stack Overflow by connecting
-								it to your Ethereum wallet address. Projects can then engage you
-								on a 1-to-1 basis.
+								Projects currently listed on Huobi Exchange can now provide opportunities for you to learn more about them as well as earning some valuable and unique crypto rewards in the process!
 							</Typography>
 							<Button
 								variant="contained"
@@ -361,7 +359,7 @@ class Index extends React.Component {
 										<span>
 											<IconRecognition className={classes.iconRecognition} />
 										</span>
-										<ListItemText primary="Gain recognition and tokens by micro-consulting for projects at your leisure." />
+										<ListItemText primary="Gain recognition and tokens by learning about projects at your leisure." />
 									</ListItem>
 									<ListItem>
 										<span>
@@ -373,7 +371,7 @@ class Index extends React.Component {
 										<span>
 											<TasksIcon className={classes.iconTasks} />
 										</span>
-										<ListItemText primary="Complete tasks and surveys to receive crypto micropayments." />
+										<ListItemText primary="Complete tasks and surveys to receive crypto rewards." />
 									</ListItem>
 								</List>
 								<Button variant="text" color="secondary" size="medium">
@@ -389,7 +387,7 @@ class Index extends React.Component {
 								className={classes.hero2Title}
 								gutterBottom
 							>
-								Engage with projects
+								Learn about crypto-currency and crypto-assets!
 							</Typography>
 						</Grid>
 					</Grid>

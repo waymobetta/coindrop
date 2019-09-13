@@ -12,7 +12,6 @@ import Hidden from '@material-ui/core/Hidden'
 import DashAccountItem from '../../components/dashboard/dashAccountItem'
 import theme from '../../components/theme'
 import { ReactComponent as Reddit } from '../../components/assets/reddit.svg'
-import { ReactComponent as StackOverflow } from '../../components/assets/stackOverflow.svg'
 import classNames from 'classnames'
 
 const styles = () => ({
@@ -76,7 +75,7 @@ class Accounts extends React.Component {
 			<Layout>
 				<SEO
 					title="Home"
-					keywords={['coinDrop', 'application', 'react']}
+					keywords={['learn.exchange', 'application', 'react']}
 				/>
 				<Hidden mdUp>
 					<Typography
@@ -116,25 +115,7 @@ class Accounts extends React.Component {
 							<span className={classes.accountType}>Reddit</span>
 
 							<span className={classes.currentValue}>
-								r/hunter2727
-							</span>
-						</DashAccountItem>
-						<DashAccountItem
-							variant="outlined"
-							size="large"
-							color="primary"
-							render={
-								<StackOverflow
-									className={classes.leftIcon}
-									color="#8C8C8C"
-								/>
-							}
-						>
-							<span className={classes.accountType}>
-								Stack Overflow
-							</span>
-							<span className={classes.currentValue}>
-								UserID:
+								r/huobiUser1234
 							</span>
 						</DashAccountItem>
 					</Paper>

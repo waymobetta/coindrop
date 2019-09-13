@@ -14,6 +14,8 @@ import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import MyCryptoTask from '../../components/tasks/myCrypto'
 
+const typeformEmbed = require('@typeform/embed')
+
 const styles = () => ({
 	taskDetailsBoxPaper: {
 		position: 'relative',
@@ -39,7 +41,6 @@ const styles = () => ({
 		height: 52,
 		display: 'block',
 		borderRadius: 30,
-		backgroundColor: '#ccc',
 		marginRight: 10,
 	},
 	taskDetailTop: {
@@ -122,6 +123,19 @@ class TaskDetail extends React.Component {
 		this.setTask();
 	}
 
+	quizModal = () => {
+		const reference = typeformEmbed.makePopup(
+			'https://coindrop.typeform.com/to/mDDkkK',
+			{
+				mode: 'popup',
+				onSubmit: () => {
+					console.log('typeform submitted')
+				}
+			})
+
+		reference.open()
+	}
+
 	getTask = (id) => {
 		try {
 			const { tasks: { tasks } } = this.props;
@@ -158,7 +172,7 @@ class TaskDetail extends React.Component {
 
 		return (
 			<Layout>
-				<SEO title="Home" keywords={['coinDrop', 'application', 'react']} />
+				<SEO title="Home" keywords={['learn.exchange', 'application', 'react']} />
 				<Hidden mdUp>
 					<Typography variant="h2" component="h2" className={classes.boxTitle}>
 						Tasks
@@ -168,14 +182,20 @@ class TaskDetail extends React.Component {
 					<Paper className={classes.taskDetailsBoxPaper}>
 						<div className={classes.taskDetail}>
 							<div className={classes.taskDetailTop}>
-								<span className={classes.taskRound} />
+								<div className={classes.taskRound}>
+									<img
+										src={task.logo}
+										height='50px'
+										width='50px'
+									/>
+								</div>
 								<div className={classes.taskHeader}>
 									<span className={classes.taskName}>{task.author}</span>
 									<span className={classes.taskDesc}>{task.title}</span>
 								</div>
 								<div className={classes.taskPayout}>
 									<span className={classes.possible}>Possible Payout:</span>
-									<span className={classes.payout}>$6 (1000 ADT)</span>
+									<span className={classes.payout}>{task.tokenAllocation} {task.token}</span>
 								</div>
 							</div>
 							<Grid container className={classes.taskDetailMain}>
@@ -196,7 +216,7 @@ class TaskDetail extends React.Component {
 														<iframe
 															width="100%"
 															height="315"
-															src="https://www.youtube.com/embed/cOeqNSN8_Uw?controls=0"
+															src={task.videoSrc}
 															frameBorder="0"
 															allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 															allowFullScreen
@@ -215,23 +235,18 @@ class TaskDetail extends React.Component {
 														{task.description}
 													</h4>
 													<p className={classes.details}>
-														Instructions Watch the informational video below to learn
-														about adChain. Then, take the quiz to test your knowledge
-														and to try and collect some adToken (ADT).
 											<br />
 														<br />
-														The amount of tokens you receive from adChain will depend on
-														the number of questions you get right. So choose carefully
-														as you only get one chance to complete the quiz once you
-														begin!
+													{task.instructions}
 											</p>
 													<Button
 														variant="contained"
 														color="secondary"
 														className={classes.secondary}
+														onClick={this.quizModal}
 													>
 														Take Quiz
-											</Button>
+													</Button>
 												</Grid>
 											</React.Fragment>
 										)
